@@ -18,10 +18,4 @@ public class OffmeshlinkDetector : MonoBehaviour
         targetUp = colliderUp.GetComponent<colliderDetector>();
         targetDown = colliderDown.GetComponent<colliderDetector>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-	
-	}
 }
