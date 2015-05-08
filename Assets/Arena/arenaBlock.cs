@@ -10,9 +10,9 @@ public class arenaBlock : MonoBehaviour
         navObstacle = gameObject.transform.GetChild(1).gameObject.GetComponent<NavmeshobstacleController>();
 	}
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
         //in the future this method would be used to blockade arena position if block are placed
         navObstacle.toggle();
-    }
+    }*/
 }
