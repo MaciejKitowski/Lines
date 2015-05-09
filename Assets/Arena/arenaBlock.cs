@@ -3,9 +3,10 @@ using System.Collections;
 
 public class arenaBlock : MonoBehaviour 
 {
-    arenaManager manager;
+    public arenaManager manager;
     NavmeshobstacleController navObstacle;
 
+    public GameObject block;
     public bool blocked;
 
 	void Start () 
@@ -14,10 +15,29 @@ public class arenaBlock : MonoBehaviour
         manager = gameObject.GetComponentInParent<arenaManager>();
 	}
 
+    void Update()
+    {
+        if(block != null)
+        {
+            //Reset off mesh links
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            
+            //Turn on navmesh obstacle
+            if (blocked)
+            {
+                block.GetComponent<NavMeshAgent>().enabled = false;
+                navObstacle.toggle(NavmeshobstacleController.turn.ON);
+            }
+            else navObstacle.toggle(NavmeshobstacleController.turn.OFF);
+        }
+    }
+
     void OnMouseDown()
     {
         if(!blocked)
         {
+            //Select new target for block
             if (manager.managerBlock.blockSelected())
             {
                 manager.managerBlock.blocks[manager.managerBlock.blockSelectedIndex()].GetComponent<blockController>().setNavDestination(gameObject);
@@ -25,13 +45,11 @@ public class arenaBlock : MonoBehaviour
         }
         else
         {
+            //Unselect block
             if (manager.managerBlock.blockSelected())
             {
                 manager.managerBlock.blocks[manager.managerBlock.blockSelectedIndex()].GetComponent<blockController>().selected = false;
             }
         }
-        
-        //in the future this method would be used to blockade arena position if block are placed
-        //navObstacle.toggle();
     }
 }

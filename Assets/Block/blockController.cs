@@ -20,6 +20,7 @@ public class blockController : MonoBehaviour
 
     public void setNavDestination(GameObject target)
     {
+        navAgent.enabled = true;
         navTarget = target;
 
         Vector3 pos = target.transform.position;

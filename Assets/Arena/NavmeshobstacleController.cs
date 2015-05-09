@@ -4,15 +4,17 @@ using System.Collections;
 public class NavmeshobstacleController : MonoBehaviour 
 {
     NavMeshObstacle navMesh;
+
+    public enum turn { ON, OFF }
 	
 	void Start () 
     {
         navMesh = gameObject.GetComponent<NavMeshObstacle>();
 	}
 	
-	public void toggle()
+	public void toggle(turn Turn)
     {
-        if (navMesh.enabled) navMesh.enabled = false;
-        else navMesh.enabled = true;
+        if (Turn == turn.ON) navMesh.enabled = true;
+        if (Turn == turn.OFF) navMesh.enabled = false;
     }
 }

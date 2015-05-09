@@ -32,8 +32,23 @@ public class blockManager : MonoBehaviour
 
 	void Update () 
     {
-	    // [[   TEST    ]]  --  Create new block
-        if(blockCounter == 0)
+        //Find multiple selection
+        for (int i = 0; i < blockCounter; ++i )
+        {
+            if(blocks[i].GetComponent<blockController>().selected)
+            {
+                for(int j = i + 1; j < blockCounter; ++j)
+                {
+                    if(blocks[j].GetComponent<blockController>().selected)
+                    {
+                        blocks[i].GetComponent<blockController>().selected = false;
+                        blocks[j].GetComponent<blockController>().selected = false;
+                    }
+                }
+            }
+        }
+        // [[   TEST    ]]  --  Create new block
+        if (blockCounter == 0)
         {
             ++blockCounter;
 
@@ -51,6 +66,41 @@ public class blockManager : MonoBehaviour
 
             //Set color
             newBlock.GetComponent<blockController>().blockColor = color.green; //It should be randomized
+
+            //Set as child
+            newBlock.transform.parent = gameObject.transform;
+
+            //Turn on Navmesh Agent
+            newBlock.GetComponent<NavMeshAgent>().enabled = true;
+
+            //Add to list
+            blocks.Add(transform.GetChild(blockCounter - 1).gameObject);
+
+            //Run animation
+            newBlock.GetComponent<Animator>().SetTrigger("newBlock");
+
+            ++blockIndex;
+        }
+
+        // [[   TEST    ]]  --  Create new block 2
+        if (blockCounter == 1)
+        {
+            ++blockCounter;
+
+            GameObject newBlock = Instantiate(blockPrefab) as GameObject;
+
+            //Change name
+            newBlock.name = blockIndex.ToString();
+
+            //Turn off Navmesh Agent
+            newBlock.GetComponent<NavMeshAgent>().enabled = false;
+
+            //Set position
+            Vector3 pos = new Vector3(15.4f, 0.4166f, -92.4f); //There should be randomized arena block
+            newBlock.transform.position = pos;
+
+            //Set color
+            newBlock.GetComponent<blockController>().blockColor = color.blue; //It should be randomized
 
             //Set as child
             newBlock.transform.parent = gameObject.transform;
