@@ -14,48 +14,18 @@ public class OffmeshlinkController : MonoBehaviour
 	void Update () 
     {
         //Generate offmeshlinks
-        //Right
-        if (detector.targetRight.collidedObject != null && meshRight == null)
-        {
-            meshRight = gameObject.AddComponent<OffMeshLink>();
-
-            meshRight.autoUpdatePositions = true;
-            meshRight.biDirectional = false;
-            meshRight.startTransform = gameObject.transform;
-            meshRight.endTransform = detector.targetRight.collidedObject.transform.GetChild(0).transform;
-        }
-
-        //Left
-        if (detector.targetLeft.collidedObject != null && meshLeft == null)
-        {
-            meshLeft = gameObject.AddComponent<OffMeshLink>();
-
-            meshLeft.autoUpdatePositions = true;
-            meshLeft.biDirectional = false;
-            meshLeft.startTransform = gameObject.transform;
-            meshLeft.endTransform = detector.targetLeft.collidedObject.transform.GetChild(0).transform;
-        }
-
-        //Up
-        if (detector.targetUp.collidedObject != null && meshUp == null)
-        {
-            meshUp = gameObject.AddComponent<OffMeshLink>();
-
-            meshUp.autoUpdatePositions = true;
-            meshUp.biDirectional = false;
-            meshUp.startTransform = gameObject.transform;
-            meshUp.endTransform = detector.targetUp.collidedObject.transform.GetChild(0).transform;
-        }
-
-        //Down
-        if (detector.targetDown.collidedObject != null && meshDown == null)
-        {
-            meshDown = gameObject.AddComponent<OffMeshLink>();
-
-            meshDown.autoUpdatePositions = true;
-            meshDown.biDirectional = false;
-            meshDown.startTransform = gameObject.transform;
-            meshDown.endTransform = detector.targetDown.collidedObject.transform.GetChild(0).transform;
-        }
+        if (detector.targetRight.collidedObject != null && meshRight == null) generateOffmesh(ref meshRight, detector.targetRight); //Right
+        if (detector.targetLeft.collidedObject != null && meshLeft == null) generateOffmesh(ref meshLeft, detector.targetLeft); //Left
+        if (detector.targetUp.collidedObject != null && meshUp == null) generateOffmesh(ref meshUp, detector.targetUp); //Up
+        if (detector.targetDown.collidedObject != null && meshDown == null) generateOffmesh(ref meshDown, detector.targetDown); //Down
 	}
+
+    void generateOffmesh(ref OffMeshLink offMesh, colliderDetector Side)
+    {
+        offMesh = gameObject.AddComponent<OffMeshLink>();
+        offMesh.autoUpdatePositions = true;
+        offMesh.biDirectional = false;
+        offMesh.startTransform = gameObject.transform;
+        offMesh.endTransform = Side.collidedObject.transform.GetChild(0).transform;
+    }
 }
