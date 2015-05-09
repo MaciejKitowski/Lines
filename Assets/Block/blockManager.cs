@@ -45,6 +45,9 @@ public class blockManager : MonoBehaviour
             //Add to list
             blocks.Add(transform.GetChild(blockCounter - 1).gameObject);
 
+            //Run animation
+            newBlock.GetComponent<Animator>().SetTrigger("newBlock");
+
             ++blockIndex;
         }
 	}
