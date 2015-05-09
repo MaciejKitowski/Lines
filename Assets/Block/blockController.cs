@@ -8,12 +8,26 @@ public class blockController : MonoBehaviour
     public blockManager.color blockColor;
     public bool selected;
     NavMeshAgent navAgent;
+
+    public GameObject navTarget;
 	
 	void Start () 
     {
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         manager = gameObject.GetComponentInParent<blockManager>();
+        navAgent.updateRotation = false;
 	}
+
+    public void setNavDestination(GameObject target)
+    {
+        navTarget = target;
+
+        Vector3 pos = target.transform.position;
+        pos.y = 0.4166668f;
+        navAgent.SetDestination(pos);
+
+        selected = false;
+    }
 
     void OnMouseDown()
     {
