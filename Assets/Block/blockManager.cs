@@ -49,7 +49,7 @@ public class blockManager : MonoBehaviour
         }
 
         // [[   TEST    ]]  --  Create new blocks
-        if (Input.GetKeyDown(KeyCode.A)) createNewBlock(color.blue);
+        //if (Input.GetKeyDown(KeyCode.A)) createNewBlock(color.blue);
 
         // [[   TEST    ]]  --  delete block
         if (Input.GetKeyDown(KeyCode.Space)) deleteBlock(blocks[0]);

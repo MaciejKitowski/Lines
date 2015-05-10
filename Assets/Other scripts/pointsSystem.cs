@@ -25,20 +25,19 @@ public class pointsSystem : MonoBehaviour
         {
             for (int X = 1, i = 1; X < 6; ++X)
             {
-                if (X < 5 && arena[X - 1, Y].block != null && arena[X, Y].block != null) //If blocks match
+                //If blocks match
+                if (X < 5 && (arena[X - 1, Y].block != null && arena[X, Y].block != null) && 
+                    (arena[X - 1, Y].BlockControl().blockColor == arena[X, Y].BlockControl().blockColor) && 
+                    (!arena[X - 1, Y].BlockControl().toDestroy && !arena[X, Y].BlockControl().toDestroy) && 
+                    (arena[X - 1, Y].BlockControl().navTarget == arena[X - 1, Y].gameObject && arena[X, Y].BlockControl().navTarget == arena[X, Y].gameObject))
                 {
-                    if (arena[X - 1, Y].BlockControl().blockColor == arena[X, Y].BlockControl().blockColor)
-                    {
-                        if (!arena[X - 1, Y].BlockControl().toDestroy && !arena[X, Y].BlockControl().toDestroy)
-                        {
-                            if (arena[X - 1, Y].BlockControl().navTarget == arena[X - 1, Y].gameObject && arena[X, Y].BlockControl().navTarget == arena[X, Y].gameObject) ++i;
-                        }
-                    }
+                    ++i;
                 }
                 else //If blocs are different
                 {
                     if (i >= 3)
                     {
+                        Debug.Log(i);
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
                         for (int w = i; w > 0; w--) managerBlock.deleteBlock(arena[X - w, Y].block); //Delete blocks
                         Debug.Log(manager.points);
@@ -51,15 +50,13 @@ public class pointsSystem : MonoBehaviour
         {
             for (int Y = 1, i = 1; Y < 9; ++Y)
             {
-                if (Y < 8 && arena[X, Y - 1].block != null && arena[X, Y].block != null) //If blocks match
+                //If blocks match
+                if (Y < 8 && (arena[X, Y - 1].block != null && arena[X, Y].block != null) && 
+                    (arena[X, Y - 1].BlockControl().blockColor == arena[X, Y].BlockControl().blockColor) && 
+                    (!arena[X, Y - 1].BlockControl().toDestroy && !arena[X, Y].BlockControl().toDestroy) && 
+                    (arena[X, Y - 1].BlockControl().navTarget == arena[X, Y - 1].gameObject && arena[X, Y].BlockControl().navTarget == arena[X, Y].gameObject))
                 {
-                    if (arena[X, Y - 1].BlockControl().blockColor == arena[X, Y].BlockControl().blockColor)
-                    {
-                        if (!arena[X, Y - 1].BlockControl().toDestroy && !arena[X, Y].BlockControl().toDestroy)
-                        {
-                            if (arena[X, Y - 1].BlockControl().navTarget == arena[X, Y - 1].gameObject && arena[X, Y].BlockControl().navTarget == arena[X, Y].gameObject) ++i;
-                        }
-                    }
+                    ++i;
                 }
                 else //If blocs are different
                 {
