@@ -7,6 +7,7 @@ public class blockController : MonoBehaviour
 
     public blockManager.color blockColor;
     public bool selected;
+    public bool toDestroy;
     NavMeshAgent navAgent;
 
     public GameObject navTarget;
@@ -39,9 +40,9 @@ public class blockController : MonoBehaviour
         }
     }
 	
-	
 	void Update ()
     {
+        //Change material
 	    if(selected)
         {
             gameObject.GetComponent<MeshRenderer>().material = manager.blockSelectedMaterial;
@@ -49,6 +50,15 @@ public class blockController : MonoBehaviour
         else
         {
             gameObject.GetComponent<MeshRenderer>().material = manager.blockUnselectedMaterial;
+        }
+
+        //Destroy object if animation ended
+        if(toDestroy)
+        {
+            if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("readyToDelete"))
+            {
+                Destroy(gameObject);
+            }
         }
 
         //Change block color
