@@ -49,7 +49,7 @@ public class blockManager : MonoBehaviour
         }
 
         // [[   TEST    ]]  --  Create new blocks
-        if (blockIndex < 10) createNewBlock(color.blue);
+        if (Input.GetKeyDown(KeyCode.A)) createNewBlock(color.blue);
 
         // [[   TEST    ]]  --  delete block
         if (Input.GetKeyDown(KeyCode.Space)) deleteBlock(blocks[0]);
@@ -58,10 +58,15 @@ public class blockManager : MonoBehaviour
     public void createNewBlock(color col)
     {
         arenaBlock arena = null;
-        for (int i = 0; i < 5; ++i) //5 attmepts to find empty arena block
+
+        if (blockCounter < 32) while (arena == null || arena.blocked) arena = managerArena.arenaBlock[Random.Range(0, 39)];
+        else
         {
-            arena = managerArena.arenaBlock[Random.Range(0, 39)];
-            if (!arena.blocked) continue;
+            for (int i = 0; i < 40; ++i)
+            {
+                arena = managerArena.arenaBlock[i];
+                if (!arena.blocked) break;
+            }
         }
 
         if (!arena.blocked)
