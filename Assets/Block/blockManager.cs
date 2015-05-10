@@ -47,74 +47,41 @@ public class blockManager : MonoBehaviour
                 }
             }
         }
-        // [[   TEST    ]]  --  Create new block
-        if (blockCounter == 0)
-        {
-            ++blockCounter;
 
-            GameObject newBlock = Instantiate(blockPrefab) as GameObject;
-
-            //Change name
-            newBlock.name = blockIndex.ToString();
-
-            //Turn off Navmesh Agent
-            newBlock.GetComponent<NavMeshAgent>().enabled = false;
-
-            //Set position
-            Vector3 pos = new Vector3(-30.8f, 0.4166f, 0f); //There should be randomized arena block
-            newBlock.transform.position = pos;
-
-            //Set color
-            newBlock.GetComponent<blockController>().blockColor = color.green; //It should be randomized
-
-            //Set as child
-            newBlock.transform.parent = gameObject.transform;
-
-            //Turn on Navmesh Agent
-            newBlock.GetComponent<NavMeshAgent>().enabled = true;
-
-            //Add to list
-            blocks.Add(transform.GetChild(blockCounter - 1).gameObject);
-
-            //Run animation
-            newBlock.GetComponent<Animator>().SetTrigger("newBlock");
-
-            ++blockIndex;
-        }
-
-        // [[   TEST    ]]  --  Create new block 2
-        if (blockCounter == 1)
-        {
-            ++blockCounter;
-
-            GameObject newBlock = Instantiate(blockPrefab) as GameObject;
-
-            //Change name
-            newBlock.name = blockIndex.ToString();
-
-            //Turn off Navmesh Agent
-            newBlock.GetComponent<NavMeshAgent>().enabled = false;
-
-            //Set position
-            Vector3 pos = new Vector3(15.4f, 0.4166f, -92.4f); //There should be randomized arena block
-            newBlock.transform.position = pos;
-
-            //Set color
-            newBlock.GetComponent<blockController>().blockColor = color.blue; //It should be randomized
-
-            //Set as child
-            newBlock.transform.parent = gameObject.transform;
-
-            //Turn on Navmesh Agent
-            newBlock.GetComponent<NavMeshAgent>().enabled = true;
-
-            //Add to list
-            blocks.Add(transform.GetChild(blockCounter - 1).gameObject);
-
-            //Run animation
-            newBlock.GetComponent<Animator>().SetTrigger("newBlock");
-
-            ++blockIndex;
-        }
+        // [[   TEST    ]]  --  Create new blocks
+        if (blockCounter < 10) createNewBlock(color.blue);
 	}
+
+    public void createNewBlock(color col)
+    {
+        arenaBlock arena = null;
+        for (int i = 0; i < 5; ++i) //5 attmepts to find empty arena block
+        {
+            arena = managerArena.arenaBlock[Random.Range(0, 39)];
+            if (!arena.blocked) continue;
+        }
+
+        if (!arena.blocked)
+        {
+            ++blockCounter;
+
+            GameObject newBlock = Instantiate(blockPrefab) as GameObject;
+            newBlock.name = blockIndex.ToString(); //Change name
+            newBlock.GetComponent<NavMeshAgent>().enabled = false; //Turn off Navmesh Agent
+
+            //Set position
+            Vector3 pos = arena.transform.position;
+            pos.y = 0.4166f;
+            newBlock.transform.position = pos;
+            newBlock.GetComponent<blockController>().navTarget = arena.transform.gameObject;
+
+            newBlock.GetComponent<blockController>().blockColor = col; //Set color
+            newBlock.transform.parent = gameObject.transform; //Set as child
+            newBlock.GetComponent<NavMeshAgent>().enabled = true; //Turn on Navmesh Agent
+            blocks.Add(transform.GetChild(blockCounter - 1).gameObject); //Add to block list
+            newBlock.GetComponent<Animator>().SetTrigger("newBlock"); //Run animation
+
+            ++blockIndex;
+        }
+    }
 }
