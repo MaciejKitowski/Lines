@@ -39,6 +39,11 @@ public class blockDetector : MonoBehaviour
                     }
                 }
             }
+            //Turn off navmesh obstacle if block is going to destroy
+            if(block.GetComponent<blockController>().toDestroy)
+            {
+                gameObject.transform.parent.GetComponent<arenaBlock>().blocked = false;
+            }
 
             //Turn off navmesh obstacle if selected new target
             if(block.GetComponent<blockController>().navTarget != gameObject.transform.parent.gameObject)

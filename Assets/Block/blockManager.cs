@@ -49,7 +49,10 @@ public class blockManager : MonoBehaviour
         }
 
         // [[   TEST    ]]  --  Create new blocks
-        if (blockCounter < 10) createNewBlock(color.blue);
+        if (blockIndex < 10) createNewBlock(color.blue);
+
+        // [[   TEST    ]]  --  delete block
+        if (Input.GetKeyDown(KeyCode.Space)) deleteBlock(blocks[0]);
 	}
 
     public void createNewBlock(color col)
@@ -84,4 +87,36 @@ public class blockManager : MonoBehaviour
             ++blockIndex;
         }
     }
+
+    public void deleteBlock(GameObject obj)
+    {
+        for(int i = 0; i < blockCounter; ++i)
+        {
+            if(obj == blocks[i].gameObject)
+            {
+                blocks[i].GetComponent<blockController>().navTarget = null;
+                blocks[i].GetComponent<blockController>().toDestroy = true;
+                blocks[i].GetComponent<Animator>().SetTrigger("deleteBlock");
+                --blockCounter;
+                blocks.RemoveAt(i);
+                continue;
+            }
+        }
+    }
 }
+
+
+/*public void deleteBlock(GameObject obj)
+    {
+        for (int i = 0; i < blockSize;i++ )
+        {
+            if(obj == blocks[i].gameObject)
+            {
+                blocks[i].arenaBlock.GetComponent<arena>().blocked = false;
+                Destroy(blocks[i].gameObject);
+                blockSize--;
+                blocks.RemoveAt(i);
+                continue;
+            }
+        }
+    }*/
