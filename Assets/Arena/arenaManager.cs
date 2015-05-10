@@ -7,7 +7,7 @@ public class arenaManager : MonoBehaviour
 
     public blockManager managerBlock;
 	
-	void Start () 
+	void Awake () 
     {
         arenaBlock = new arenaBlock[40];
 
