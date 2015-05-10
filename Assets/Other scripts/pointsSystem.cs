@@ -64,6 +64,44 @@ public class pointsSystem : MonoBehaviour
                 }
             }
         }
-    }
-        
+
+        //vertical
+        for (int X = 0; X < 5; ++X)
+        {
+            for (int Y = 1, i = 1; Y < 9; ++Y)
+            {
+                //If blocks match
+                if (Y < 8 && arena[X , Y - 1].block != null && arena[X, Y].block != null)
+                {
+                    if (arena[X, Y - 1].block.GetComponent<blockController>().blockColor == arena[X, Y].block.GetComponent<blockController>().blockColor)
+                    {
+                        if (!arena[X, Y - 1].block.GetComponent<blockController>().toDestroy && !arena[X, Y].block.GetComponent<blockController>().toDestroy)
+                        {
+                            if (arena[X, Y - 1].block.GetComponent<blockController>().navTarget == arena[X, Y - 1].transform.gameObject && arena[X, Y].block.GetComponent<blockController>().navTarget == arena[X, Y].transform.gameObject)
+                            {
+                                ++i;
+                            }
+                        }
+                    }
+                }
+                //If blocs are different
+                else
+                {
+                    if (i >= 3)
+                    {
+                        //Add points
+                        manager.points += 10 + ((i % 3) + 1) * 5;
+
+                        //Delete blocks
+                        for (int w = i; w > 0; w--)
+                        {
+                            managerBlock.deleteBlock(arena[X, Y - w].block);
+                        }
+                        Debug.Log(manager.points);
+                    }
+                    i = 1;
+                }
+            }
+        }
+    }   
 }
