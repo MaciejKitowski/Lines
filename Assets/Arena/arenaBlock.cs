@@ -52,4 +52,9 @@ public class arenaBlock : MonoBehaviour
             }
         }
     }
+
+    public blockController BlockControl()
+    {
+        return block.GetComponent<blockController>();
+    }
 }
