@@ -55,7 +55,7 @@ public class nextBlocksController : MonoBehaviour
 	
 	void Update () 
     {
-        if (managerBlock.blockCounter < 4) push();
+        if (managerBlock.blockCount() < 4) push();
 
         // [[   TEST    ]]  -- rand new colors
         if (Input.GetKeyDown(KeyCode.S)) randNewColor();
