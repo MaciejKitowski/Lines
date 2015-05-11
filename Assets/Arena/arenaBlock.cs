@@ -40,7 +40,7 @@ public class arenaBlock : MonoBehaviour
             //Select new target for block
             if (manager.managerBlock.blockSelected())
             {
-                manager.managerBlock.blocks[manager.managerBlock.blockSelectedIndex()].GetComponent<blockController>().setNavDestination(gameObject);
+                manager.managerBlock.getBlock(manager.managerBlock.blockSelectedIndex()).GetComponent<blockController>().setNavDestination(gameObject);
             }
         }
         else
@@ -48,7 +48,7 @@ public class arenaBlock : MonoBehaviour
             //Unselect block
             if (manager.managerBlock.blockSelected())
             {
-                manager.managerBlock.blocks[manager.managerBlock.blockSelectedIndex()].GetComponent<blockController>().selected = false;
+                manager.managerBlock.getBlock(manager.managerBlock.blockSelectedIndex()).GetComponent<blockController>().selected = false;
             }
         }
     }
