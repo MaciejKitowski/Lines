@@ -38,17 +38,9 @@ public class arenaBlock : MonoBehaviour
         if(!blocked)
         {
             //Select new target for block
-            if (manager.managerBlock.blockSelected())
+            if(manager.managerBlock.getSelectedBlock() != null)
             {
-                manager.managerBlock.getBlock(manager.managerBlock.blockSelectedIndex()).GetComponent<blockController>().setNavDestination(gameObject);
-            }
-        }
-        else
-        {
-            //Unselect block
-            if (manager.managerBlock.blockSelected())
-            {
-                manager.managerBlock.getBlock(manager.managerBlock.blockSelectedIndex()).GetComponent<blockController>().selected = false;
+                manager.managerBlock.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
             }
         }
     }

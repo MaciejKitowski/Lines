@@ -24,7 +24,7 @@ public class nextBlocksController : MonoBehaviour
     {
         for(int i = 0; i < 4; ++i)
         {
-            colorIndex[i] = Random.Range(1, 4);
+            colorIndex[i] = Random.Range(1, 6);
 
             switch(colorIndex[i])
             {
@@ -39,6 +39,14 @@ public class nextBlocksController : MonoBehaviour
                 case 3:
                     col[i] = blockManager.color.blue;
                     block[i].GetComponent<MeshRenderer>().material.color = Color.blue;
+                    break;
+                case 4:
+                    col[i] = blockManager.color.yellow;
+                    block[i].GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    break;
+                case 5:
+                    col[i] = blockManager.color.magenta;
+                    block[i].GetComponent<MeshRenderer>().material.color = Color.magenta;
                     break;
             }
         }

@@ -76,13 +76,13 @@ public class blockController : MonoBehaviour
                 gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 break;
 
-            /*case blockManager.color.yellow:
+            case blockManager.color.yellow:
                 gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                break;*/
+                break;
 
-            /*case blockManager.color.magenta:
+            case blockManager.color.magenta:
                 gameObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
-                break;*/
+                break;
         }
 	}
 }
