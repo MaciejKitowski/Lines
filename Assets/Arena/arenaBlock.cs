@@ -3,7 +3,6 @@ using System.Collections;
 
 public class arenaBlock : MonoBehaviour 
 {
-    public arenaManager manager;
     NavmeshobstacleController navObstacle;
 
     public GameObject block;
@@ -12,7 +11,6 @@ public class arenaBlock : MonoBehaviour
 	void Start () 
     {
         navObstacle = gameObject.transform.GetChild(1).gameObject.GetComponent<NavmeshobstacleController>();
-        manager = gameObject.GetComponentInParent<arenaManager>();
 	}
 
     void Update()
@@ -38,9 +36,9 @@ public class arenaBlock : MonoBehaviour
         if(!blocked)
         {
             //Select new target for block
-            if(manager.managerBlock.getSelectedBlock() != null)
+            if (manager.blocks.getSelectedBlock() != null)
             {
-                manager.managerBlock.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
+                manager.blocks.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
             }
         }
     }

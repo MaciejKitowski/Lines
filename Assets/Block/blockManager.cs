@@ -6,7 +6,6 @@ public class blockManager : MonoBehaviour
     public enum color { red, green, blue, yellow, magenta };
 
     public GameObject blockPrefab;
-    public arenaManager managerArena;
     public Material blockUnselectedMaterial;
     public Material blockSelectedMaterial;
 
@@ -21,12 +20,12 @@ public class blockManager : MonoBehaviour
     {
         arenaBlock arena = null;
 
-        if (blockCount() < 32) while (arena == null || arena.blocked) arena = managerArena.arenaBlock[Random.Range(0, 39)];
+        if (blockCount() < 32) while (arena == null || arena.blocked) arena = manager.arena.arenaBlock[Random.Range(0, 39)];
         else
         {
             for (int i = 0; i < 40; ++i)
             {
-                arena = managerArena.arenaBlock[i];
+                arena = manager.arena.arenaBlock[i];
                 if (!arena.blocked) break;
             }
         }

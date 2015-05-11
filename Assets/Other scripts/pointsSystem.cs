@@ -3,19 +3,12 @@ using System.Collections;
 
 public class pointsSystem : MonoBehaviour 
 {
-    public arenaManager managerArena;
-    public blockManager managerBlock;
-
-    public arenaBlock[,] arena;
+    private arenaBlock[,] arena;
 
 	void Start () 
     {
-        if (managerArena == null) Debug.Log(gameObject.name + " - arenaManager empty!");
-        else
-        {
-            arena = new arenaBlock[5, 8];
-            for (int Y = 0, i = 0; Y < 8; ++Y) for (int X = 0; X < 5; ++X, ++i) arena[X, Y] = managerArena.arenaBlock[i];
-        }
+        arena = new arenaBlock[5, 8];
+        for (int y = 0, i = 0; y < 8; ++y) for (int x = 0; x < 5; ++x, ++i) arena[x, y] = manager.arena.arenaBlock[i];
 	}
 	
 	void Update () 
@@ -39,7 +32,7 @@ public class pointsSystem : MonoBehaviour
                     {
                         Debug.Log(i);
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
-                        for (int w = i; w > 0; w--) managerBlock.deleteBlock(arena[X - w, Y].block); //Delete blocks
+                        for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[X - w, Y].block); //Delete blocks
                         Debug.Log(manager.points);
                     }
                     i = 1;
@@ -63,7 +56,7 @@ public class pointsSystem : MonoBehaviour
                     if (i >= 3)
                     {
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
-                        for (int w = i; w > 0; w--) managerBlock.deleteBlock(arena[X, Y - w].block); //Delete blocks
+                        for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[X, Y - w].block); //Delete blocks
                         Debug.Log(manager.points);
                     }
                     i = 1;

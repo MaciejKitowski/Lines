@@ -5,7 +5,6 @@ public class arenaManager : MonoBehaviour
 {
     public arenaBlock [] arenaBlock;
 
-    public blockManager managerBlock;
 	
 	void Awake () 
     {

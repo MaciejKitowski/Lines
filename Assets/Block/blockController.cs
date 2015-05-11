@@ -3,8 +3,6 @@ using System.Collections;
 
 public class blockController : MonoBehaviour 
 {
-    blockManager manager;
-
     public blockManager.color blockColor;
     public bool selected;
     public bool toDestroy;
@@ -15,7 +13,6 @@ public class blockController : MonoBehaviour
 	void Start () 
     {
         navAgent = gameObject.GetComponent<NavMeshAgent>();
-        manager = gameObject.GetComponentInParent<blockManager>();
         navAgent.updateRotation = false;
 	}
 
@@ -45,11 +42,11 @@ public class blockController : MonoBehaviour
         //Change material
 	    if(selected)
         {
-            gameObject.GetComponent<MeshRenderer>().material = manager.blockSelectedMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blockSelectedMaterial;
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().material = manager.blockUnselectedMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blockUnselectedMaterial;
         }
 
         //Destroy object if animation ended
