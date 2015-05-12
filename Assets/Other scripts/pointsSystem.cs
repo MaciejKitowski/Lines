@@ -32,6 +32,7 @@ public class pointsSystem : MonoBehaviour
                     {
                         Debug.Log(i);
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
+                        manager.blocks.addedPoints = true;
                         for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[X - w, Y].block); //Delete blocks
                         Debug.Log(manager.points);
                     }

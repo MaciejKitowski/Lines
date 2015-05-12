@@ -36,6 +36,7 @@ public class blockDetector : MonoBehaviour
                         block.transform.position.z == gameObject.transform.parent.gameObject.transform.position.z)
                     {
                         gameObject.transform.parent.GetComponent<arenaBlock>().blocked = true;
+                        block.GetComponent<blockController>().onPosition = true;
                     }
                 }
             }

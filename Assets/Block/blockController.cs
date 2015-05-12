@@ -9,6 +9,8 @@ public class blockController : MonoBehaviour
     NavMeshAgent navAgent;
 
     public GameObject navTarget;
+    public bool moved;
+    public bool onPosition;
 	
 	void Start () 
     {
@@ -26,6 +28,8 @@ public class blockController : MonoBehaviour
         navAgent.SetDestination(pos);
 
         selected = false;
+        moved = true;
+        onPosition = false;
     }
 
     void OnMouseDown()

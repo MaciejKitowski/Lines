@@ -9,10 +9,12 @@ public class blockManager : MonoBehaviour
     public Material blockUnselectedMaterial;
     public Material blockSelectedMaterial;
 
+    public bool addedPoints; //if false add new blocks
     private int blockIndex = 1; //Index to naming blocks in inspector
 
 	void Update () 
     {
+        pushNewBlocks();
         multipleSelection();
 	}
 
@@ -99,6 +101,25 @@ public class blockManager : MonoBehaviour
                         getBlock(j).GetComponent<blockController>().selected = false;
                     }
                 }
+            }
+        }
+    }
+
+    //Add new blocks for every move without points
+    private void pushNewBlocks()
+    {
+        for (int i = 0; i < blockCount(); ++i)
+        {
+            if (getBlock(i).GetComponent<blockController>().moved && !addedPoints && getBlock(i).GetComponent<blockController>().onPosition)
+            {
+                manager.nextBlock.push();
+                getBlock(i).GetComponent<blockController>().moved = false;
+                addedPoints = false;
+            }
+            else if (getBlock(i).GetComponent<blockController>().moved && addedPoints && getBlock(i).GetComponent<blockController>().onPosition)
+            {
+                getBlock(i).GetComponent<blockController>().moved = false;
+                addedPoints = false;
             }
         }
     }
