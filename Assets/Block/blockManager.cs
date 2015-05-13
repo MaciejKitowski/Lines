@@ -120,11 +120,7 @@ public class blockManager : MonoBehaviour
                 getBlock(i).GetComponent<blockController>().moved = false;
                 addedPoints = false;
             }
-            else if (getBlock(i).GetComponent<blockController>().moved && addedPoints && getBlock(i).GetComponent<blockController>().onPosition)
-            {
-                getBlock(i).GetComponent<blockController>().moved = false;
-                addedPoints = false;
-            }
+            else if (addedPoints) addedPoints = false;
         }
     }
 }
