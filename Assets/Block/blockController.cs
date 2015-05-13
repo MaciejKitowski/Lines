@@ -40,18 +40,12 @@ public class blockController : MonoBehaviour
             else selected = true;
         }
     }
-	
+
 	void Update ()
     {
         //Change material
-	    if(selected)
-        {
-            gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blockSelectedMaterial;
-        }
-        else
-        {
-            gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blockUnselectedMaterial;
-        }
+        if (selected) selectBlock();
+        else unselectBlock();
 
         //Destroy object if animation ended
         if(toDestroy)
@@ -61,29 +55,57 @@ public class blockController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+	}
 
-        //Change block color
-        switch(blockColor)
+    private void selectBlock()
+    {
+        switch (blockColor)
         {
             case blockManager.color.blue:
-                gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blueBlockSelect;
                 break;
 
             case blockManager.color.green:
-                gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.greenBlockSelect;
                 break;
 
             case blockManager.color.red:
-                gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.redBlockSelect;
                 break;
 
             case blockManager.color.yellow:
-                gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.yellowBlockSelect;
                 break;
 
             case blockManager.color.magenta:
-                gameObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.magentaBlockSelect;
                 break;
         }
-	}
+    }
+
+    private void unselectBlock()
+    {
+        switch (blockColor)
+        {
+            case blockManager.color.blue:
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blueBlockUnselect;
+                break;
+
+            case blockManager.color.green:
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.greenBlockUnselect;
+                break;
+
+            case blockManager.color.red:
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.redBlockUnselect;
+                break;
+
+            case blockManager.color.yellow:
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.yellowBlockUnselect;
+                break;
+
+            case blockManager.color.magenta:
+                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.magentaBlockUnselect;
+                break;
+        }
+    }
 }

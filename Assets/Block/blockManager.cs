@@ -6,8 +6,12 @@ public class blockManager : MonoBehaviour
     public enum color { red, green, blue, yellow, magenta };
 
     public GameObject blockPrefab;
-    public Material blockUnselectedMaterial;
-    public Material blockSelectedMaterial;
+
+    public Material redBlockUnselect, redBlockSelect;
+    public Material greenBlockUnselect, greenBlockSelect;
+    public Material blueBlockUnselect, blueBlockSelect;
+    public Material yellowBlockUnselect, yellowBlockSelect;
+    public Material magentaBlockUnselect, magentaBlockSelect;
 
     public bool addedPoints; //if false add new blocks
     private int blockIndex = 1; //Index to naming blocks in inspector
