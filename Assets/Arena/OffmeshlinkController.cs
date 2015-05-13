@@ -18,6 +18,13 @@ public class OffmeshlinkController : MonoBehaviour
         if (detector.targetLeft.collidedObject != null && meshLeft == null) generateOffmesh(ref meshLeft, detector.targetLeft); //Left
         if (detector.targetUp.collidedObject != null && meshUp == null) generateOffmesh(ref meshUp, detector.targetUp); //Up
         if (detector.targetDown.collidedObject != null && meshDown == null) generateOffmesh(ref meshDown, detector.targetDown); //Down
+
+        //Turn off gameobjects for optimization
+        detector.targetRight.gameObject.SetActive(false);
+        detector.targetLeft.gameObject.SetActive(false);
+        detector.targetUp.gameObject.SetActive(false);
+        detector.targetDown.gameObject.SetActive(false);
+            
 	}
 
     void generateOffmesh(ref OffMeshLink offMesh, colliderDetector Side)
