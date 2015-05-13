@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class pointsSystem : MonoBehaviour 
 {
+    public Text pointsText;
     private arenaBlock[,] arena;
 
 	void Start () 
@@ -13,6 +15,9 @@ public class pointsSystem : MonoBehaviour
 	
 	void Update () 
     {
+        //Update points
+        pointsText.text = manager.points.ToString();
+
         //Check color in lines
         for (int Y = 0; Y < 8; ++Y) //Horizontal
         {
