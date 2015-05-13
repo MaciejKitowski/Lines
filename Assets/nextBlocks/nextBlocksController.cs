@@ -3,9 +3,12 @@ using System.Collections;
 
 public class nextBlocksController : MonoBehaviour 
 {
+    public int blocksToAdd = 4;
+
     private int[] colorIndex;
     private GameObject[] block;
     private blockManager.color[] col;
+    private float timer;
 
 	void Start () 
     {
@@ -52,21 +55,25 @@ public class nextBlocksController : MonoBehaviour
 
     public void push()
     {
-        for (int i = 0; i < 5; ++i)
-        {
-            if (i < 4) manager.blocks.createNewBlock(col[i]);
-            else randNewColor();
-        }
+        if (blocksToAdd > 0) manager.blocks.createNewBlock(col[blocksToAdd - 1]);
+        else randNewColor();
     }
 	
 	void Update () 
     {
-        if (manager.blocks.blockCount() < 4) push();
+        if (manager.blocks.blockCount() < 4) blocksToAdd = 4;
+
+        if (blocksToAdd >= 0 && Time.time > timer)
+        {
+            timer = Time.time + 0.1f;
+            push();
+            blocksToAdd--;
+        }
 
         // [[   TEST    ]]  -- rand new colors
         if (Input.GetKeyDown(KeyCode.S)) randNewColor();
 
         // [[   TEST    ]]  --  Create new blocks
-        if (Input.GetKeyDown(KeyCode.A)) push();
+        if (Input.GetKeyDown(KeyCode.A)) blocksToAdd = 4;
 	}
 }

@@ -116,7 +116,8 @@ public class blockManager : MonoBehaviour
         {
             if (getBlock(i).GetComponent<blockController>().moved && !addedPoints && getBlock(i).GetComponent<blockController>().onPosition)
             {
-                manager.nextBlock.push();
+                //manager.nextBlock.push();
+                manager.nextBlock.blocksToAdd = 4;
                 getBlock(i).GetComponent<blockController>().moved = false;
                 addedPoints = false;
             }
