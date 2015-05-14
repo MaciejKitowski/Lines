@@ -33,7 +33,7 @@ public class arenaBlock : MonoBehaviour
 
     void OnMouseDown()
     {
-        if(!blocked)
+        if (!blocked && !manager.DebugMenu.active)
         {
             //Select new target for block
             if (manager.blocks.getSelectedBlock() != null)
