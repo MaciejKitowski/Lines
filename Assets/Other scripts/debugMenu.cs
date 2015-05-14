@@ -14,6 +14,20 @@ public class debugMenu : MonoBehaviour
         }
 	}
 
+    //Add 100 points
+    public void addPoints()
+    {
+        manager.points += 100;
+        hideMenu();
+    }
+
+    //Substract 100 points
+    public void substractPoints()
+    {
+        manager.points -= 100;
+        hideMenu();
+    }
+
     //Exit game button
     public void exitGame()
     {
