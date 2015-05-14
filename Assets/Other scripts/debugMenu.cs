@@ -9,16 +9,28 @@ public class debugMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (active)
-            {
-                active = false;
-                gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.transform.GetChild(0).gameObject.SetActive(true);
-                active = true;
-            }
+            if (active) hideMenu();
+            else showMenu();
         }
 	}
+
+    //Exit game button
+    public void exitGame()
+    {
+        Application.Quit();
+    }
+
+    //Hide debug menu
+    private void hideMenu()
+    {
+        active = false;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    //Display debug menu
+    private void showMenu()
+    {
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        active = true;
+    }
 }
