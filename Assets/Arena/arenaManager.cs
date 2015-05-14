@@ -4,7 +4,6 @@ using System.Collections;
 public class arenaManager : MonoBehaviour 
 {
     public arenaBlock [] arenaBlock;
-
 	
 	void Awake () 
     {
