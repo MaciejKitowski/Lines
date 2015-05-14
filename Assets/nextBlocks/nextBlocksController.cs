@@ -21,7 +21,7 @@ public class nextBlocksController : MonoBehaviour
         randNewColor();
 	}
 
-    void randNewColor()
+    public void randNewColor()
     {
         for(int i = 0; i < 4; ++i)
         {

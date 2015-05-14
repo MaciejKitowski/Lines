@@ -18,14 +18,25 @@ public class debugMenu : MonoBehaviour
     public void addPoints()
     {
         manager.points += 100;
-        hideMenu();
     }
 
     //Substract 100 points
     public void substractPoints()
     {
         manager.points -= 100;
+    }
+
+    //Push new blocks
+    public void pushBlocks()
+    {
+        manager.nextBlock.blocksToAdd = 4;
         hideMenu();
+    }
+
+    //Rand new nextBlocks colors
+    public void randNew()
+    {
+        manager.nextBlock.randNewColor();
     }
 
     //Exit game button
