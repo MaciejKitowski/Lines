@@ -45,6 +45,12 @@ public class debugMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void deleteBlocks()
+    {
+        for (int i = manager.blocks.blockCount() - 1; i >= 0; --i) manager.blocks.deleteBlock(manager.blocks.getBlock(i));
+        hideMenu();
+    }
+
     //Hide debug menu
     private void hideMenu()
     {
