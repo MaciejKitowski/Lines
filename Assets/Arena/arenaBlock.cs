@@ -12,15 +12,11 @@ public class arenaBlock : MonoBehaviour
     {
         navObstacle = gameObject.transform.GetChild(1).gameObject.GetComponent<NavmeshobstacleController>();
 	}
-
+    
     void Update()
     {
         if(block != null)
         {
-            //Reset off mesh links
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            
             //Turn on navmesh obstacle
             if (blocked)
             {

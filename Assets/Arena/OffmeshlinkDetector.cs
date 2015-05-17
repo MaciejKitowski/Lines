@@ -18,4 +18,14 @@ public class OffmeshlinkDetector : MonoBehaviour
         targetUp = colliderUp.GetComponent<colliderDetector>();
         targetDown = colliderDown.GetComponent<colliderDetector>();
 	}
+
+    void Update()
+    {
+        //Destroy OffmeshlinkDetector and disable gameObject for optimization
+        if (gameObject.transform.childCount == 0)
+        {
+            Destroy(gameObject.GetComponent<OffmeshlinkDetector>());
+            gameObject.SetActive(false);
+        }
+    }
 }
