@@ -28,14 +28,22 @@ public class mainMenuController : MonoBehaviour
         }
 	}
 
+    public void displayMenu()
+    {
+        active = true;
+        gameObject.SetActive(true);
+    }
+
+    public void hideMenu()
+    {
+        active = false;
+        gameObject.SetActive(false);
+    }
+
     //New game
     public void newGame()
     {
-        if(!displayHighScores && !displayAbout && !displayExitPanel)
-        {
-            active = false;
-            gameObject.SetActive(false);
-        }
+        if (!displayHighScores && !displayAbout && !displayExitPanel) hideMenu();
     }
 
     //Exit game panel

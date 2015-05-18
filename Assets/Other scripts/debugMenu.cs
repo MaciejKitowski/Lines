@@ -39,12 +39,20 @@ public class debugMenu : MonoBehaviour
         manager.nextBlock.randNewColor();
     }
 
+    //Back to menu button
+    public void backToMenu()
+    {
+        hideMenu();
+        manager.mainMenu.displayMenu();
+    }
+
     //Exit game button
     public void exitGame()
     {
         Application.Quit();
     }
 
+    //Delete all blocks
     public void deleteBlocks()
     {
         for (int i = manager.blocks.blockCount() - 1; i >= 0; --i) manager.blocks.deleteBlock(manager.blocks.getBlock(i));
