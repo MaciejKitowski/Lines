@@ -10,8 +10,14 @@ public class debugMenu : MonoBehaviour
     public void addPoints() { manager.points += 100; } //Add 100 points
     public void substractPoints() { manager.points -= 100; } //Substract 100 points
     public void randNew() { manager.nextBlock.randNewColor(); } //Rand new nextBlocks colors
-    public void exitGame() { Application.Quit(); } //Exit game button
 
+    //Exit game button
+    public void exitGame() 
+    {
+        scoreManager.saveScore();
+        Application.Quit();
+    }
+    
     //Display/hide
     private void toggleDisplay()
     {

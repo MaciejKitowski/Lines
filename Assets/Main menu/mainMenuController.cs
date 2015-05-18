@@ -66,7 +66,11 @@ public class mainMenuController : MonoBehaviour
     
     public void exitYesButton()
     {
-        if (exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) Application.Quit();
+        if (exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            scoreManager.saveScore();
+            Application.Quit();
+        }
     }
 
     public void exitNoButton()
