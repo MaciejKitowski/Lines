@@ -7,9 +7,6 @@ public class colliderDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider obj)
     {
-        if (obj.gameObject.tag == "Arena block")
-        {
-            collidedObject = obj.gameObject;
-        }
+        if (obj.gameObject.tag == "Arena block") collidedObject = obj.gameObject;
     }
 }

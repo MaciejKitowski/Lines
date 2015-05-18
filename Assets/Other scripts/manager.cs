@@ -10,6 +10,7 @@ public class manager : MonoBehaviour
     public static nextBlocksController nextBlock;
     public static debugMenu DebugMenu;
     public static mainMenuController mainMenu;
+    public static versionInfo verInfo;
 	
 	void Awake () 
     {
@@ -18,5 +19,6 @@ public class manager : MonoBehaviour
         nextBlock = FindObjectOfType<nextBlocksController>();
         DebugMenu = FindObjectOfType<debugMenu>();
         mainMenu = FindObjectOfType<mainMenuController>();
+        verInfo = FindObjectOfType<versionInfo>();
 	}
 }

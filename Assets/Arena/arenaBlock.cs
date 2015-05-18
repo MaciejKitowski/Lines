@@ -8,17 +8,13 @@ public class arenaBlock : MonoBehaviour
     public GameObject block;
     public bool blocked;
 
-	void Start () 
-    {
-        navObstacle = gameObject.transform.GetChild(1).gameObject.GetComponent<NavmeshobstacleController>();
-	}
-    
+    void Start() { navObstacle = gameObject.transform.GetChild(1).gameObject.GetComponent<NavmeshobstacleController>(); }
+
     void Update()
     {
         if(block != null)
         {
-            //Turn on navmesh obstacle
-            if (blocked)
+            if (blocked) //Turn on navmesh obstacle
             {
                 block.GetComponent<NavMeshAgent>().enabled = false;
                 navObstacle.toggle(NavmeshobstacleController.turn.ON);
@@ -32,15 +28,9 @@ public class arenaBlock : MonoBehaviour
         if (!blocked && !manager.DebugMenu.active && !manager.mainMenu.active)
         {
             //Select new target for block
-            if (manager.blocks.getSelectedBlock() != null)
-            {
-                manager.blocks.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
-            }
+            if (manager.blocks.getSelectedBlock() != null) manager.blocks.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
         }
     }
 
-    public blockController BlockControl()
-    {
-        return block.GetComponent<blockController>();
-    }
+    public blockController BlockControl() { return block.GetComponent<blockController>(); }
 }

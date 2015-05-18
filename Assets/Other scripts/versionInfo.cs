@@ -5,6 +5,7 @@ using System.Collections;
 public class versionInfo : MonoBehaviour 
 {
     public string gameVersion;
+    public string lastUpdateTime;
     Text text;
 	
 	void Start () 

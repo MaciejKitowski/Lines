@@ -71,17 +71,8 @@ public class blockManager : MonoBehaviour
         }
     }
 
-    //Return block count
-    public int blockCount()
-    {
-        return gameObject.transform.childCount;
-    }
-
-    //Return block
-    public GameObject getBlock(int Index)
-    {
-        return gameObject.transform.GetChild(Index).gameObject;
-    }
+    public int blockCount() { return gameObject.transform.childCount; } //Return block count
+    public GameObject getBlock(int Index) { return gameObject.transform.GetChild(Index).gameObject; } //Return block
 
     //Return selected block
     public GameObject getSelectedBlock()

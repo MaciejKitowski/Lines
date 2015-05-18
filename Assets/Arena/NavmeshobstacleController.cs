@@ -3,15 +3,12 @@ using System.Collections;
 
 public class NavmeshobstacleController : MonoBehaviour 
 {
-    NavMeshObstacle navMesh;
+    private NavMeshObstacle navMesh;
 
     public enum turn { ON, OFF }
-	
-	void Start () 
-    {
-        navMesh = gameObject.GetComponent<NavMeshObstacle>();
-	}
-	
+
+    void Start() { navMesh = gameObject.GetComponent<NavMeshObstacle>(); }
+
 	public void toggle(turn Turn)
     {
         if (Turn == turn.ON) navMesh.enabled = true;
