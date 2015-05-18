@@ -17,6 +17,7 @@ public class mainMenuController : MonoBehaviour
 	void Start () 
     {
         exitPanel = gameObject.transform.GetChild(1).gameObject;
+        HighScores = gameObject.transform.GetChild(2).gameObject;
 	}
 	
 	void Update () 
@@ -32,6 +33,13 @@ public class mainMenuController : MonoBehaviour
         {
             displayExitPanel = false;
             exitPanel.SetActive(false);
+        }
+
+        //Hide High Scores panel if animation has ended
+        if(displayHighScores && HighScores.GetComponent<highScoresController>().getAnim().GetCurrentAnimatorStateInfo(0).IsName("readyToHide"))
+        {
+            displayHighScores = false;
+            HighScores.SetActive(false);
         }
 	}
 
@@ -51,6 +59,16 @@ public class mainMenuController : MonoBehaviour
     public void newGame()
     {
         if (!displayHighScores && !displayAbout && !displayExitPanel) hideMenu();
+    }
+
+    public void highScoresButton()
+    {
+        if (!displayHighScores && !displayAbout && !displayExitPanel)
+        {
+            displayHighScores = true;
+            HighScores.SetActive(true);
+            HighScores.GetComponent<highScoresController>().getAnim().SetTrigger("displayHighScores");
+        }
     }
 
     //Exit game panel
