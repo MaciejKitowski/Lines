@@ -26,6 +26,13 @@ public class mainMenuController : MonoBehaviour
             if (!displayHighScores && !displayAbout && !displayExitPanel) displayExit();
             else if (displayExitPanel) exitNoButton();
         }
+
+        //Hide exit panel if animation has ended
+        if (displayExitPanel && exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("readyToHide"))
+        {
+            displayExitPanel = false;
+            exitPanel.SetActive(false);
+        }
 	}
 
     public void displayMenu()
@@ -53,17 +60,20 @@ public class mainMenuController : MonoBehaviour
         {
             displayExitPanel = true;
             exitPanel.SetActive(true);
+            exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("displayExit"); //Run animation
         }
     }
-
+    
     public void exitYesButton()
     {
-        Application.Quit();
+        if (exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) Application.Quit();
     }
 
     public void exitNoButton()
     {
-        displayExitPanel = false;
-        exitPanel.SetActive(false);
+        if (exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            exitPanel.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("hideExit"); //Run animation
+        }
     }
 }
