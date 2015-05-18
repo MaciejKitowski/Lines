@@ -7,7 +7,7 @@ public class debugMenu : MonoBehaviour
 	
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !manager.mainMenu.active)
         {
             if (active) hideMenu();
             else showMenu();

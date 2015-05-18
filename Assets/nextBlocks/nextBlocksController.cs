@@ -55,13 +55,13 @@ public class nextBlocksController : MonoBehaviour
 
     public void push()
     {
-        if (blocksToAdd > 0) manager.blocks.createNewBlock(col[blocksToAdd - 1]);
+        if (blocksToAdd > 0 && !manager.mainMenu.active) manager.blocks.createNewBlock(col[blocksToAdd - 1]);
         else randNewColor();
     }
 	
 	void Update () 
     {
-        if (manager.blocks.blockCount() < 4) blocksToAdd = 4;
+        if (manager.blocks.blockCount() < 4 && !manager.mainMenu.active) blocksToAdd = 4;
 
         if (blocksToAdd >= 0 && Time.time > timer)
         {
@@ -69,11 +69,5 @@ public class nextBlocksController : MonoBehaviour
             push();
             blocksToAdd--;
         }
-
-        // [[   TEST    ]]  -- rand new colors
-        if (Input.GetKeyDown(KeyCode.S)) randNewColor();
-
-        // [[   TEST    ]]  --  Create new blocks
-        if (Input.GetKeyDown(KeyCode.A)) blocksToAdd = 4;
 	}
 }

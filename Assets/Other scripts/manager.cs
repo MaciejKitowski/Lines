@@ -9,6 +9,7 @@ public class manager : MonoBehaviour
     public static arenaManager arena;
     public static nextBlocksController nextBlock;
     public static debugMenu DebugMenu;
+    public static mainMenuController mainMenu;
 	
 	void Awake () 
     {
@@ -16,5 +17,6 @@ public class manager : MonoBehaviour
         arena = FindObjectOfType<arenaManager>();
         nextBlock = FindObjectOfType<nextBlocksController>();
         DebugMenu = FindObjectOfType<debugMenu>();
+        mainMenu = FindObjectOfType<mainMenuController>();
 	}
 }
