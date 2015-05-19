@@ -67,6 +67,7 @@ public class mainMenuController : MonoBehaviour
         {
             displayHighScores = true;
             HighScores.SetActive(true);
+            highScoresController.updateScores();
             HighScores.GetComponent<highScoresController>().getAnim().SetTrigger("displayHighScores");
         }
     }

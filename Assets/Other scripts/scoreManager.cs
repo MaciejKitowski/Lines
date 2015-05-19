@@ -57,7 +57,7 @@ public class scoreManager : MonoBehaviour
             for (int i = 0, j; i < 10; ++i)
             {
                 j = i + 1;
-                PlayerPrefs.SetString("scoreDate" + j.ToString(), DateTime.Now.ToString());
+                PlayerPrefs.SetString("scoreDate" + j.ToString(), DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
                 PlayerPrefs.SetInt("scoreValue" + j.ToString(), j);
             }
             loadScore();
