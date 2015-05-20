@@ -5,6 +5,8 @@ public class mainMenuController : MonoBehaviour
 {
     public bool active;
 
+    GameObject mainMenu;
+
     GameObject HighScores;
     public bool displayHighScores;
 
@@ -16,6 +18,7 @@ public class mainMenuController : MonoBehaviour
 
 	void Start () 
     {
+        mainMenu = gameObject.transform.GetChild(0).gameObject;
         exitPanel = gameObject.transform.GetChild(1).gameObject;
         HighScores = gameObject.transform.GetChild(2).gameObject;
 	}
@@ -26,6 +29,19 @@ public class mainMenuController : MonoBehaviour
         {
             if (!displayHighScores && !displayAbout && !displayExitPanel) displayExit();
             else if (displayExitPanel) exitNoButton();
+        }
+
+        //Display Main menu if animation has ended
+        if (!active && mainMenu.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            active = true;
+        }
+
+        //Hide Main menu if animation has ended
+        if (active && mainMenu.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("readyToHide"))
+        {
+            active = false;
+            gameObject.SetActive(false);
         }
 
         //Hide exit panel if animation has ended
@@ -45,14 +61,13 @@ public class mainMenuController : MonoBehaviour
 
     public void displayMenu()
     {
-        active = true;
         gameObject.SetActive(true);
+        mainMenu.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("displayMainMenu");
     }
 
     public void hideMenu()
     {
-        active = false;
-        gameObject.SetActive(false);
+        mainMenu.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("hideMainMenu");
     }
 
     //New game
