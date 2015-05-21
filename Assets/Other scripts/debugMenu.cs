@@ -5,7 +5,7 @@ public class debugMenu : MonoBehaviour
 {
     public bool active = false;
 
-    void Update() { if (Input.GetKeyDown(KeyCode.Escape) && !manager.mainMenu.active) toggleDisplay(); }
+    void Update() { if (Input.GetKeyDown(KeyCode.Escape) && !manager.menu.mainMenu.active) toggleDisplay(); }
 
     public void addPoints() { manager.points += 100; } //Add 100 points
     public void substractPoints() { manager.points -= 100; } //Substract 100 points

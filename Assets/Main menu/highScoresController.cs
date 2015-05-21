@@ -4,6 +4,10 @@ using System.Collections;
 
 public class highScoresController : MonoBehaviour 
 {
+    public bool active;
+
+    public GameObject canvas;
+
     private static Text[] place;
 
     void Start()
@@ -12,30 +16,46 @@ public class highScoresController : MonoBehaviour
 
         for (int i = 0, j = 2; i < 10; ++i, ++j) place[i] = gameObject.transform.GetChild(0).gameObject.transform.GetChild(j).gameObject.GetComponent<Text>();
 
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        canvas = gameObject.transform.GetChild(0).gameObject;
+        canvas.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) returnButton();
-    }
-
-    public static void updateScores()
-    {
-        for (int i = 0; i < 10; ++i)
+        if (active && manager.readyToHide(ref canvas))
         {
-            int j = i + 1;
-            if (place[i] != null) place[i].text = j.ToString() + ". " + scoreManager.Score[i].Key + " " + scoreManager.Score[i].Value.ToString();
+            active = false;
+            canvas.gameObject.SetActive(false);
+        }
+
+        if (manager.isIdle(ref canvas))
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) hide();
         }
     }
 
-    public Animator getAnim()
+    public void display()
     {
-        return gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
+        active = true;
+        manager.displayObject(ref canvas);
+        updateScores();
     }
 
-    public void returnButton()
+    public void hide()
     {
-        getAnim().SetTrigger("hideHighScores");
+        manager.hideObject(ref canvas);
+    }
+
+    public void returnBUTTON()
+    {
+        hide();
+    }
+
+    private void updateScores()
+    {
+        for (int i = 0, j = 1; i < 10; ++i, ++j)
+        {
+            if (place[i] != null) place[i].text = j.ToString() + ". " + scoreManager.Score[i].Key + " " + scoreManager.Score[i].Value.ToString();
+        }
     }
 }

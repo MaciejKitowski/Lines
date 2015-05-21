@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mainMenuController : MonoBehaviour 
+public class exitGameController : MonoBehaviour 
 {
     public bool active;
 
@@ -9,21 +9,21 @@ public class mainMenuController : MonoBehaviour
 
 	void Start () 
     {
-        active = true;
         canvas = gameObject.transform.GetChild(0).gameObject;
+        canvas.SetActive(false);
 	}
-	
+
 	void Update () 
     {
         if (active && manager.readyToHide(ref canvas))
         {
-            canvas.gameObject.SetActive(false);
             active = false;
+            canvas.SetActive(false);
         }
 
-        if(manager.isIdle(ref canvas))
+        if (manager.isIdle(ref canvas))
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) manager.menu.exitGame.display();
+            if (Input.GetKeyDown(KeyCode.Escape)) hide();
         }
 	}
 
@@ -38,18 +38,17 @@ public class mainMenuController : MonoBehaviour
         manager.hideObject(ref canvas);
     }
 
-    public void newGameBUTTON()
+    public void YesBUTTON()
+    {
+        if (manager.isIdle(ref canvas))
+        {
+            scoreManager.saveScore();
+            Application.Quit();
+        }
+    }
+
+    public void NoBUTTON()
     {
         if (manager.isIdle(ref canvas)) hide();
-    }
-
-    public void exitGameBUTTON()
-    {
-        if (manager.isIdle(ref canvas)) manager.menu.exitGame.display();
-    }
-
-    public void highScoresBUTTON()
-    {
-        if (manager.isIdle(ref canvas)) manager.menu.highScores.display();
     }
 }

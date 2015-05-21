@@ -56,6 +56,6 @@ public class gameLossPanelController : MonoBehaviour
         canvas.SetActive(false);
         manager.blocks.deleteAllBlocks();
     
-        manager.mainMenu.displayMenu();
+        manager.menu.mainMenu.display();
     }
 }
