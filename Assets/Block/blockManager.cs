@@ -71,6 +71,11 @@ public class blockManager : MonoBehaviour
         }
     }
 
+    public void deleteAllBlocks()
+    {
+        for (int i = blockCount() - 1; i >= 0; --i) deleteBlock(getBlock(i));
+    }
+
     public int blockCount() { return gameObject.transform.childCount; } //Return block count
     public GameObject getBlock(int Index) { return gameObject.transform.GetChild(Index).gameObject; } //Return block
 

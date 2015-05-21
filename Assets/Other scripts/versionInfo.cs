@@ -6,7 +6,8 @@ public class versionInfo : MonoBehaviour
 {
     public string gameVersion;
     public string lastUpdateTime;
-    Text text;
+
+    private Text text;
 	
 	void Start () 
     {
