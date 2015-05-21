@@ -11,6 +11,7 @@ public class manager : MonoBehaviour
     public static debugMenu DebugMenu;
     public static mainMenuController mainMenu;
     public static versionInfo verInfo;
+    public static gameLossPanelController gameLossPanel;
 	
 	void Awake () 
     {
@@ -20,5 +21,6 @@ public class manager : MonoBehaviour
         DebugMenu = FindObjectOfType<debugMenu>();
         mainMenu = FindObjectOfType<mainMenuController>();
         verInfo = FindObjectOfType<versionInfo>();
+        gameLossPanel = FindObjectOfType<gameLossPanelController>();
 	}
 }

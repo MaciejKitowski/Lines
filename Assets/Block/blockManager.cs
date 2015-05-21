@@ -81,6 +81,13 @@ public class blockManager : MonoBehaviour
         return null;
     }
 
+    //Return true if any block are destroying
+    public bool checkDestroy()
+    {
+        for (int i = 0; i < blockCount(); ++i) if (getBlock(i).GetComponent<blockController>().toDestroy) return true;
+        return false;
+    }
+
     //Find multiple selection
     private void multipleSelection()
     {
