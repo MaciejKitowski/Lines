@@ -55,7 +55,7 @@ public class mainMenuController : MonoBehaviour
         if(displayHighScores && HighScores.GetComponent<highScoresController>().getAnim().GetCurrentAnimatorStateInfo(0).IsName("readyToHide"))
         {
             displayHighScores = false;
-            HighScores.SetActive(false);
+            HighScores.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 	}
 
@@ -81,7 +81,7 @@ public class mainMenuController : MonoBehaviour
         if (!displayHighScores && !displayAbout && !displayExitPanel)
         {
             displayHighScores = true;
-            HighScores.SetActive(true);
+            HighScores.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             highScoresController.updateScores();
             HighScores.GetComponent<highScoresController>().getAnim().SetTrigger("displayHighScores");
         }

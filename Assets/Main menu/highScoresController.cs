@@ -11,7 +11,8 @@ public class highScoresController : MonoBehaviour
         place = new Text[10];
 
         for (int i = 0, j = 2; i < 10; ++i, ++j) place[i] = gameObject.transform.GetChild(0).gameObject.transform.GetChild(j).gameObject.GetComponent<Text>();
-        updateScores();
+
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void Update()
@@ -24,7 +25,7 @@ public class highScoresController : MonoBehaviour
         for (int i = 0; i < 10; ++i)
         {
             int j = i + 1;
-            place[i].text = j.ToString() + ". " + scoreManager.Score[i].Key + " " + scoreManager.Score[i].Value.ToString();
+            if (place[i] != null) place[i].text = j.ToString() + ". " + scoreManager.Score[i].Key + " " + scoreManager.Score[i].Value.ToString();
         }
     }
 
