@@ -5,6 +5,6 @@ public class gameLossConditions : MonoBehaviour
 {
 	void Update () 
     {
-        if (manager.blocks.blockCount() >= 40 && !manager.blocks.checkDestroy() && !manager.gameLossPanel.active) manager.gameLossPanel.activate();
+        if (manager.blocks.blockCount() >= 40 && !manager.blocks.checkDestroy() && !manager.gameLossPanel.active) manager.gameLossPanel.displayGameLoss();
 	}
 }
