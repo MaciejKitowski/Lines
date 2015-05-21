@@ -25,6 +25,8 @@ public class gameLossPanelController : MonoBehaviour
         pointsValue.text = manager.points.ToString();
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
+        gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("displayGameLossPanel");
+
         if(manager.points > scoreManager.Score[9].Value)
         {
             newRecord.SetActive(true);
@@ -33,12 +35,20 @@ public class gameLossPanelController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (!active && gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("readyToHide"))
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
     public void resetGame()
     {
         manager.points = 0;
         active = false;
         newRecord.SetActive(false);
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("hideGameLossPanel");
 
         //Delete all blocks
         for (int i = manager.blocks.blockCount() - 1; i >= 0; --i) manager.blocks.deleteBlock(manager.blocks.getBlock(i));

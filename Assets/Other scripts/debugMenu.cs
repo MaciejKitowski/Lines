@@ -37,7 +37,8 @@ public class debugMenu : MonoBehaviour
     public void backToMenu()
     {
         toggleDisplay();
-        manager.mainMenu.displayMenu();
+        manager.gameLossPanel.activate();
+        //manager.mainMenu.displayMenu();
     }
 
     //Delete all blocks
