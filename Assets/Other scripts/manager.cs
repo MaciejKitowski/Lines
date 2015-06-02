@@ -10,7 +10,6 @@ public class manager : MonoBehaviour
     public static nextBlocksController nextBlock;
     public static debugMenu DebugMenu;
     public static menuManager menu;
-    public static versionInfo verInfo;
     public static gameLossPanelController gameLossPanel;
 	
 	void Awake () 
@@ -20,10 +19,10 @@ public class manager : MonoBehaviour
         nextBlock = FindObjectOfType<nextBlocksController>();
         DebugMenu = FindObjectOfType<debugMenu>();
         menu = FindObjectOfType<menuManager>();
-        verInfo = FindObjectOfType<versionInfo>();
         gameLossPanel = FindObjectOfType<gameLossPanelController>();
 	}
 
+    //Animations controller
     public static void displayObject(ref GameObject obj)
     {
         obj.SetActive(true);

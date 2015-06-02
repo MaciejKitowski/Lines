@@ -13,8 +13,8 @@ public class aboutController : MonoBehaviour
         canvas = gameObject.transform.GetChild(0).gameObject;
         canvas.SetActive(false);
 
-        canvas.transform.GetChild(5).gameObject.GetComponent<Text>().text = manager.verInfo.gameVersion;
-        canvas.transform.GetChild(7).gameObject.GetComponent<Text>().text = manager.verInfo.lastUpdateTime;
+        canvas.transform.GetChild(5).gameObject.GetComponent<Text>().text = GameVersion.getVersion();
+        canvas.transform.GetChild(7).gameObject.GetComponent<Text>().text = GameVersion.getLastUpdate();
 	}
 	
 	

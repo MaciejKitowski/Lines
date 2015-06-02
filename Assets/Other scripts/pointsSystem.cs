@@ -35,11 +35,8 @@ public class pointsSystem : MonoBehaviour
                 {
                     if (i >= 3)
                     {
-                        Debug.Log(i);
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
-                        manager.blocks.addedPoints = true;
                         for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[X - w, Y].block); //Delete blocks
-                        Debug.Log(manager.points);
                     }
                     i = 1;
                 }
@@ -63,7 +60,6 @@ public class pointsSystem : MonoBehaviour
                     {
                         manager.points += 10 + ((i % 3) + 1) * 5; //Add points
                         for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[X, Y - w].block); //Delete blocks
-                        Debug.Log(manager.points);
                     }
                     i = 1;
                 }

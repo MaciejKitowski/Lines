@@ -13,7 +13,6 @@ public class blockManager : MonoBehaviour
     public Material yellowBlockUnselect, yellowBlockSelect;
     public Material magentaBlockUnselect, magentaBlockSelect;
 
-    public bool addedPoints; //if false add new blocks
     private int blockIndex = 1; //Index to naming blocks in inspector
 
 	void Update () 
@@ -50,7 +49,6 @@ public class blockManager : MonoBehaviour
 
             newBlock.GetComponent<blockController>().blockColor = col; //Set color
             newBlock.transform.parent = gameObject.transform; //Set as child
-            newBlock.GetComponent<NavMeshAgent>().enabled = true; //Turn on Navmesh Agent
             newBlock.GetComponent<Animator>().SetTrigger("newBlock"); //Run animation
 
             ++blockIndex;
@@ -117,13 +115,11 @@ public class blockManager : MonoBehaviour
     {
         for (int i = 0; i < blockCount(); ++i)
         {
-            if (getBlock(i).GetComponent<blockController>().moved && !addedPoints && getBlock(i).GetComponent<blockController>().onPosition)
+            if (getBlock(i).GetComponent<blockController>().moved && getBlock(i).GetComponent<blockController>().onPosition)
             {
                 manager.nextBlock.blocksToAdd = 4;
                 getBlock(i).GetComponent<blockController>().moved = false;
-                addedPoints = false;
             }
-            else if (addedPoints) addedPoints = false;
         }
     }
 }
