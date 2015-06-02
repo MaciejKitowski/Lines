@@ -52,4 +52,9 @@ public class mainMenuController : MonoBehaviour
     {
         if (manager.isIdle(ref canvas)) manager.menu.highScores.display();
     }
+
+    public void aboutBUTTON()
+    {
+        if (manager.isIdle(ref canvas)) manager.menu.about.display();
+    }
 }
