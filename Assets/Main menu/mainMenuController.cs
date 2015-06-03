@@ -40,21 +40,21 @@ public class mainMenuController : MonoBehaviour
 
     public void newGameBUTTON()
     {
-        if (manager.isIdle(ref canvas)) hide();
+        if (manager.isIdle(ref canvas) && !menuManager.ExitGame().active) hide();
     }
 
     public void exitGameBUTTON()
     {
-        if (manager.isIdle(ref canvas)) menuManager.ExitGame().display();
+        if (manager.isIdle(ref canvas) && !menuManager.ExitGame().active) menuManager.ExitGame().display();
     }
 
     public void highScoresBUTTON()
     {
-        if (manager.isIdle(ref canvas)) menuManager.HighScores().display();
+        if (manager.isIdle(ref canvas) && !menuManager.ExitGame().active) menuManager.HighScores().display();
     }
 
     public void aboutBUTTON()
     {
-        if (manager.isIdle(ref canvas)) menuManager.About().display();
+        if (manager.isIdle(ref canvas) && !menuManager.ExitGame().active) menuManager.About().display();
     }
 }

@@ -34,7 +34,7 @@ public class blockController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameManager.DebugMenu().active) selected = !selected;
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameManager.DebugMenu().active && !gameManager.GameLossPanel().active) selected = !selected;
     }
 
 	void Update ()

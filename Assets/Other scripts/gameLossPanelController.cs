@@ -24,6 +24,7 @@ public class gameLossPanelController : MonoBehaviour
     void Update()
     {
         if (!active && manager.readyToHide(ref canvas)) canvas.gameObject.SetActive(false);
+        if (manager.isIdle(ref canvas) && Input.GetKeyDown(KeyCode.Escape)) backToMenuBUTTON();
     }
 
     public void display()
