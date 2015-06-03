@@ -21,7 +21,7 @@ public class mainMenuController : MonoBehaviour
             active = false;
         }
 
-        if(manager.isIdle(ref canvas))
+        if(manager.isIdle(ref canvas) && !menuManager.About().active && !menuManager.HighScores().active && !menuManager.ExitGame().active)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) menuManager.ExitGame().display();
         }
