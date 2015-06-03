@@ -7,8 +7,8 @@ public class debugMenu : MonoBehaviour
 
     void Update() { if (Input.GetKeyDown(KeyCode.Escape) && !manager.menu.mainMenu.active) toggleDisplay(); }
 
-    public void addPoints() { manager.points += 100; } //Add 100 points
-    public void substractPoints() { manager.points -= 100; } //Substract 100 points
+    public void addPoints() { PointsController.addPoints(100); } //Add 100 points
+    public void substractPoints() { PointsController.substractPoints(100); } //Substract 100 points
     public void randNew() { manager.nextBlock.randNewColor(); } //Rand new nextBlocks colors
 
     //Exit game button

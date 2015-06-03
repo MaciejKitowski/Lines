@@ -30,12 +30,12 @@ public class gameLossPanelController : MonoBehaviour
     {
         active = true;
         manager.displayObject(ref canvas);
-        pointsValue.text = manager.points.ToString();
+        pointsValue.text = PointsController.getPoints().ToString();
 
-        if (manager.points > scoreManager.Score[9].Value)
+        if (PointsController.getPoints() > scoreManager.Score[9].Value)
         {
             newRecord.SetActive(true);
-            scoreManager.addNewRecord(manager.points);
+            scoreManager.addNewRecord(PointsController.getPoints());
         }
     }
 
@@ -43,14 +43,14 @@ public class gameLossPanelController : MonoBehaviour
     {
         active = false;
         newRecord.SetActive(false);
-        manager.points = 0;
+        PointsController.resetValue();
         manager.hideObject(ref canvas);
         manager.blocks.deleteAllBlocks();
     }
 
     public void backToMenuBUTTON()
     {
-        manager.points = 0;
+        PointsController.resetValue();
         active = false;
         newRecord.SetActive(false);
         canvas.SetActive(false);
