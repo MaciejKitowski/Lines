@@ -25,10 +25,10 @@ public class arenaBlock : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!blocked && !manager.DebugMenu.active && !manager.menu.mainMenu.active)
+        if (!blocked && !gameManager.DebugMenu().active && !menuManager.MainMenu().active)
         {
             //Select new target for block
-            if (manager.blocks.getSelectedBlock() != null) manager.blocks.getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
+            if (gameManager.BlockManager().getSelectedBlock() != null) gameManager.BlockManager().getSelectedBlock().GetComponent<blockController>().setNavDestination(gameObject);
         }
     }
 

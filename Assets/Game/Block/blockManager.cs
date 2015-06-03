@@ -25,12 +25,12 @@ public class blockManager : MonoBehaviour
     {
         arenaBlock arena = null;
 
-        if (blockCount() < 32) while (arena == null || arena.blocked) arena = manager.arena.arenaBlock[Random.Range(0, 39)];
+        if (blockCount() < 32) while (arena == null || arena.blocked) arena = gameManager.ArenaManager().arenaBlock[Random.Range(0, 39)];
         else
         {
             for (int i = 0; i < 40; ++i)
             {
-                arena = manager.arena.arenaBlock[i];
+                arena = gameManager.ArenaManager().arenaBlock[i];
                 if (!arena.blocked) break;
             }
         }
@@ -117,7 +117,7 @@ public class blockManager : MonoBehaviour
         {
             if (getBlock(i).GetComponent<blockController>().moved && getBlock(i).GetComponent<blockController>().onPosition)
             {
-                manager.nextBlock.blocksToAdd = 4;
+                gameManager.NextBlockControl().blocksToAdd = 4;
                 getBlock(i).GetComponent<blockController>().moved = false;
             }
         }

@@ -55,13 +55,13 @@ public class nextBlocksController : MonoBehaviour
 
     public void push()
     {
-        if (blocksToAdd > 0 && !manager.menu.mainMenu.active) manager.blocks.createNewBlock(col[blocksToAdd - 1]);
+        if (blocksToAdd > 0 && !menuManager.MainMenu().active) gameManager.BlockManager().createNewBlock(col[blocksToAdd - 1]);
         else randNewColor();
     }
 	
 	void Update () 
     {
-        if (manager.blocks.blockCount() < 4 && !manager.menu.mainMenu.active) blocksToAdd = 4;
+        if (gameManager.BlockManager().blockCount() < 4 && !menuManager.MainMenu().active) blocksToAdd = 4;
 
         if (blocksToAdd >= 0 && Time.time > timer)
         {

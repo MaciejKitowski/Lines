@@ -3,10 +3,10 @@ using System.Collections;
 
 public class menuManager : MonoBehaviour 
 {
-    public mainMenuController mainMenu;
-    public exitGameController exitGame;
-    public highScoresController highScores;
-    public aboutController about;
+    private static mainMenuController mainMenu;
+    private static exitGameController exitGame;
+    private static highScoresController highScores;
+    private static aboutController about;
 
 	void Start () 
     {
@@ -15,4 +15,24 @@ public class menuManager : MonoBehaviour
         highScores = gameObject.transform.GetChild(2).gameObject.GetComponent<highScoresController>();
         about = gameObject.transform.GetChild(3).gameObject.GetComponent<aboutController>();
 	}
+
+    public static mainMenuController MainMenu()
+    {
+        return mainMenu;
+    }
+
+    public static exitGameController ExitGame()
+    {
+        return exitGame;
+    }
+
+    public static highScoresController HighScores()
+    {
+        return highScores;
+    }
+
+    public static aboutController About()
+    {
+        return about;
+    }
 }

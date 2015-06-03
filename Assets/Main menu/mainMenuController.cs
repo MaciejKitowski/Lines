@@ -23,7 +23,7 @@ public class mainMenuController : MonoBehaviour
 
         if(manager.isIdle(ref canvas))
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) manager.menu.exitGame.display();
+            if (Input.GetKeyDown(KeyCode.Escape)) menuManager.ExitGame().display();
         }
 	}
 
@@ -45,16 +45,16 @@ public class mainMenuController : MonoBehaviour
 
     public void exitGameBUTTON()
     {
-        if (manager.isIdle(ref canvas)) manager.menu.exitGame.display();
+        if (manager.isIdle(ref canvas)) menuManager.ExitGame().display();
     }
 
     public void highScoresBUTTON()
     {
-        if (manager.isIdle(ref canvas)) manager.menu.highScores.display();
+        if (manager.isIdle(ref canvas)) menuManager.HighScores().display();
     }
 
     public void aboutBUTTON()
     {
-        if (manager.isIdle(ref canvas)) manager.menu.about.display();
+        if (manager.isIdle(ref canvas)) menuManager.About().display();
     }
 }

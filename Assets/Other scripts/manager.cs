@@ -3,23 +3,6 @@ using System.Collections;
 
 public class manager : MonoBehaviour 
 {
-    public static blockManager blocks;
-    public static arenaManager arena;
-    public static nextBlocksController nextBlock;
-    public static debugMenu DebugMenu;
-    public static menuManager menu;
-    public static gameLossPanelController gameLossPanel;
-	
-	void Awake () 
-    {
-        blocks = FindObjectOfType<blockManager>();
-        arena = FindObjectOfType<arenaManager>();
-        nextBlock = FindObjectOfType<nextBlocksController>();
-        DebugMenu = FindObjectOfType<debugMenu>();
-        menu = FindObjectOfType<menuManager>();
-        gameLossPanel = FindObjectOfType<gameLossPanelController>();
-	}
-
     //Animations controller
     public static void displayObject(ref GameObject obj)
     {

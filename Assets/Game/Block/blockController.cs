@@ -34,7 +34,7 @@ public class blockController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !manager.DebugMenu.active) selected = !selected;
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameManager.DebugMenu().active) selected = !selected;
     }
 
 	void Update ()
@@ -58,23 +58,23 @@ public class blockController : MonoBehaviour
         switch (blockColor)
         {
             case blockManager.color.blue:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blueBlockSelect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().blueBlockSelect;
                 break;
 
             case blockManager.color.green:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.greenBlockSelect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().greenBlockSelect;
                 break;
 
             case blockManager.color.red:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.redBlockSelect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().redBlockSelect;
                 break;
 
             case blockManager.color.yellow:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.yellowBlockSelect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().yellowBlockSelect;
                 break;
 
             case blockManager.color.magenta:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.magentaBlockSelect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().magentaBlockSelect;
                 break;
         }
     }
@@ -84,23 +84,23 @@ public class blockController : MonoBehaviour
         switch (blockColor)
         {
             case blockManager.color.blue:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.blueBlockUnselect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().blueBlockUnselect;
                 break;
 
             case blockManager.color.green:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.greenBlockUnselect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().greenBlockUnselect;
                 break;
 
             case blockManager.color.red:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.redBlockUnselect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().redBlockUnselect;
                 break;
 
             case blockManager.color.yellow:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.yellowBlockUnselect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().yellowBlockUnselect;
                 break;
 
             case blockManager.color.magenta:
-                gameObject.GetComponent<MeshRenderer>().material = manager.blocks.magentaBlockUnselect;
+                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().magentaBlockUnselect;
                 break;
         }
     }

@@ -14,7 +14,7 @@ public class PointsController : MonoBehaviour
         arena = new arenaBlock[5, 8];
 
         text = gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        for (int y = 0, i = 0; y < 8; ++y) for (int x = 0; x < 5; ++x, ++i) arena[x, y] = manager.arena.arenaBlock[i];
+        for (int y = 0, i = 0; y < 8; ++y) for (int x = 0; x < 5; ++x, ++i) arena[x, y] = gameManager.ArenaManager().arenaBlock[i];
         text.text = points.ToString();
     }
 
@@ -45,7 +45,7 @@ public class PointsController : MonoBehaviour
                     {
                         points += 10 + ((i % 3) + 1) * 5;
                         text.text = points.ToString(); //Update points
-                        for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[x - w, y].block); //Delete blocks
+                        for (int w = i; w > 0; w--) gameManager.BlockManager().deleteBlock(arena[x - w, y].block); //Delete blocks
                     }
                     i = 1;
                 }
@@ -73,7 +73,7 @@ public class PointsController : MonoBehaviour
                     {
                         points += 10 + ((i % 3) + 1) * 5;
                         text.text = points.ToString(); //Update points
-                        for (int w = i; w > 0; w--) manager.blocks.deleteBlock(arena[x, y - w].block); //Delete blocks
+                        for (int w = i; w > 0; w--) gameManager.BlockManager().deleteBlock(arena[x, y - w].block); //Delete blocks
                     }
                     i = 1;
                 }

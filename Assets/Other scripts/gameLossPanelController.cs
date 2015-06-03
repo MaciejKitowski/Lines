@@ -45,7 +45,7 @@ public class gameLossPanelController : MonoBehaviour
         newRecord.SetActive(false);
         PointsController.resetValue();
         manager.hideObject(ref canvas);
-        manager.blocks.deleteAllBlocks();
+        gameManager.BlockManager().deleteAllBlocks();
     }
 
     public void backToMenuBUTTON()
@@ -54,8 +54,8 @@ public class gameLossPanelController : MonoBehaviour
         active = false;
         newRecord.SetActive(false);
         canvas.SetActive(false);
-        manager.blocks.deleteAllBlocks();
-    
-        manager.menu.mainMenu.display();
+        gameManager.BlockManager().deleteAllBlocks();
+
+        menuManager.MainMenu().display();
     }
 }
