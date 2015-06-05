@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GameVersion : MonoBehaviour 
 {
-    private static string gameVersion = "0.2.4.8 pre-alpha";
+    private static string gameVersion = "0.2.5 pre-alpha";
     private static string lastUpdateTime = "06.05.2015";
 
     private Text versionText;
