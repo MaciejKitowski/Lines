@@ -9,7 +9,7 @@ public class scoreManager : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll(); // ---------- [DEBUG] ----------
+        //PlayerPrefs.DeleteAll(); // ---------- [DEBUG] ----------
 
         Score = new List<KeyValuePair<string, int>>();
 
