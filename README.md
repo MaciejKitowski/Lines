@@ -10,13 +10,13 @@ Game based on <i><b>Game Lines</b></i> created in 1992 by <i>Gamos</i>. [Wikiped
 
 ## Screenshots
 <div align="center">
-        <img width="19%" src="screenshots/1.png" alt="Screenshots" title="Main Menu"</img>
+        <img width="25%" src="screenshots/1.png" alt="Screenshots" title="Main Menu"</img>
         <img height="0" width="2px">
-        <img width="19%" src="screenshots/2.png" alt="Screenshots" title="Game"></img>
+        <img width="25%" src="screenshots/2.png" alt="Screenshots" title="Game"></img>
         <img height="0" width="2px">
-        <img width="19%" src="screenshots/3.png" alt="Screenshots" title="Game Loss"></img>
+        <img width="25%" src="screenshots/3.png" alt="Screenshots" title="Game Loss"></img>
         <img height="0" width="2px">
-        <img width="19%" src="screenshots/4.png" alt="Screenshots" title="High Scores"></img>
+        <img width="25%" src="screenshots/4.png" alt="Screenshots" title="High Scores"></img>
         <img height="0" width="2px">
-        <img width="19%" src="screenshots/5.png" alt="Screenshots" title="About"></img>
+        <img width="25%" src="screenshots/5.png" alt="Screenshots" title="About"></img>
 </div>
