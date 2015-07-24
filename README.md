@@ -1,3 +1,5 @@
+#Under refactoring
+Old source code available in <i><b>master</b></i> branch.
 # Lines
 Simple arcade game <i>Lines</i> for Android created with Unity3D.
 
