@@ -4,6 +4,15 @@ using System.Collections;
 public class exitGameController : MonoBehaviour 
 {
     public bool active;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Back button");
+            setActive(false);
+        }
+    }
 	
     public void setActive(bool status)
     {
