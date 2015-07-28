@@ -6,8 +6,9 @@ public class Manager : MonoBehaviour
     public static mainMenuController MainMenu;
     public static exitGameController ExitGame;
     public static blocksManager blocks;
+    public static arenaManager arena;
 
-    private static string gameVersion = "0.2.9";
+    private static string gameVersion = "0.3.0";
     private static string lastUpdateTime = "28.07.2015";
 	
 	void Awake()
@@ -15,6 +16,7 @@ public class Manager : MonoBehaviour
         MainMenu = GameObject.FindObjectOfType<mainMenuController>();
         ExitGame = GameObject.FindObjectOfType<exitGameController>();
         blocks = GameObject.FindObjectOfType<blocksManager>();
+        arena = GameObject.FindObjectOfType<arenaManager>();
 
         ExitGame.setActive(false);
     }

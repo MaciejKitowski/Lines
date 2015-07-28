@@ -21,10 +21,7 @@ public class blockController : MonoBehaviour
 	
 	void Update () 
     {
-        if(arenaTarget != null && !onPosition)
-        {
-            gameObject.transform.position = navAgent.gameObject.transform.position;
-        }   
+        if (arenaTarget != null && !onPosition) gameObject.transform.position = navAgent.gameObject.transform.position; 
 	}
 
     void OnMouseDown()
