@@ -14,16 +14,8 @@ public class arenaBlockController : MonoBehaviour
 
     void Update()
     {
-        if (block != null && !block.selected && !navMeshObstacle.activeInHierarchy)
-        {
-            navMeshObstacle.SetActive(true);
-            Debug.Log("Activate");
-        }
-        else if (block != null && block.selected && navMeshObstacle.activeInHierarchy)
-        {
-            navMeshObstacle.SetActive(false);
-            Debug.Log("Deactivate");
-        }       
+        if (block != null && !block.selected && !navMeshObstacle.activeInHierarchy) navMeshObstacle.SetActive(true);
+        else if (block != null && block.selected && navMeshObstacle.activeInHierarchy) navMeshObstacle.SetActive(false);     
     }
 
     void OnTriggerEnter(Collider obj)

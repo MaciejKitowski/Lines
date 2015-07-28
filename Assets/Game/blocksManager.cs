@@ -3,6 +3,10 @@ using System.Collections;
 
 public class blocksManager : MonoBehaviour 
 {
+    public enum blockColor { BLUE, GREEN, YELLOW, RED, PINK, BROWN, ORANGE };
+    public Material unselectBlue, unselectGreen, unselectYellow, unselectRed, unselectPink, unselectBrown, unselectOrange;
+    public Material selectBlue, selectGreen, selectYellow, selectRed, selectPink, selectBrown, selectOrange;
+
     public blockController getSelectedBlock()
     {
         foreach (Transform block in transform) if (block.gameObject.GetComponent<blockController>().selected) return block.gameObject.GetComponent<blockController>();
@@ -24,6 +28,7 @@ public class blocksManager : MonoBehaviour
             if (block.gameObject.GetComponent<blockController>().selected)
             {
                 block.gameObject.GetComponent<blockController>().selected = false;
+                block.gameObject.GetComponent<blockController>().updateMaterial();
                 Debug.LogWarning("Multiple selection");
                 return true;
             }

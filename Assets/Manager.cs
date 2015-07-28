@@ -7,8 +7,8 @@ public class Manager : MonoBehaviour
     public static exitGameController ExitGame;
     public static blocksManager blocks;
 
-    private static string gameVersion = "0.2.8";
-    private static string lastUpdateTime = "25.07.2015";
+    private static string gameVersion = "0.2.9";
+    private static string lastUpdateTime = "28.07.2015";
 	
 	void Awake()
     {
