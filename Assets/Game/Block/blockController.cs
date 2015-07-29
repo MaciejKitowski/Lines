@@ -3,7 +3,8 @@ using System.Collections;
 
 public class blockController : MonoBehaviour 
 {
-    public bool selected;
+    public bool selected = false;
+    public bool toDestroy = false;
     public blocksManager.blockColor color;
 
     public NavMeshAgent navAgent;

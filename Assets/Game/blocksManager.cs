@@ -5,10 +5,29 @@ public class blocksManager : MonoBehaviour
 {
     public enum blockColor { BLUE, GREEN, YELLOW, RED, PINK, BROWN, ORANGE };
     public GameObject blockPrefab;
+    public float blockSpawnDelay = 0.5f;
     public Material unselectBlue, unselectGreen, unselectYellow, unselectRed, unselectPink, unselectBrown, unselectOrange;
     public Material selectBlue, selectGreen, selectYellow, selectRed, selectPink, selectBrown, selectOrange;
 
     private int blockIndex = 1; //Index to naming blocks in inspector
+    private int blocksToCreate = 5;
+    private float timer = 0f;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) blocksToCreate = 5;
+
+        if (blocksToCreate > 0)
+        {
+            if (timer > 0) timer -= Time.deltaTime;
+            else
+            {
+                timer = blockSpawnDelay;
+                createNewBlock(blocksToCreate - 1);
+                --blocksToCreate;
+            }
+        }
+    }
 
     public blockController getSelectedBlock()
     {
@@ -39,46 +58,53 @@ public class blocksManager : MonoBehaviour
         return false;
     }
 
-    void Update()
+    public void createNewBlock(int nextBlockNum)
     {
-        if (Input.GetKeyDown(KeyCode.Space)) createNewBlock();
-    }
+        arenaBlockController arenaBlock = null;
 
-    public void createNewBlock()
-    {
-        foreach(blockColor col in Manager.nextBlocks.color)
+        if(gameObject.transform.childCount < 42) while (arenaBlock == null || arenaBlock.block != null) arenaBlock = Manager.arena.arenaBlock[Random.Range(0, 48)];
+        else
         {
-            arenaBlockController arenaBlock = null;
-
-            if(gameObject.transform.childCount < 42) while (arenaBlock == null || arenaBlock.block != null) arenaBlock = Manager.arena.arenaBlock[Random.Range(0, 48)];
-            else
+            foreach (arenaBlockController it in Manager.arena.arenaBlock)
             {
-                foreach (arenaBlockController it in Manager.arena.arenaBlock)
+                if (it.block == null)
                 {
-                    if (it.block == null)
-                    {
-                        arenaBlock = it;
-                        break;
-                    }
+                    arenaBlock = it;
+                    break;
                 }
             }
-
-            GameObject newBlock = Instantiate(blockPrefab) as GameObject;
-            newBlock.name = blockIndex.ToString();
-
-            newBlock.transform.parent = gameObject.transform;
-            newBlock.GetComponent<blockController>().arenaTarget = arenaBlock;
-            newBlock.GetComponent<blockController>().color = col;
-
-            newBlock.transform.localScale = blockPrefab.transform.localScale;
-            newBlock.transform.localRotation = blockPrefab.transform.localRotation;
-
-            Vector3 pos = arenaBlock.transform.localPosition;
-            pos.z = -0.639f;
-            newBlock.transform.localPosition = pos;
-
-            ++blockIndex;
         }
-        Manager.nextBlocks.randNewColors();
+
+        GameObject newBlock = Instantiate(blockPrefab) as GameObject;
+        newBlock.name = blockIndex.ToString();
+
+        newBlock.transform.parent = gameObject.transform;
+        newBlock.GetComponent<blockController>().arenaTarget = arenaBlock;
+        newBlock.GetComponent<blockController>().color = Manager.nextBlocks.color[nextBlockNum];
+
+        newBlock.transform.localScale = blockPrefab.transform.localScale;
+        newBlock.transform.localRotation = blockPrefab.transform.localRotation;
+
+        Vector3 pos = arenaBlock.transform.localPosition;
+        pos.z = -0.639f;
+        newBlock.transform.localPosition = pos;
+
+        ++blockIndex;
+        if (nextBlockNum == 0) Manager.nextBlocks.randNewColors();
+    }
+
+    public void destroyBlock(blockController block)
+    {
+        foreach (Transform it in transform)
+        {
+            if(block == it.gameObject.GetComponent<blockController>())
+            {
+                it.gameObject.GetComponent<blockController>().toDestroy = true;
+                it.gameObject.GetComponent<blockController>().arenaTarget.block = null;
+                it.gameObject.GetComponent<blockController>().arenaTarget.navMeshObstacle.SetActive(false);
+                Destroy(it.gameObject);
+                break;
+            }
+        }
     }
 }

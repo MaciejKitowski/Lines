@@ -3,12 +3,54 @@ using System.Collections;
 
 public class arenaManager : MonoBehaviour 
 {
+    public static int points = 0;
     public arenaBlockController[] arenaBlock;
+
+    private arenaBlockController[,] arena;
 
     void Awake()
     {
         arenaBlock = new arenaBlockController[49];
-        for (int i = 0; i < 49; ++i) arenaBlock[i] = gameObject.transform.GetChild(i).gameObject.GetComponent<arenaBlockController>();
+        arena = new arenaBlockController[7, 7];
+
+
+        for(int y = 0, i = 0; y < 7; ++y)
+        {
+            for(int x = 0; x < 7; ++x, ++i)
+            {
+                arenaBlock[i] = gameObject.transform.GetChild(i).gameObject.GetComponent<arenaBlockController>();
+                arena[x,y] = gameObject.transform.GetChild(i).gameObject.GetComponent<arenaBlockController>();
+            }
+        }
     }
-    
+
+    void Update()
+    {
+        checkArenaHorizontal();
+    }
+
+    private void checkArenaHorizontal()
+    {
+        for(int y = 0; y < 7; ++y)
+        {
+            for (int x = 1, i = 1; x < 8; ++x)
+            {
+                //If blocks match
+                if(x < 7 && arena[x - 1,y].block != null && arena[x,y].block != null && (arena[x - 1,y].block.color == arena[x,y].block.color))
+                {
+                    if (arena[x - 1, y].block.onPosition && arena[x, y].block.onPosition && !arena[x - 1, y].block.toDestroy && !arena[x, y].block.toDestroy) ++i;
+                }
+                else //If blocs are different
+                {
+                    if(i >= 3)
+                    {
+                        points += 10 + ((i % 3) + 1) * 5;
+                        for (int w = i; w > 0; --w) Manager.blocks.destroyBlock(arena[x - w, y].block);
+                        Debug.Log(points);
+                    }
+                    i = 1;
+                }
+            }
+        }
+    }
 }
