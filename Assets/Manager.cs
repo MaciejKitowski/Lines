@@ -7,9 +7,10 @@ public class Manager : MonoBehaviour
     public static exitGameController ExitGame;
     public static blocksManager blocks;
     public static arenaManager arena;
+    public static nextBlocksController nextBlocks;
 
-    private static string gameVersion = "0.3.0";
-    private static string lastUpdateTime = "28.07.2015";
+    private static string gameVersion = "0.3.1";
+    private static string lastUpdateTime = "29.07.2015";
 	
 	void Awake()
     {
@@ -17,6 +18,7 @@ public class Manager : MonoBehaviour
         ExitGame = GameObject.FindObjectOfType<exitGameController>();
         blocks = GameObject.FindObjectOfType<blocksManager>();
         arena = GameObject.FindObjectOfType<arenaManager>();
+        nextBlocks = GameObject.FindObjectOfType<nextBlocksController>();
 
         ExitGame.setActive(false);
     }
