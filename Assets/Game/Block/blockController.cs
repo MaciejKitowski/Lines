@@ -12,6 +12,7 @@ public class blockController : MonoBehaviour
     public bool onPosition;
 
     private MeshRenderer render;
+    private bool isNewBlock = true;
 
 	void Start ()
     {
@@ -64,7 +65,8 @@ public class blockController : MonoBehaviour
     {
         Debug.Log("Path stopped");
         onPosition = true;
-        gameObject.transform.position = navAgent.pathEndPosition;
+        if (isNewBlock) isNewBlock = false;
+        else gameObject.transform.position = navAgent.pathEndPosition;
         navAgent.gameObject.SetActive(false);
     }
 
