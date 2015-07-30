@@ -10,7 +10,7 @@ public class Manager : MonoBehaviour
     public static nextBlocksController nextBlocks;
     public static GameObject Game;
 
-    private static string gameVersion = "0.3.7";
+    private static string gameVersion = "0.3.8";
     private static string lastUpdateTime = "30.07.2015";
 	
 	void Awake()
