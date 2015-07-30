@@ -11,12 +11,12 @@ public class blockController : MonoBehaviour
     public arenaBlockController arenaTarget;
     public bool onPosition;
 
-    private MeshRenderer renderer;
+    private MeshRenderer render;
 
 	void Start ()
     {
         navAgent = gameObject.transform.GetChild(0).gameObject.GetComponent<NavMeshAgent>();
-        renderer = gameObject.GetComponent<MeshRenderer>();
+        render = gameObject.GetComponent<MeshRenderer>();
         updateMaterial();
 	}
 	
@@ -73,32 +73,32 @@ public class blockController : MonoBehaviour
         switch(color)
         {
             case blocksManager.blockColor.BLUE:
-                if (selected) renderer.material = Manager.blocks.selectBlue;
-                else renderer.material = Manager.blocks.unselectBlue;
+                if (selected) render.material = Manager.blocks.selectBlue;
+                else render.material = Manager.blocks.unselectBlue;
                 break;
             case blocksManager.blockColor.BROWN:
-                if (selected) renderer.material = Manager.blocks.selectBrown;
-                else renderer.material = Manager.blocks.unselectBrown;
+                if (selected) render.material = Manager.blocks.selectBrown;
+                else render.material = Manager.blocks.unselectBrown;
                 break;
             case blocksManager.blockColor.GREEN:
-                if (selected) renderer.material = Manager.blocks.selectGreen;
-                else renderer.material = Manager.blocks.unselectGreen;
+                if (selected) render.material = Manager.blocks.selectGreen;
+                else render.material = Manager.blocks.unselectGreen;
                 break;
             case blocksManager.blockColor.ORANGE:
-                if (selected) renderer.material = Manager.blocks.selectOrange;
-                else renderer.material = Manager.blocks.unselectOrange;
+                if (selected) render.material = Manager.blocks.selectOrange;
+                else render.material = Manager.blocks.unselectOrange;
                 break;
             case blocksManager.blockColor.PINK:
-                if (selected) renderer.material = Manager.blocks.selectPink;
-                else renderer.material = Manager.blocks.unselectPink;
+                if (selected) render.material = Manager.blocks.selectPink;
+                else render.material = Manager.blocks.unselectPink;
                 break;
             case blocksManager.blockColor.RED:
-                if (selected) renderer.material = Manager.blocks.selectRed;
-                else renderer.material = Manager.blocks.unselectRed;
+                if (selected) render.material = Manager.blocks.selectRed;
+                else render.material = Manager.blocks.unselectRed;
                 break;
             case blocksManager.blockColor.YELLOW:
-                if (selected) renderer.material = Manager.blocks.selectYellow;
-                else renderer.material = Manager.blocks.unselectYellow;
+                if (selected) render.material = Manager.blocks.selectYellow;
+                else render.material = Manager.blocks.unselectYellow;
                 break;
         }
     }
