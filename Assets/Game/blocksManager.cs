@@ -27,6 +27,8 @@ public class blocksManager : MonoBehaviour
                 --blocksToCreate;
             }
         }
+
+        if (gameObject.transform.childCount < 6 && blocksToCreate == 0) blocksToCreate = 5;
     }
 
     public blockController getSelectedBlock()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class arenaManager : MonoBehaviour 
@@ -7,12 +8,15 @@ public class arenaManager : MonoBehaviour
     public arenaBlockController[] arenaBlock;
 
     private arenaBlockController[,] arena;
+    private static Text pointsTxt;
 
     void Awake()
     {
         arenaBlock = new arenaBlockController[49];
         arena = new arenaBlockController[7, 7];
 
+        pointsTxt = GameObject.FindGameObjectWithTag("Points text").gameObject.GetComponent<Text>();
+        updatePoints();
 
         for(int y = 0, i = 0; y < 7; ++y)
         {
@@ -30,6 +34,11 @@ public class arenaManager : MonoBehaviour
         checkArenaVertical();
     }
 
+    public static void updatePoints()
+    {
+        pointsTxt.text = points.ToString();
+    }
+
     private void checkArenaHorizontal()
     {
         for(int y = 0; y < 7; ++y)
@@ -45,8 +54,8 @@ public class arenaManager : MonoBehaviour
                     if(i >= 3)
                     {
                         points += 10 + ((i % 3) + 1) * 5;
+                        updatePoints();
                         for (int w = i; w > 0; --w) Manager.blocks.destroyBlock(arena[x - w, y].block);
-                        Debug.Log(points);
                     }
                     i = 1;
                 }
@@ -69,8 +78,8 @@ public class arenaManager : MonoBehaviour
                     if (i >= 3)
                     {
                         points += 10 + ((i % 3) + 1) * 5;
+                        updatePoints();
                         for (int w = i; w > 0; --w) Manager.blocks.destroyBlock(arena[x, y - w].block);
-                        Debug.Log(points);
                     }
                     i = 1;
                 }
