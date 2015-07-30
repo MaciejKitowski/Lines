@@ -6,9 +6,9 @@ public class blocksManager : MonoBehaviour
     public enum blockColor { BLUE, GREEN, YELLOW, RED, PINK, BROWN, ORANGE };
     public GameObject blockPrefab;
     public float blockSpawnDelay = 0.5f;
+    public int blocksToCreate = 0;
     public Material unselectBlue, unselectGreen, unselectYellow, unselectRed, unselectPink, unselectBrown, unselectOrange;
     public Material selectBlue, selectGreen, selectYellow, selectRed, selectPink, selectBrown, selectOrange;
-    public int blocksToCreate = 5;
 
     private int blockIndex = 1; //Index to naming blocks in inspector
     private float timer = 0f;
@@ -119,5 +119,17 @@ public class blocksManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void destroyAllBlocks()
+    {
+        for(int i = gameObject.transform.childCount; i > 0; --i)
+        {
+            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().toDestroy = true;
+            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().arenaTarget.block = null;
+            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().arenaTarget.navMeshObstacle.SetActive(false);
+            Destroy(gameObject.transform.GetChild(i - 1).gameObject);
+        }
+        //blocksToCreate = 5;
     }
 }

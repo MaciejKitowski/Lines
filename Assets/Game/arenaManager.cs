@@ -30,6 +30,11 @@ public class arenaManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Manager.Game.SetActive(false);
+            Manager.MainMenu.setActive(true);
+        }
         checkArenaHorizontal();
         checkArenaVertical();
     }

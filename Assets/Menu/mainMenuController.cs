@@ -26,6 +26,12 @@ public class mainMenuController : MonoBehaviour
     public void button_NewGame()
     {
         Debug.Log("New Game button");
+        Manager.MainMenu.setActive(false);
+        Manager.Game.SetActive(true);
+        Manager.blocks.destroyAllBlocks();
+        Manager.nextBlocks.randNewColors();
+        arenaManager.points = 0;
+        arenaManager.updatePoints();
     }
 
     public void button_HighScores()
