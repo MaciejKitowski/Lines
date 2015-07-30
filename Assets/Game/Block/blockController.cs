@@ -23,12 +23,12 @@ public class blockController : MonoBehaviour
 	
 	void Update () 
     {
-        if (arenaTarget != null && !onPosition) gameObject.transform.position = navAgent.gameObject.transform.position; 
+        if (arenaTarget != null && !onPosition) gameObject.transform.position = navAgent.gameObject.transform.position;
 	}
 
     void OnMouseDown()
     {
-        if (!Manager.blocks.blockIsSelected())
+        if (!Manager.blocks.blockIsSelected() && !Manager.blocks.blockIsMove() && Manager.blocks.blocksToCreate == 0)
         {
             selected = true;
             updateMaterial();
@@ -66,7 +66,11 @@ public class blockController : MonoBehaviour
         Debug.Log("Path stopped");
         onPosition = true;
         if (isNewBlock) isNewBlock = false;
-        else gameObject.transform.position = navAgent.pathEndPosition;
+        else
+        {
+            Manager.blocks.blocksToCreate = 5;
+            gameObject.transform.position = navAgent.pathEndPosition;
+        }
         navAgent.gameObject.SetActive(false);
     }
 

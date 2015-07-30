@@ -8,9 +8,9 @@ public class blocksManager : MonoBehaviour
     public float blockSpawnDelay = 0.5f;
     public Material unselectBlue, unselectGreen, unselectYellow, unselectRed, unselectPink, unselectBrown, unselectOrange;
     public Material selectBlue, selectGreen, selectYellow, selectRed, selectPink, selectBrown, selectOrange;
+    public int blocksToCreate = 5;
 
     private int blockIndex = 1; //Index to naming blocks in inspector
-    private int blocksToCreate = 5;
     private float timer = 0f;
 
     void Update()
@@ -60,6 +60,15 @@ public class blocksManager : MonoBehaviour
         return false;
     }
 
+    public bool blockIsMove()
+    {
+        foreach(Transform block in transform)
+        {
+            if (!block.gameObject.GetComponent<blockController>().onPosition) return true;
+        }
+        return false;
+    }
+
     public void createNewBlock(int nextBlockNum)
     {
         arenaBlockController arenaBlock = null;
@@ -101,6 +110,8 @@ public class blocksManager : MonoBehaviour
         {
             if(block == it.gameObject.GetComponent<blockController>())
             {
+                blocksToCreate = 0;
+                Manager.nextBlocks.randNewColors();
                 it.gameObject.GetComponent<blockController>().toDestroy = true;
                 it.gameObject.GetComponent<blockController>().arenaTarget.block = null;
                 it.gameObject.GetComponent<blockController>().arenaTarget.navMeshObstacle.SetActive(false);
