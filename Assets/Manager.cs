@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     public static nextBlocksController nextBlocks;
     public static GameObject Game;
     public static aboutController about;
+    public static highScoresController highScore;
 	
 	void Awake()
     {
@@ -19,12 +20,12 @@ public class Manager : MonoBehaviour
         arena = GameObject.FindObjectOfType<arenaManager>();
         about = GameObject.FindObjectOfType<aboutController>();
         nextBlocks = GameObject.FindObjectOfType<nextBlocksController>();
+        highScore = GameObject.FindObjectOfType<highScoresController>();
         Game = GameObject.FindGameObjectWithTag("Game");
         
-
-        Debug.Log(MainMenu.gameObject.name);
         ExitGame.setActive(false);
         Game.SetActive(false);
         about.setActive(false);
+        highScore.setActive(false);
     }
 }

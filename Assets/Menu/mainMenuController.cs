@@ -37,6 +37,9 @@ public class mainMenuController : MonoBehaviour
     public void button_HighScores()
     {
         Debug.Log("High Scores button");
+        setActive(false);
+        Manager.highScore.setActive(true);
+        Manager.highScore.updateText();
     }
 
     public void button_About()
