@@ -29,6 +29,7 @@ public class blocksManager : MonoBehaviour
         }
 
         if (gameObject.transform.childCount < 6 && blocksToCreate == 0) blocksToCreate = 5;
+        if (gameObject.transform.childCount >= 49 && !Manager.endGame.active) Manager.endGame.setActive(true);
     }
 
     public blockController getSelectedBlock()

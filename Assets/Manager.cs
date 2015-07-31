@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour
     public static GameObject Game;
     public static aboutController about;
     public static highScoresController highScore;
+    public static endGameController endGame;
 	
 	void Awake()
     {
@@ -21,11 +22,13 @@ public class Manager : MonoBehaviour
         about = GameObject.FindObjectOfType<aboutController>();
         nextBlocks = GameObject.FindObjectOfType<nextBlocksController>();
         highScore = GameObject.FindObjectOfType<highScoresController>();
+        endGame = GameObject.FindObjectOfType<endGameController>();
         Game = GameObject.FindGameObjectWithTag("Game");
         
         ExitGame.setActive(false);
         Game.SetActive(false);
         about.setActive(false);
         highScore.setActive(false);
+        endGame.setActive(false);
     }
 }
