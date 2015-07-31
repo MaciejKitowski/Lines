@@ -3,7 +3,7 @@ using System.Collections;
 
 public class mainMenuController : MonoBehaviour 
 {
-    public bool active = true;
+    public bool active;
 
     void Update()
     {
@@ -26,7 +26,7 @@ public class mainMenuController : MonoBehaviour
     public void button_NewGame()
     {
         Debug.Log("New Game button");
-        Manager.MainMenu.setActive(false);
+        setActive(false);
         Manager.Game.SetActive(true);
         Manager.blocks.destroyAllBlocks();
         Manager.nextBlocks.randNewColors();
@@ -44,6 +44,8 @@ public class mainMenuController : MonoBehaviour
         if (!Manager.ExitGame.active)
         {
             Debug.Log("About button");
+            Manager.about.setActive(true);
+            setActive(false);
         }
     }
 

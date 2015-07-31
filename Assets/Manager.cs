@@ -9,9 +9,7 @@ public class Manager : MonoBehaviour
     public static arenaManager arena;
     public static nextBlocksController nextBlocks;
     public static GameObject Game;
-
-    private static string gameVersion = "0.3.9";
-    private static string lastUpdateTime = "31.07.2015";
+    public static aboutController about;
 	
 	void Awake()
     {
@@ -19,10 +17,14 @@ public class Manager : MonoBehaviour
         ExitGame = GameObject.FindObjectOfType<exitGameController>();
         blocks = GameObject.FindObjectOfType<blocksManager>();
         arena = GameObject.FindObjectOfType<arenaManager>();
+        about = GameObject.FindObjectOfType<aboutController>();
         nextBlocks = GameObject.FindObjectOfType<nextBlocksController>();
         Game = GameObject.FindGameObjectWithTag("Game");
         
+
+        Debug.Log(MainMenu.gameObject.name);
         ExitGame.setActive(false);
         Game.SetActive(false);
+        about.setActive(false);
     }
 }
