@@ -10,8 +10,8 @@ public class Manager : MonoBehaviour
     public static nextBlocksController nextBlocks;
     public static GameObject Game;
 
-    private static string gameVersion = "0.3.8";
-    private static string lastUpdateTime = "30.07.2015";
+    private static string gameVersion = "0.3.9";
+    private static string lastUpdateTime = "31.07.2015";
 	
 	void Awake()
     {
@@ -21,7 +21,7 @@ public class Manager : MonoBehaviour
         arena = GameObject.FindObjectOfType<arenaManager>();
         nextBlocks = GameObject.FindObjectOfType<nextBlocksController>();
         Game = GameObject.FindGameObjectWithTag("Game");
-
+        
         ExitGame.setActive(false);
         Game.SetActive(false);
     }
