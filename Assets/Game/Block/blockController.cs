@@ -28,7 +28,7 @@ public class blockController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!Manager.blocks.blockIsSelected() && !Manager.blocks.blockIsMove() && Manager.blocks.blocksToCreate == 0)
+        if (!Manager.blocks.blockIsSelected() && !Manager.blocks.blockIsMove() && Manager.blocks.blocksToCreate == 0 && !Manager.debugMenu.active)
         {
             selected = true;
             updateMaterial();

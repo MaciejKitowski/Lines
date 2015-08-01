@@ -122,6 +122,15 @@ public class blocksManager : MonoBehaviour
         }
     }
 
+    public void destroyBlock(int size)
+    {
+        while(size != 0 && gameObject.transform.childCount > size)
+        {
+            destroyBlock(gameObject.transform.GetChild(0).gameObject.GetComponent<blockController>());
+            --size;
+        }
+    }
+
     public void destroyAllBlocks()
     {
         for(int i = gameObject.transform.childCount; i > 0; --i)

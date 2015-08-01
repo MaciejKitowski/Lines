@@ -33,7 +33,7 @@ public class arenaBlockController : MonoBehaviour
     void OnMouseDown()
     {
         Debug.Log("mouse clicked on arena: " + gameObject.name);
-        if(Manager.blocks.blockSelected())Manager.blocks.getSelectedBlock().setPatch(gameObject.GetComponent<arenaBlockController>());
+        if(Manager.blocks.blockSelected() && !Manager.debugMenu.active)Manager.blocks.getSelectedBlock().setPatch(gameObject.GetComponent<arenaBlockController>());
     }
 	
 }
