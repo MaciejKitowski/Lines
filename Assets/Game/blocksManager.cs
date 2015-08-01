@@ -27,7 +27,6 @@ public class blocksManager : MonoBehaviour
                 --blocksToCreate;
             }
         }
-
         if (gameObject.transform.childCount < 6 && blocksToCreate == 0) blocksToCreate = 5;
         if (gameObject.transform.childCount >= 49 && !Manager.endGame.active) Manager.endGame.setActive(true);
     }
@@ -68,6 +67,11 @@ public class blocksManager : MonoBehaviour
             if (!block.gameObject.GetComponent<blockController>().onPosition) return true;
         }
         return false;
+    }
+
+    public void playBadPathSound()
+    {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(gameObject.GetComponent<AudioSource>().clip);
     }
 
     public void createNewBlock(int nextBlockNum)

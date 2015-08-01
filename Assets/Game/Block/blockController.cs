@@ -57,6 +57,7 @@ public class blockController : MonoBehaviour
         else if (path.status == NavMeshPathStatus.PathPartial)
         {
             navAgent.gameObject.SetActive(false);
+            Manager.blocks.playBadPathSound();
             Debug.Log("Block didn't found path");
         }
     }
