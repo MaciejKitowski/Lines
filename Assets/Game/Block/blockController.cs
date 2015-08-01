@@ -13,17 +13,21 @@ public class blockController : MonoBehaviour
 
     private MeshRenderer render;
     private bool isNewBlock = true;
+    private Animation animation;
 
 	void Start ()
     {
         navAgent = gameObject.transform.GetChild(0).gameObject.GetComponent<NavMeshAgent>();
+        animation = gameObject.GetComponent<Animation>();
         render = gameObject.GetComponent<MeshRenderer>();
         updateMaterial();
+        animation.Play("New block");
 	}
 	
 	void Update () 
     {
         if (arenaTarget != null && !onPosition) gameObject.transform.position = navAgent.gameObject.transform.position;
+        if (!animation.isPlaying && toDestroy) Destroy(gameObject);
 	}
 
     void OnMouseDown()
@@ -73,6 +77,14 @@ public class blockController : MonoBehaviour
             gameObject.transform.position = navAgent.pathEndPosition;
         }
         navAgent.gameObject.SetActive(false);
+    }
+
+    public void destroyBlock()
+    {
+        animation.Play("Destroy block");
+        toDestroy = true;
+        arenaTarget.block = null;
+        arenaTarget.navMeshObstacle.SetActive(false);
     }
 
     public void updateMaterial()

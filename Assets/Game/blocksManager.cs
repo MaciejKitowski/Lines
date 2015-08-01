@@ -117,10 +117,7 @@ public class blocksManager : MonoBehaviour
             {
                 blocksToCreate = 0;
                 Manager.nextBlocks.randNewColors();
-                it.gameObject.GetComponent<blockController>().toDestroy = true;
-                it.gameObject.GetComponent<blockController>().arenaTarget.block = null;
-                it.gameObject.GetComponent<blockController>().arenaTarget.navMeshObstacle.SetActive(false);
-                Destroy(it.gameObject);
+                it.gameObject.GetComponent<blockController>().destroyBlock();
                 break;
             }
         }
@@ -137,13 +134,6 @@ public class blocksManager : MonoBehaviour
 
     public void destroyAllBlocks()
     {
-        for(int i = gameObject.transform.childCount; i > 0; --i)
-        {
-            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().toDestroy = true;
-            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().arenaTarget.block = null;
-            gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().arenaTarget.navMeshObstacle.SetActive(false);
-            Destroy(gameObject.transform.GetChild(i - 1).gameObject);
-        }
-        //blocksToCreate = 5;
+        for (int i = gameObject.transform.childCount; i > 0; --i) gameObject.transform.GetChild(i - 1).gameObject.GetComponent<blockController>().destroyBlock();
     }
 }
