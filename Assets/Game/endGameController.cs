@@ -47,8 +47,8 @@ public class endGameController : MonoBehaviour
     {
         Debug.Log("Back to menu button");
         Manager.blocks.destroyAllBlocks();
-        Manager.Game.SetActive(false);
         Manager.MainMenu.setActive(true);
+        Manager.Game.SetActive(false);
         setActive(false);
     }
 }

@@ -73,8 +73,11 @@ public class blockController : MonoBehaviour
         if (isNewBlock) isNewBlock = false;
         else
         {
-            Manager.blocks.blocksToCreate = 5;
-            gameObject.transform.position = navAgent.pathEndPosition;
+            if(!toDestroy)
+            {
+                Manager.blocks.blocksToCreate = 5;
+                gameObject.transform.position = navAgent.pathEndPosition;
+            }
         }
         navAgent.gameObject.SetActive(false);
     }
