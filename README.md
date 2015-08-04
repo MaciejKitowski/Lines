@@ -1,9 +1,7 @@
-#Under refactoring
-Old source code available in <i><b>master</b></i> branch.
 # Lines
 Simple arcade game <i>Lines</i> for Android created with Unity3D.
 
-Used Unity3D version: 5.0.0f4
+Used Unity3D version: 5.1.2f1
 
 ## Game
 The game starts on a 5x8 arena with several blocks in one of 4 colors. The player have to set up lines (vertical or horizontal) with three or more blocks in the same color.
