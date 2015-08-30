@@ -6,11 +6,13 @@ public class mainMenuController : utilities
     private exitGameController exitGame;
     private aboutController about;
     private highScoresController highScores;
+    private gameManager game;
 
     void Awake()
     {
-        exitGame = GameObject.FindGameObjectWithTag("Exit Game").GetComponent<exitGameController>();
+        game = GameObject.FindGameObjectWithTag("Game").GetComponent<gameManager>();
         about = GameObject.FindGameObjectWithTag("About").GetComponent<aboutController>();
+        exitGame = GameObject.FindGameObjectWithTag("Exit Game").GetComponent<exitGameController>();
         highScores = GameObject.FindGameObjectWithTag("High Scores").GetComponent<highScoresController>();
     }
 
@@ -23,11 +25,8 @@ public class mainMenuController : utilities
     {
         Debug.Log("New Game button");
         setActive(false);
-        Manager.Game.SetActive(true);
-        Manager.blocks.destroyAllBlocks();
-        Manager.nextBlocks.randNewColors();
-        arenaManager.points = 0;
-        arenaManager.updatePoints();
+        game.setActive(true);
+        gameManager.resetGame();
     }
 
     public void button_HighScores()

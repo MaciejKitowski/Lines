@@ -32,7 +32,7 @@ public class blockController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!Manager.blocks.blockIsSelected() && !Manager.blocks.blockIsMove() && Manager.blocks.blocksToCreate == 0 && !Manager.debugMenu.active)
+        if (!gameManager.block.blockIsSelected() && !gameManager.block.blockIsMove() && gameManager.block.blocksToCreate == 0 && !gameManager.debugMenu.active)
         {
             selected = true;
             updateMaterial();
@@ -61,7 +61,7 @@ public class blockController : MonoBehaviour
         else if (path.status == NavMeshPathStatus.PathPartial)
         {
             navAgent.gameObject.SetActive(false);
-            Manager.blocks.playBadPathSound();
+            gameManager.block.playBadPathSound();
             Debug.Log("Block didn't found path");
         }
     }
@@ -75,7 +75,7 @@ public class blockController : MonoBehaviour
         {
             if(!toDestroy)
             {
-                Manager.blocks.blocksToCreate = 5;
+                gameManager.block.blocksToCreate = 5;
                 gameObject.transform.position = navAgent.pathEndPosition;
             }
         }
@@ -95,32 +95,32 @@ public class blockController : MonoBehaviour
         switch(color)
         {
             case blocksManager.blockColor.BLUE:
-                if (selected) render.material = Manager.blocks.selectBlue;
-                else render.material = Manager.blocks.unselectBlue;
+                if (selected) render.material = gameManager.block.selectBlue;
+                else render.material = gameManager.block.unselectBlue;
                 break;
             case blocksManager.blockColor.BROWN:
-                if (selected) render.material = Manager.blocks.selectBrown;
-                else render.material = Manager.blocks.unselectBrown;
+                if (selected) render.material = gameManager.block.selectBrown;
+                else render.material = gameManager.block.unselectBrown;
                 break;
             case blocksManager.blockColor.GREEN:
-                if (selected) render.material = Manager.blocks.selectGreen;
-                else render.material = Manager.blocks.unselectGreen;
+                if (selected) render.material = gameManager.block.selectGreen;
+                else render.material = gameManager.block.unselectGreen;
                 break;
             case blocksManager.blockColor.ORANGE:
-                if (selected) render.material = Manager.blocks.selectOrange;
-                else render.material = Manager.blocks.unselectOrange;
+                if (selected) render.material = gameManager.block.selectOrange;
+                else render.material = gameManager.block.unselectOrange;
                 break;
             case blocksManager.blockColor.PINK:
-                if (selected) render.material = Manager.blocks.selectPink;
-                else render.material = Manager.blocks.unselectPink;
+                if (selected) render.material = gameManager.block.selectPink;
+                else render.material = gameManager.block.unselectPink;
                 break;
             case blocksManager.blockColor.RED:
-                if (selected) render.material = Manager.blocks.selectRed;
-                else render.material = Manager.blocks.unselectRed;
+                if (selected) render.material = gameManager.block.selectRed;
+                else render.material = gameManager.block.unselectRed;
                 break;
             case blocksManager.blockColor.YELLOW:
-                if (selected) render.material = Manager.blocks.selectYellow;
-                else render.material = Manager.blocks.unselectYellow;
+                if (selected) render.material = gameManager.block.selectYellow;
+                else render.material = gameManager.block.unselectYellow;
                 break;
         }
     }

@@ -6,14 +6,22 @@ public class endGameController : utilities
 {
     public bool active;
 
-    private GameObject newHighScore;
     private Text UIpoints;
-
+    private gameManager game;
+    private GameObject newHighScore;
+    private mainMenuController mainMenu;
+    private highScoresController highScores;
+    
     void Awake()
     {
         newHighScore = gameObject.transform.GetChild(2).gameObject;
         UIpoints = gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        game = GameObject.FindGameObjectWithTag("Game").GetComponent<gameManager>();
+        highScores = GameObject.FindGameObjectWithTag("High Scores").GetComponent<highScoresController>();
+        mainMenu = GameObject.FindGameObjectWithTag("Main Menu").GetComponent<mainMenuController>();
     }
+
+    void Start() { setActive(false); }
 
     override public void setActive(bool state)
     {
@@ -22,12 +30,12 @@ public class endGameController : utilities
 
         if(state)
         {
-            Manager.blocks.blocksToCreate = 0;
-            UIpoints.text = arenaManager.points.ToString();
-            if(Manager.highScore.compareWithlastScore(arenaManager.points))
+            gameManager.block.blocksToCreate = 0;
+            UIpoints.text = gameManager.points.ToString();
+            if (highScores.compareWithlastScore(gameManager.points))
             {
                 newHighScore.SetActive(true);
-                Manager.highScore.newHighScore(arenaManager.points);
+                highScores.newHighScore(gameManager.points);
             }
             else newHighScore.SetActive(false);
         }
@@ -36,19 +44,14 @@ public class endGameController : utilities
     public void button_PlayAgain()
     {
         Debug.Log("Play again button");
-        Manager.blocks.destroyAllBlocks();
-        Manager.nextBlocks.randNewColors();
-        arenaManager.points = 0;
-        arenaManager.updatePoints();
-        setActive(false);
+        gameManager.resetGame();
     }
 
     public void button_BackToMenu()
     {
         Debug.Log("Back to menu button");
-        Manager.blocks.destroyAllBlocks();
-        Manager.MainMenu.setActive(true);
-        Manager.Game.SetActive(false);
+        mainMenu.setActive(true);
+        game.setActive(false);
         setActive(false);
     }
 }

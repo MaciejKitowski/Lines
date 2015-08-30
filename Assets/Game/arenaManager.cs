@@ -4,19 +4,14 @@ using System.Collections;
 
 public class arenaManager : MonoBehaviour 
 {
-    public static int points = 0;
     public arenaBlockController[] arenaBlock;
 
     private arenaBlockController[,] arena;
-    private static Text pointsTxt;
 
     void Awake()
     {
         arenaBlock = new arenaBlockController[49];
         arena = new arenaBlockController[7, 7];
-
-        pointsTxt = GameObject.FindGameObjectWithTag("Points text").gameObject.GetComponent<Text>();
-        updatePoints();
 
         for(int y = 0, i = 0; y < 7; ++y)
         {
@@ -30,14 +25,9 @@ public class arenaManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !Manager.endGame.active) Manager.endGame.setActive(true);
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.endGame.active) gameManager.endGame.setActive(true);
         checkArenaHorizontal();
         checkArenaVertical();
-    }
-
-    public static void updatePoints()
-    {
-        pointsTxt.text = points.ToString();
     }
 
     private void checkArenaHorizontal()
@@ -54,9 +44,8 @@ public class arenaManager : MonoBehaviour
                 {
                     if(i >= 3)
                     {
-                        points += 10 + ((i % 3) + 1) * 5;
-                        updatePoints();
-                        for (int w = i; w > 0; --w) Manager.blocks.destroyBlock(arena[x - w, y].block);
+                        gameManager.addPoints(10 + ((i % 3) + 1) * 5);
+                        for (int w = i; w > 0; --w) gameManager.block.destroyBlock(arena[x - w, y].block);
                     }
                     i = 1;
                 }
@@ -78,9 +67,8 @@ public class arenaManager : MonoBehaviour
                 {
                     if (i >= 3)
                     {
-                        points += 10 + ((i % 3) + 1) * 5;
-                        updatePoints();
-                        for (int w = i; w > 0; --w) Manager.blocks.destroyBlock(arena[x, y - w].block);
+                        gameManager.addPoints(10 + ((i % 3) + 1) * 5);
+                        for (int w = i; w > 0; --w) gameManager.block.destroyBlock(arena[x, y - w].block);
                     }
                     i = 1;
                 }

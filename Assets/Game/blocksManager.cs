@@ -28,7 +28,7 @@ public class blocksManager : MonoBehaviour
             }
         }
         if (gameObject.transform.childCount < 6 && blocksToCreate == 0) blocksToCreate = 5;
-        if (gameObject.transform.childCount >= 49 && !Manager.endGame.active) Manager.endGame.setActive(true);
+        if (gameObject.transform.childCount >= 49 && !gameManager.endGame.active) gameManager.endGame.setActive(true);
     }
 
     public blockController getSelectedBlock()
@@ -78,10 +78,10 @@ public class blocksManager : MonoBehaviour
     {
         arenaBlockController arenaBlock = null;
 
-        if(gameObject.transform.childCount < 42) while (arenaBlock == null || arenaBlock.block != null) arenaBlock = Manager.arena.arenaBlock[Random.Range(0, 48)];
+        if (gameObject.transform.childCount < 42) while (arenaBlock == null || arenaBlock.block != null) arenaBlock = gameManager.arena.arenaBlock[Random.Range(0, 48)];
         else
         {
-            foreach (arenaBlockController it in Manager.arena.arenaBlock)
+            foreach (arenaBlockController it in gameManager.arena.arenaBlock)
             {
                 if (it.block == null)
                 {
@@ -96,7 +96,7 @@ public class blocksManager : MonoBehaviour
 
         newBlock.transform.parent = gameObject.transform;
         newBlock.GetComponent<blockController>().arenaTarget = arenaBlock;
-        newBlock.GetComponent<blockController>().color = Manager.nextBlocks.color[nextBlockNum];
+        newBlock.GetComponent<blockController>().color = gameManager.nextBlock.color[nextBlockNum];
 
         newBlock.transform.localScale = blockPrefab.transform.localScale;
         newBlock.transform.localRotation = blockPrefab.transform.localRotation;
@@ -106,7 +106,7 @@ public class blocksManager : MonoBehaviour
         newBlock.transform.localPosition = pos;
 
         ++blockIndex;
-        if (nextBlockNum == 0) Manager.nextBlocks.randNewColors();
+        if (nextBlockNum == 0) gameManager.nextBlock.randNewColors();
     }
 
     public void destroyBlock(blockController block)
@@ -116,7 +116,7 @@ public class blocksManager : MonoBehaviour
             if(block == it.gameObject.GetComponent<blockController>())
             {
                 blocksToCreate = 0;
-                Manager.nextBlocks.randNewColors();
+                gameManager.nextBlock.randNewColors();
                 it.gameObject.GetComponent<blockController>().destroyBlock();
                 break;
             }

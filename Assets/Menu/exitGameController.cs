@@ -5,15 +5,8 @@ public class exitGameController : utilities
 {
     public bool active;
 
-    void Start()
-    {
-        setActive(false);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) setActive(false);
-    }
+    void Start() { setActive(false); }
+    void Update() { if (Input.GetKeyDown(KeyCode.Escape)) setActive(false); }
 
     override public void setActive(bool state)
     {

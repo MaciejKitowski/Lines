@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 public class highScoresController : utilities 
 {
-    private List<KeyValuePair<string, int>> Score;
     private Text[] place;
     private mainMenuController mainMenu;
+    private List<KeyValuePair<string, int>> Score;
 
     void Awake()
     {
@@ -20,11 +20,7 @@ public class highScoresController : utilities
         Score = new List<KeyValuePair<string, int>>();
         loadScore();
     }
-
-    void Start()
-    {
-        setActive(false);
-    }
+    void Start() { setActive(false); }
 
     void Update()
     {
@@ -33,11 +29,6 @@ public class highScoresController : utilities
             mainMenu.setActive(true);
             setActive(false);
         }
-    }
-
-    public void updateText()
-    {
-        for (int i = 0; i < 10; ++i) place[i].text = (i + 1).ToString() + ". " + Score[i].Key + " " + Score[i].Value.ToString();
     }
 
     public bool compareWithlastScore(int val)
@@ -51,6 +42,8 @@ public class highScoresController : utilities
         Score[9] = new KeyValuePair<string, int>(DateTime.Now.ToString("yyyy/MM/dd HH:mm"), val);
         sortScore();
     }
+
+    public void updateText() { for (int i = 0; i < 10; ++i) place[i].text = (i + 1).ToString() + ". " + Score[i].Key + " " + Score[i].Value.ToString(); }
 
     private void loadScore()
     {

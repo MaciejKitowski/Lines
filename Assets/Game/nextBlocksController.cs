@@ -26,31 +26,31 @@ public class nextBlocksController : MonoBehaviour
             {
                 case 1:
                     color[i] = blocksManager.blockColor.BLUE;
-                    blockRenderer[i].material = Manager.blocks.unselectBlue;
+                    blockRenderer[i].material = gameManager.block.unselectBlue;
                     break;
                 case 2:
                     color[i] = blocksManager.blockColor.BROWN;
-                    blockRenderer[i].material = Manager.blocks.unselectBrown;
+                    blockRenderer[i].material = gameManager.block.unselectBrown;
                     break;
                 case 3:
                     color[i] = blocksManager.blockColor.GREEN;
-                    blockRenderer[i].material = Manager.blocks.unselectGreen;
+                    blockRenderer[i].material = gameManager.block.unselectGreen;
                     break;
                 case 4:
                     color[i] = blocksManager.blockColor.ORANGE;
-                    blockRenderer[i].material = Manager.blocks.unselectOrange;
+                    blockRenderer[i].material = gameManager.block.unselectOrange;
                     break;
                 case 5:
                     color[i] = blocksManager.blockColor.PINK;
-                    blockRenderer[i].material = Manager.blocks.unselectPink;
+                    blockRenderer[i].material = gameManager.block.unselectPink;
                     break;
                 case 6:
                     color[i] = blocksManager.blockColor.RED;
-                    blockRenderer[i].material = Manager.blocks.unselectRed;
+                    blockRenderer[i].material = gameManager.block.unselectRed;
                     break;
                 case 7:
                     color[i] = blocksManager.blockColor.YELLOW;
-                    blockRenderer[i].material = Manager.blocks.unselectYellow;
+                    blockRenderer[i].material = gameManager.block.unselectYellow;
                     break;
                 default:
                     Debug.LogError(gameObject.name + " - Bad color assignment");
@@ -58,9 +58,4 @@ public class nextBlocksController : MonoBehaviour
             }
         }
     }
-
-	void Update () 
-    {
-        if (Input.GetKeyDown(KeyCode.A)) randNewColors();
-	}
 }

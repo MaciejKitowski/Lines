@@ -5,6 +5,6 @@ public class displayDebugMenu : MonoBehaviour
 {
 	void OnMouseDown()
     {
-        if (!Manager.debugMenu.active) Manager.debugMenu.setActive(true);
+        if (!gameManager.debugMenu.active) gameManager.debugMenu.setActive(true);
     }
 }

@@ -27,6 +27,8 @@ public class debugMenuController : utilities
         }
     }
 
+    void Start() { setActive(false); }
+
     override public void setActive(bool state)
     {
         active = state;
@@ -36,55 +38,52 @@ public class debugMenuController : utilities
     public void button_addPoints()
     {
         Debug.LogWarning("Debug menu - add " + pointsChange.ToString() + " points.");
-        arenaManager.points += pointsChange;
-        arenaManager.updatePoints();
+        gameManager.addPoints(pointsChange);
     }
 
     public void button_subtractPoints()
     {
         Debug.LogWarning("Debug menu - subtract " + pointsChange.ToString() + " points.");
-        arenaManager.points -= pointsChange;
-        arenaManager.updatePoints();
+        gameManager.addPoints(-pointsChange);
     }
 
     public void button_resetPoints()
     {
         Debug.LogWarning("Debug menu - reset points.");
-        arenaManager.points = 0;
-        arenaManager.updatePoints();
+        gameManager.setPoints(0);
     }
 
     public void button_randColors()
     {
         Debug.LogWarning("Debug menu - rand new colors.");
-        Manager.nextBlocks.randNewColors();
+        gameManager.nextBlock.randNewColors();
     }
 
     public void button_pushBlocks()
     {
         Debug.LogWarning("Debug menu - push new blocks.");
-        Manager.blocks.blocksToCreate = 5;
+        gameManager.block.blocksToCreate = 5;
         setActive(false);
     }
 
     public void button_removeOneBlock()
     {
         Debug.LogWarning("Debug menu - remove 1 block.");
-        Manager.blocks.destroyBlock(1);
+        gameManager.block.destroyBlock(1);
         setActive(false);
     }
 
     public void button_removeBlocksValue()
     {
         Debug.LogWarning("Debug menu - remove " + blocksChange.ToString() + " blocks.");
-        Manager.blocks.destroyBlock(blocksChange);
+        gameManager.block.destroyBlock(blocksChange);
         setActive(false);
     }
 
     public void button_removeAllBlocks()
     {
         Debug.LogWarning("Debug menu - remove all block.");
-        Manager.blocks.destroyAllBlocks();
+        gameManager.block.destroyAllBlocks();
         setActive(false);
     }
 
