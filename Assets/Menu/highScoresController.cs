@@ -6,10 +6,9 @@ using System.Collections.Generic;
 
 public class highScoresController : MonoBehaviour 
 {
-    public bool active;
-
     private List<KeyValuePair<string, int>> Score;
     private Text[] place;
+    private mainMenuController mainMenu;
 
     void Awake()
     {
@@ -17,32 +16,34 @@ public class highScoresController : MonoBehaviour
         place = new Text[10];
 
         for (int i = 0; i < 10; ++i) place[i] = gameObject.transform.GetChild(i + 1).gameObject.GetComponent<Text>();
+        mainMenu = GameObject.FindGameObjectWithTag("Main Menu").GetComponent<mainMenuController>();
         Score = new List<KeyValuePair<string, int>>();
         loadScore();
+    }
+
+    void Start()
+    {
+        setActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Back button");
-            Manager.MainMenu.setActive(true);
+            mainMenu.setActive(true);
             setActive(false);
         }
     }
 
     public void setActive(bool status)
     {
-        active = status;
         gameObject.SetActive(status);
+        Debug.Log("Display high scores - " + status);
     }
 
     public void updateText()
     {
-        for(int i = 0; i < 10; ++i)
-        {
-            place[i].text = (i + 1).ToString() + ". " + Score[i].Key + " " + Score[i].Value.ToString();
-        }
+        for (int i = 0; i < 10; ++i) place[i].text = (i + 1).ToString() + ". " + Score[i].Key + " " + Score[i].Value.ToString();
     }
 
     public bool compareWithlastScore(int val)
@@ -98,16 +99,12 @@ public class highScoresController : MonoBehaviour
         loadScore();
     }
 
-    private void sortScore()
-    {
-        Score.Sort((nextPair, firstPair) => { return firstPair.Value.CompareTo(nextPair.Value); });
-    }
+    private void sortScore() { Score.Sort((nextPair, firstPair) => { return firstPair.Value.CompareTo(nextPair.Value); }); }
 	
     public void button_back()
     {
-        Debug.Log("Back button");
         saveScore();
-        Manager.MainMenu.setActive(true);
+        mainMenu.setActive(true);
         setActive(false);
     }
 }

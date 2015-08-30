@@ -5,30 +5,23 @@ public class exitGameController : MonoBehaviour
 {
     public bool active;
 
+    void Start()
+    {
+        setActive(false);
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("Back button");
-            setActive(false);
-        }
+        if (Input.GetKeyDown(KeyCode.Escape)) setActive(false);
     }
 	
     public void setActive(bool status)
     {
         active = status;
         gameObject.SetActive(status);
+        Debug.Log("Display exit game - " + status);
     }
 
-    public void button_Yes()
-    {
-        Debug.Log("Yes button");
-        Application.Quit();
-    }
-
-    public void button_No()
-    {
-        Debug.Log("No button");
-        setActive(false);
-    }
+    public void button_Yes() { Application.Quit(); }
+    public void button_No() { setActive(false); }
 }

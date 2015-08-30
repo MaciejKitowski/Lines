@@ -4,7 +4,6 @@ using System.Collections;
 
 public class aboutController : MonoBehaviour 
 {
-    public bool active = true;
     public string createdBy;
     public string gameVersion;
     public string lastUpdate;
@@ -12,30 +11,37 @@ public class aboutController : MonoBehaviour
     private Text UIcreatedBy;
     private Text UIgameVersion;
     private Text UIlastUpdate;
+    private mainMenuController mainMenu;
 	
 	void Awake()
     {
         UIcreatedBy = gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         UIgameVersion = gameObject.transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         UIlastUpdate = gameObject.transform.GetChild(3).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        mainMenu = GameObject.FindGameObjectWithTag("Main Menu").GetComponent<mainMenuController>();
+
         if (checkValue()) updateValues();
         else Debug.LogError("About - To short string values in controller.");
+    }
+
+    void Start()
+    {
+        setActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Back button");
-            Manager.MainMenu.setActive(true);
+            mainMenu.setActive(true);
             setActive(false);
         }
     }
 
     public void setActive(bool status)
     {
-        active = status;
         gameObject.SetActive(status);
+        Debug.Log("Display about - " + status);
     }
 
     private bool checkValue()
@@ -53,8 +59,7 @@ public class aboutController : MonoBehaviour
 
     public void button_back()
     {
-        Debug.Log("Back button");
-        Manager.MainMenu.setActive(true);
+        mainMenu.setActive(true);
         setActive(false);
     }
 }

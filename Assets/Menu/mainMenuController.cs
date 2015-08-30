@@ -3,24 +3,26 @@ using System.Collections;
 
 public class mainMenuController : MonoBehaviour 
 {
-    public bool active;
+    private exitGameController exitGame;
+    private aboutController about;
+    private highScoresController highScores;
+
+    void Awake()
+    {
+        exitGame = GameObject.FindGameObjectWithTag("Exit Game").GetComponent<exitGameController>();
+        about = GameObject.FindGameObjectWithTag("About").GetComponent<aboutController>();
+        highScores = GameObject.FindGameObjectWithTag("High Scores").GetComponent<highScoresController>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(!Manager.ExitGame.active)
-            {
-                Debug.Log("Back button");
-                Manager.ExitGame.setActive(true);
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.Escape) && !exitGame.active) exitGame.setActive(true);
     }
 
-    public void setActive(bool status)
-    {
-        active = status;
+    public void setActive(bool status) 
+    { 
         gameObject.SetActive(status);
+        Debug.Log("Display main menu - " + status);
     }
 
     public void button_NewGame()
@@ -37,27 +39,19 @@ public class mainMenuController : MonoBehaviour
     public void button_HighScores()
     {
         Debug.Log("High Scores button");
+        highScores.setActive(true);
+        highScores.updateText();
         setActive(false);
-        Manager.highScore.setActive(true);
-        Manager.highScore.updateText();
     }
 
     public void button_About()
     {
-        if (!Manager.ExitGame.active)
+        if(!exitGame.active)
         {
-            Debug.Log("About button");
-            Manager.about.setActive(true);
+            about.setActive(true);
             setActive(false);
         }
     }
 
-    public void button_ExitGame()
-    {
-        if (!Manager.ExitGame.active)
-        {
-            Debug.Log("Exit Game button");
-            Manager.ExitGame.setActive(true);
-        }
-    }
+    public void button_ExitGame() { if (!exitGame.active) exitGame.setActive(true); }
 }
