@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mainMenuController : MonoBehaviour 
+public class mainMenuController : utilities 
 {
     private exitGameController exitGame;
     private aboutController about;
@@ -17,12 +17,6 @@ public class mainMenuController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !exitGame.active) exitGame.setActive(true);
-    }
-
-    public void setActive(bool status) 
-    { 
-        gameObject.SetActive(status);
-        Debug.Log("Display main menu - " + status);
     }
 
     public void button_NewGame()

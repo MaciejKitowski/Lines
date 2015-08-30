@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class aboutController : MonoBehaviour 
+public class aboutController : utilities
 {
     public string createdBy;
     public string gameVersion;
@@ -36,12 +36,6 @@ public class aboutController : MonoBehaviour
             mainMenu.setActive(true);
             setActive(false);
         }
-    }
-
-    public void setActive(bool status)
-    {
-        gameObject.SetActive(status);
-        Debug.Log("Display about - " + status);
     }
 
     private bool checkValue()

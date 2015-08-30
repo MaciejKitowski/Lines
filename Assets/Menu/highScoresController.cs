@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class highScoresController : MonoBehaviour 
+public class highScoresController : utilities 
 {
     private List<KeyValuePair<string, int>> Score;
     private Text[] place;
@@ -33,12 +33,6 @@ public class highScoresController : MonoBehaviour
             mainMenu.setActive(true);
             setActive(false);
         }
-    }
-
-    public void setActive(bool status)
-    {
-        gameObject.SetActive(status);
-        Debug.Log("Display high scores - " + status);
     }
 
     public void updateText()

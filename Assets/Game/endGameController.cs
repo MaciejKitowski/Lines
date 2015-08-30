@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class endGameController : MonoBehaviour 
+public class endGameController : utilities
 {
     public bool active;
 
@@ -15,12 +15,12 @@ public class endGameController : MonoBehaviour
         UIpoints = gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
 
-    public void setActive(bool status)
+    override public void setActive(bool state)
     {
-        active = status;
-        gameObject.SetActive(status);
+        active = state;
+        gameObject.SetActive(state);
 
-        if(status)
+        if(state)
         {
             Manager.blocks.blocksToCreate = 0;
             UIpoints.text = arenaManager.points.ToString();

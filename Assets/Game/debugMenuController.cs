@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class debugMenuController : MonoBehaviour 
+public class debugMenuController : utilities 
 {
     public bool active;
     public int pointsChange;
@@ -27,10 +27,10 @@ public class debugMenuController : MonoBehaviour
         }
     }
 
-    public void setActive(bool status)
+    override public void setActive(bool state)
     {
-        active = status;
-        gameObject.SetActive(status);
+        active = state;
+        gameObject.SetActive(state);
     }
 
     public void button_addPoints()

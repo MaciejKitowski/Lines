@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class exitGameController : MonoBehaviour 
+public class exitGameController : utilities 
 {
     public bool active;
 
@@ -14,12 +14,11 @@ public class exitGameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) setActive(false);
     }
-	
-    public void setActive(bool status)
+
+    override public void setActive(bool state)
     {
-        active = status;
-        gameObject.SetActive(status);
-        Debug.Log("Display exit game - " + status);
+        active = state;
+        gameObject.SetActive(state);
     }
 
     public void button_Yes() { Application.Quit(); }
