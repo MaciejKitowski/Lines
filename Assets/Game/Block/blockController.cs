@@ -3,104 +3,124 @@ using System.Collections;
 
 public class blockController : MonoBehaviour 
 {
-    public blockManager.color blockColor;
-    public bool selected;
-    public bool toDestroy;
-    NavMeshAgent navAgent;
+    public bool selected = false;
+    public bool toDestroy = false;
+    public blocksManager.blockColor color;
 
-    public GameObject navTarget;
-    public bool moved;
+    public NavMeshAgent navAgent;
+    public arenaBlockController arenaTarget;
     public bool onPosition;
-	
-	void Start () 
+
+    private MeshRenderer render;
+    private bool isNewBlock = true;
+    private Animation animation;
+
+	void Start ()
     {
-        navAgent = gameObject.GetComponent<NavMeshAgent>();
-        navAgent.updateRotation = false;
+        navAgent = gameObject.transform.GetChild(0).gameObject.GetComponent<NavMeshAgent>();
+        animation = gameObject.GetComponent<Animation>();
+        render = gameObject.GetComponent<MeshRenderer>();
+        updateMaterial();
+        animation.Play("New block");
 	}
-
-    public void setNavDestination(GameObject target)
+	
+	void Update () 
     {
-        navAgent.enabled = true;
-        navTarget = target;
-
-        Vector3 pos = target.transform.position;
-        pos.y = 0.4166668f;
-        navAgent.SetDestination(pos);
-
-        selected = false;
-        moved = true;
-        onPosition = false;
-    }
+        if (arenaTarget != null && !onPosition) gameObject.transform.position = navAgent.gameObject.transform.position;
+        if (!animation.isPlaying && toDestroy) Destroy(gameObject);
+	}
 
     void OnMouseDown()
     {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameManager.DebugMenu().active && !gameManager.GameLossPanel().active) selected = !selected;
+        if (!gameManager.block.blockIsSelected() && !gameManager.block.blockIsMove() && gameManager.block.blocksToCreate == 0 && !gameManager.debugMenu.active)
+        {
+            selected = true;
+            updateMaterial();
+        }
     }
 
-	void Update ()
+    public void setPatch(arenaBlockController target)
     {
-        //Change material
-        if (selected) selectBlock();
-        else unselectBlock();
+        NavMeshPath path = new NavMeshPath();
+        Vector3 pos = target.transform.position;
+        navAgent.gameObject.SetActive(true);
+        navAgent.CalculatePath(pos, path);
+        selected = false;
+        updateMaterial();
 
-        //Destroy object if animation ended
-        if(toDestroy)
+        if (path.status == NavMeshPathStatus.PathComplete)
         {
-            if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("readyToDelete"))
+            Debug.Log("Path found");
+            if(arenaTarget != null)arenaTarget.block = null;
+            arenaTarget = target;
+            onPosition = false;
+            navAgent.SetPath(path);
+            navAgent.Resume();
+        }
+
+        else if (path.status == NavMeshPathStatus.PathPartial)
+        {
+            navAgent.gameObject.SetActive(false);
+            gameManager.block.playBadPathSound();
+            Debug.Log("Block didn't found path");
+        }
+    }
+
+    public void stopPath()
+    {
+        Debug.Log("Path stopped");
+        onPosition = true;
+        if (isNewBlock) isNewBlock = false;
+        else
+        {
+            if(!toDestroy)
             {
-                Destroy(gameObject);
+                gameManager.block.blocksToCreate = 5;
+                gameObject.transform.position = navAgent.pathEndPosition;
             }
         }
-	}
-
-    private void selectBlock()
-    {
-        switch (blockColor)
-        {
-            case blockManager.color.blue:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().blueBlockSelect;
-                break;
-
-            case blockManager.color.green:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().greenBlockSelect;
-                break;
-
-            case blockManager.color.red:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().redBlockSelect;
-                break;
-
-            case blockManager.color.yellow:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().yellowBlockSelect;
-                break;
-
-            case blockManager.color.magenta:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().magentaBlockSelect;
-                break;
-        }
+        navAgent.gameObject.SetActive(false);
     }
 
-    private void unselectBlock()
+    public void destroyBlock()
     {
-        switch (blockColor)
+        animation.Play("Destroy block");
+        toDestroy = true;
+        arenaTarget.block = null;
+        arenaTarget.navMeshObstacle.SetActive(false);
+    }
+
+    public void updateMaterial()
+    {
+        switch(color)
         {
-            case blockManager.color.blue:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().blueBlockUnselect;
+            case blocksManager.blockColor.BLUE:
+                if (selected) render.material = gameManager.block.selectBlue;
+                else render.material = gameManager.block.unselectBlue;
                 break;
-
-            case blockManager.color.green:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().greenBlockUnselect;
+            case blocksManager.blockColor.BROWN:
+                if (selected) render.material = gameManager.block.selectBrown;
+                else render.material = gameManager.block.unselectBrown;
                 break;
-
-            case blockManager.color.red:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().redBlockUnselect;
+            case blocksManager.blockColor.GREEN:
+                if (selected) render.material = gameManager.block.selectGreen;
+                else render.material = gameManager.block.unselectGreen;
                 break;
-
-            case blockManager.color.yellow:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().yellowBlockUnselect;
+            case blocksManager.blockColor.ORANGE:
+                if (selected) render.material = gameManager.block.selectOrange;
+                else render.material = gameManager.block.unselectOrange;
                 break;
-
-            case blockManager.color.magenta:
-                gameObject.GetComponent<MeshRenderer>().material = gameManager.BlockManager().magentaBlockUnselect;
+            case blocksManager.blockColor.PINK:
+                if (selected) render.material = gameManager.block.selectPink;
+                else render.material = gameManager.block.unselectPink;
+                break;
+            case blocksManager.blockColor.RED:
+                if (selected) render.material = gameManager.block.selectRed;
+                else render.material = gameManager.block.unselectRed;
+                break;
+            case blocksManager.blockColor.YELLOW:
+                if (selected) render.material = gameManager.block.selectYellow;
+                else render.material = gameManager.block.unselectYellow;
                 break;
         }
     }
