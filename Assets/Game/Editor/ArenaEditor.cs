@@ -5,14 +5,38 @@ using UnityEditor;
 
 [CustomEditor(typeof(Arena))]
 public class ArenaEditor : Editor {
+    private bool displayOffMeshLinkButtons = false;
+    private float buttonSpace = 20f;
+    
+
     void OnEnable() {
-        getTiles();
+
     }
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
+        displayOffMeshLinkButtons = EditorGUILayout.Foldout(displayOffMeshLinkButtons, "Off Mesh links");
+
+        if (displayOffMeshLinkButtons) displayOffMeshLinksButtons();
+
         serializedObject.ApplyModifiedProperties();
+    }
+
+    private void displayOffMeshLinksButtons() {
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Clear")) clearOffMeshLinks();
+        GUILayout.Space(buttonSpace);
+        if (GUILayout.Button("Generate")) generateOffMeshLinks();
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void clearOffMeshLinks() {
+
+    }
+
+    private void generateOffMeshLinks() {
+
     }
 
     private GameObject[,] getTiles() {
