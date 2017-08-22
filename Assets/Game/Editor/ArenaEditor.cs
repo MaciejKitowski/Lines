@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEditor;
 
 [CustomEditor(typeof(Arena))]
@@ -16,7 +17,7 @@ public class ArenaEditor : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
-        displayOffMeshLinkButtons = EditorGUILayout.Foldout(displayOffMeshLinkButtons, "Off Mesh links");
+        displayOffMeshLinkButtons = EditorGUILayout.Foldout(displayOffMeshLinkButtons, "Off Mesh Links");
 
         if (displayOffMeshLinkButtons) displayOffMeshLinksButtons();
 
@@ -32,7 +33,17 @@ public class ArenaEditor : Editor {
     }
 
     private void clearOffMeshLinks() {
+        int counter = 0;
 
+        foreach(var tile in getTiles()) {
+            OffMeshLink link = tile.GetComponent<OffMeshLink>();
+            if(link != null) {
+                DestroyImmediate(link);
+                ++counter;
+            }
+        }
+
+        Debug.Log(string.Format("Removed {0} Off Mesh Links.", counter));
     }
 
     private void generateOffMeshLinks() {
@@ -51,6 +62,8 @@ public class ArenaEditor : Editor {
                 Debug.Log(string.Format("[{0},{1}] - {2}", x, y, tiles[x, y].name), tiles[x, y]);
             }
         }
+
+        Debug.Log(string.Format("Loaded {0} tiles.", tiles.Length));
 
         return tiles;
     }
