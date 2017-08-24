@@ -4,6 +4,27 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Tile : MonoBehaviour {
+    [SerializeField] private Material matUnselect;
+    [SerializeField] private Material matSelect;
+    private MeshRenderer mesh;
+    private bool selected = false;
+
+    void Start() {
+        mesh = GetComponent<MeshRenderer>();    
+    }
+
+    private void OnMouseDown() {
+        if(selected) {
+            mesh.material = matUnselect;
+            selected = false;
+        }
+        else {
+            mesh.material = matSelect;
+            selected = true;
+        }
+    }
+
+
     /*private NavMeshAgent navMesh;
 
 	void Start () {
