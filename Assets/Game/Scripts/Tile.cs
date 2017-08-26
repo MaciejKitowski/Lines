@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class Tile : MonoBehaviour {
@@ -8,39 +6,39 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Material matSelect;
     private MeshRenderer mesh;
     private bool selected = false;
+    private TileManager manager;
+    private NavMeshAgent navMesh;
 
     void Start() {
-        mesh = GetComponent<MeshRenderer>();    
+        mesh = GetComponent<MeshRenderer>();
+        navMesh = GetComponent<NavMeshAgent>();
+        manager = transform.parent.GetComponent<TileManager>();
+    }
+
+    void LateUpdate() {
+        if(navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while movement
+    }
+
+    public void moveToPosition(Vector3 pos) {
+        NavMeshPath path = new NavMeshPath();
+        navMesh.CalculatePath(pos, path);
+
+        if(navMesh.pathStatus == NavMeshPathStatus.PathComplete) navMesh.SetPath(path); 
+        else {
+            Debug.Log("Cannot reach destination.");
+        }
     }
 
     private void OnMouseDown() {
         if(selected) {
             mesh.material = matUnselect;
+            manager.selected = null;
             selected = false;
         }
         else {
             mesh.material = matSelect;
+            manager.selected = this;
             selected = true;
         }
     }
-
-
-    /*private NavMeshAgent navMesh;
-
-	void Start () {
-        navMesh = GetComponent<NavMeshAgent>();
-
-
-        NavMeshPath path = new NavMeshPath();
-        Vector3 pos = new Vector3(-2.25f, 0, 0);
-        navMesh.CalculatePath(pos, path);
-
-        Debug.Log(path.status);
-        navMesh.SetPath(path);
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        transform.rotation = new Quaternion(0, 0, 0, 0);
-    }*/
 }
