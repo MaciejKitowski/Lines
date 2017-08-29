@@ -33,8 +33,6 @@ public class Tile : MonoBehaviour {
     }
 
     void LateUpdate() {
-
-        
         if(movement) {
             if (navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while move
             else if(navMesh.remainingDistance == 0) {
