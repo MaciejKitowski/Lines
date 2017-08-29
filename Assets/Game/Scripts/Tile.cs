@@ -5,9 +5,25 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Material matUnselect;
     [SerializeField] private Material matSelect;
     private MeshRenderer mesh;
-    private bool selected = false;
+    private bool _selected = false;
     private TileManager manager;
     private NavMeshAgent navMesh;
+
+    private bool selected {
+        get { return _selected; }
+        set {
+            if(value) {
+                _selected = true;
+                mesh.material = matSelect;
+                manager.selected = this;
+            }
+            else {
+                _selected = false;
+                mesh.material = matUnselect;
+                manager.selected = null;
+            }
+        }
+    }
 
     void Start() {
         mesh = GetComponent<MeshRenderer>();
@@ -30,15 +46,7 @@ public class Tile : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        if(selected) {
-            mesh.material = matUnselect;
-            manager.selected = null;
-            selected = false;
-        }
-        else {
-            mesh.material = matSelect;
-            manager.selected = this;
-            selected = true;
-        }
+        if(selected) selected = false;
+        else selected = true;
     }
 }
