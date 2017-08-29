@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Material matSelect;
     private MeshRenderer mesh;
     private bool _selected = false;
+    private bool movement = false;
     private TileManager manager;
     private NavMeshAgent navMesh;
 
@@ -32,14 +33,26 @@ public class Tile : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if(navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while movement
+
+        
+        if(movement) {
+            if (navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while move
+            else if(navMesh.remainingDistance == 0) {
+                Debug.Log("Tile on position");
+                movement = false;
+                selected = false;
+            }
+        }
     }
 
     public void moveToPosition(Vector3 pos) {
         NavMeshPath path = new NavMeshPath();
         navMesh.CalculatePath(pos, path);
 
-        if(navMesh.pathStatus == NavMeshPathStatus.PathComplete) navMesh.SetPath(path); 
+        if(navMesh.pathStatus == NavMeshPathStatus.PathComplete) {
+            navMesh.SetPath(path);
+            movement = true;
+        }
         else {
             Debug.Log("Cannot reach destination.");
         }
