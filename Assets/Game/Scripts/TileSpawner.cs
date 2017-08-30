@@ -10,6 +10,11 @@ public class TileSpawner : MonoBehaviour {
         tiles = GetComponentsInChildren<Tile>();
 	}
 
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) randNewTiles();
+        if (Input.GetKeyDown(KeyCode.S)) spawn();
+    }
+
     private void randNewTiles() {
         foreach(var til in tiles) {
             int rand = Random.Range(0, possibleColors.Length);
@@ -17,7 +22,7 @@ public class TileSpawner : MonoBehaviour {
         }
     }
 	
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.R)) randNewTiles();
-	}
+	private void spawn() {
+
+    }
 }

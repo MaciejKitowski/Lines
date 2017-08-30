@@ -12,6 +12,7 @@ public class Tile : MonoBehaviour {
     private TileManager manager;
     private NavMeshAgent navMesh;
     private NavMeshObstacle navObstacle;
+    private ArenaTile currentTile;
 
     public bool selected {
         get { return _selected; }
@@ -63,12 +64,17 @@ public class Tile : MonoBehaviour {
         else selected = true;
     }
 
-    public void moveToPosition(Vector3 pos) {
+    public void moveToPosition(ArenaTile tile) {
+        Vector3 pos = tile.transform.position;
         NavMeshPath path = new NavMeshPath();
         navMesh.CalculatePath(pos, path);
 
         if(navMesh.pathStatus == NavMeshPathStatus.PathComplete) {
             navMesh.SetPath(path);
+
+            if (currentTile != null) currentTile.tile = null;
+            currentTile = tile;
+            tile.tile = this;
             movement = true;
         }
         else {
