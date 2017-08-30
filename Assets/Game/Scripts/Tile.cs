@@ -7,12 +7,13 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Material matSelect;
     private MeshRenderer mesh;
     private bool _selected = false;
+    private Color _color;
     private bool movement = false;
     private TileManager manager;
     private NavMeshAgent navMesh;
     private NavMeshObstacle navObstacle;
 
-    private bool selected {
+    public bool selected {
         get { return _selected; }
         set {
             if(value) {
@@ -28,6 +29,14 @@ public class Tile : MonoBehaviour {
                 mesh.material = matUnselect;
                 manager.selected = null;
             }
+        }
+    }
+
+    public Color color {
+        get { return _color; }
+        set {
+            _color = value;
+            if (mesh != null) mesh.material.color = value;
         }
     }
 
