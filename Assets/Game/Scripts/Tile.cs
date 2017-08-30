@@ -17,6 +17,7 @@ public class Tile : MonoBehaviour {
         set {
             if(value) {
                 _selected = true;
+                if (manager.selected != null) manager.selected.selected = false;
                 StartCoroutine(toggleNavigation());
                 mesh.material = matSelect;
                 manager.selected = this;
