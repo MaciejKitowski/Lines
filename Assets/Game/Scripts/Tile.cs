@@ -17,20 +17,18 @@ public class Tile : MonoBehaviour {
     public bool selected {
         get { return _selected; }
         set {
-            if(value) {
-                _selected = true;
+            if (value) {
                 if (manager.selected != null) manager.selected.selected = false;
-                StartCoroutine(toggleNavigation());
                 mesh.material = matSelect;
                 manager.selected = this;
             }
             else {
-                _selected = false;
-                StartCoroutine(toggleNavigation());
                 mesh.material = matUnselect;
                 manager.selected = null;
             }
 
+            _selected = value;
+            StartCoroutine(toggleNavigation());
             mesh.material.color = color;
         }
     }
@@ -58,7 +56,7 @@ public class Tile : MonoBehaviour {
         if(movement) {
             if (navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while move
             else if(navMesh.remainingDistance == 0) {
-                Debug.Log("Tile on position");
+                Debug.Log("Tile on position", gameObject);
                 movement = false;
                 selected = false;
             }
@@ -91,7 +89,7 @@ public class Tile : MonoBehaviour {
             movement = true;
         }
         else {
-            Debug.Log("Cannot reach destination.");
+            Debug.Log("Cannot reach destination.", gameObject);
         }
     }
 
