@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Arena : MonoBehaviour {
@@ -22,9 +21,9 @@ public class Arena : MonoBehaviour {
         }
 	}
 
-    public ArenaTile[] getEmptyTiles() {
+    public List<ArenaTile> getEmptyTiles() {
         Debug.Log(string.Format("Found {0} empty tiles.", tileList.FindAll(b => b.empty).Count));
 
-        return tileList.FindAll(b => b.empty).ToArray();
+        return tileList.FindAll(b => b.empty);
     }
 }

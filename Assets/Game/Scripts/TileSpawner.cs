@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TileSpawner : MonoBehaviour {
     [SerializeField] private GameObject tilePrefab;
@@ -25,10 +26,11 @@ public class TileSpawner : MonoBehaviour {
     }
 	
 	private void spawn() {
-        ArenaTile[] possibleTiles = arena.getEmptyTiles();
+        List<ArenaTile> possibleTiles = arena.getEmptyTiles();
 
         foreach(var ti in tiles) {
-            ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Length)];
+            ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Count)];
+            possibleTiles.Remove(pos);
             Tile obj = Instantiate(tilePrefab, tileParent).GetComponent<Tile>();
             obj.initialize(pos, ti.color);
         }
