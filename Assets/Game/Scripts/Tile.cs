@@ -38,6 +38,10 @@ public class Tile : MonoBehaviour {
         set {
             _color = value;
             if (mesh != null) mesh.material.color = value;
+            else {
+                mesh = GetComponent<MeshRenderer>();
+                color = value;
+            }
         }
     }
 
@@ -62,6 +66,13 @@ public class Tile : MonoBehaviour {
     void OnMouseDown() {
         if (selected) selected = false;
         else selected = true;
+    }
+
+    public void initialize(ArenaTile arTile, Color col) {
+        transform.position = arTile.transform.position;
+        color = col;
+        currentTile = arTile;
+        arTile.tile = this;
     }
 
     public void moveToPosition(ArenaTile tile) {

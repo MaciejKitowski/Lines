@@ -25,6 +25,14 @@ public class TileSpawner : MonoBehaviour {
     }
 	
 	private void spawn() {
-        
+        ArenaTile[] possibleTiles = arena.getEmptyTiles();
+
+        foreach(var ti in tiles) {
+            ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Length)];
+            Tile obj = Instantiate(tilePrefab, tileParent).GetComponent<Tile>();
+            obj.initialize(pos, ti.color);
+        }
+
+        randNewTiles();
     }
 }
