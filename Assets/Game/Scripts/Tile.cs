@@ -80,7 +80,7 @@ public class Tile : MonoBehaviour {
         NavMeshPath path = new NavMeshPath();
         navMesh.CalculatePath(pos, path);
 
-        if(navMesh.pathStatus == NavMeshPathStatus.PathComplete) {
+        if(path.status == NavMeshPathStatus.PathComplete) {
             navMesh.SetPath(path);
 
             if (currentTile != null) currentTile.tile = null;
