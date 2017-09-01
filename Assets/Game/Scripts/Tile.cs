@@ -30,6 +30,8 @@ public class Tile : MonoBehaviour {
                 mesh.material = matUnselect;
                 manager.selected = null;
             }
+
+            mesh.material.color = color;
         }
     }
 
