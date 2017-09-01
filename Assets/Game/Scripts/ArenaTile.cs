@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class ArenaTile : MonoBehaviour {
-    private bool empty = true;
+    private bool _empty = true;
     private TileManager tileManager;
     private Tile _tile;
 
@@ -12,6 +12,8 @@ public class ArenaTile : MonoBehaviour {
             empty = (value == null);
         }
     }
+
+    public bool empty { get { return _empty; } private set { _empty = value; } }
 
     void Start() {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();

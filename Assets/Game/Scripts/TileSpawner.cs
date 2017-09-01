@@ -5,9 +5,11 @@ public class TileSpawner : MonoBehaviour {
     [SerializeField] private Transform tileParent;
     [SerializeField] private Color[] possibleColors;
     private Tile[] tiles;
+    private Arena arena;
 
 	void Start () {
         tiles = GetComponentsInChildren<Tile>();
+        arena = GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>();
 	}
 
     void Update() {
@@ -23,6 +25,6 @@ public class TileSpawner : MonoBehaviour {
     }
 	
 	private void spawn() {
-
+        
     }
 }
