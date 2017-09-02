@@ -28,13 +28,18 @@ public class TileSpawner : MonoBehaviour {
 	private void spawn() {
         List<ArenaTile> possibleTiles = arena.getEmptyTiles();
 
-        foreach(var ti in tiles) {
-            ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Count)];
-            possibleTiles.Remove(pos);
-            Tile obj = Instantiate(tilePrefab, tileParent).GetComponent<Tile>();
-            obj.initialize(pos, ti.color);
+        if(possibleTiles.Count < 6) {
+            Debug.Log("Game Lost");
         }
+        else {
+            foreach (var ti in tiles) {
+                ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Count)];
+                possibleTiles.Remove(pos);
+                Tile obj = Instantiate(tilePrefab, tileParent).GetComponent<Tile>();
+                obj.initialize(pos, ti.color);
+            }
 
-        randNewTiles();
+            randNewTiles();
+        }
     }
 }
