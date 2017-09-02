@@ -51,5 +51,19 @@ public class Arena : MonoBehaviour {
         }
 
         //Check columns
+        for(int x = 0; x < maxX; ++x) {
+            int sameColor = 1;
+            for(int y = 1; y < maxY; ++y) {
+                if (!tile[x, y].empty && !tile[x, y - 1].empty) {
+                    if (tile[x, y].tile.color == tile[x, y - 1].tile.color) {
+                        ++sameColor;
+                        if (sameColor == tilesInLineToRemove) {
+                            Debug.Log(string.Format("Remove column {0}", y + 1));
+                        }
+                    }
+                    else sameColor = 1;
+                }
+            }
+        }
     }
 }
