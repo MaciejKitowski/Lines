@@ -90,6 +90,7 @@ public class Tile : MonoBehaviour {
         }
         else {
             Debug.Log("Cannot reach destination.", gameObject);
+            selected = false;
         }
     }
 
