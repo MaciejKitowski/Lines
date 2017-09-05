@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Arena : MonoBehaviour {
-    [SerializeField] private int tilesInLineToRemove = 3;
+    [SerializeField] private int requiredTilesInLine = 3;
     private ArenaTile[,] _tile;
     private List<ArenaTile> tileList;   //Used to found empty tiles
     private int maxX, maxY;
@@ -41,7 +41,7 @@ public class Arena : MonoBehaviour {
                 if(!tile[x, y].empty && !tile[x - 1, y].empty) {
                     if (tile[x, y].tile.color == tile[x - 1, y].tile.color) {
                         ++sameColor;
-                        if (sameColor == tilesInLineToRemove) {
+                        if (sameColor == requiredTilesInLine) {
                             Debug.Log(string.Format("Remove row {0}", y + 1));
                         }
                     }
@@ -57,7 +57,7 @@ public class Arena : MonoBehaviour {
                 if (!tile[x, y].empty && !tile[x, y - 1].empty) {
                     if (tile[x, y].tile.color == tile[x, y - 1].tile.color) {
                         ++sameColor;
-                        if (sameColor == tilesInLineToRemove) {
+                        if (sameColor == requiredTilesInLine) {
                             Debug.Log(string.Format("Remove column {0}", y + 1));
                         }
                     }

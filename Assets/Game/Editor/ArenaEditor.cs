@@ -8,17 +8,20 @@ using UnityEditor;
 public class ArenaEditor : Editor {
     public enum logMode { FULL, SUMMARY_ONLY, NONE }
 
+    private SerializedProperty requiredTilesInLine;
+
     private bool displayOffMeshLinkButtons = false;
     private float buttonSpace = 20f;
     private logMode logmode = logMode.SUMMARY_ONLY;
     private int maxX, maxY;
     
     void OnEnable() {
-
+        requiredTilesInLine = serializedObject.FindProperty("requiredTilesInLine");
     }
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
+        EditorGUILayout.IntSlider(requiredTilesInLine, 2, 7);
 
         logmode = (logMode)EditorGUILayout.EnumPopup("Logging mode", logmode);
         displayOffMeshLinkButtons = EditorGUILayout.Foldout(displayOffMeshLinkButtons, "Off Mesh Links");
