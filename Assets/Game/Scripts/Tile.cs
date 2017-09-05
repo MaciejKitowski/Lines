@@ -7,8 +7,8 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Material matSelect;
     private MeshRenderer mesh;
     private bool _selected = false;
+    private bool _movement = false;
     private Color _color;
-    private bool movement = false;
     private TileManager manager;
     private NavMeshAgent navMesh;
     private NavMeshObstacle navObstacle;
@@ -31,6 +31,11 @@ public class Tile : MonoBehaviour {
             StartCoroutine(toggleNavigation());
             mesh.material.color = color;
         }
+    }
+
+    public bool movement {
+        get { return _movement; }
+        private set { _movement = value; }
     }
 
     public Color color {
@@ -64,8 +69,10 @@ public class Tile : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        if (selected) selected = false;
-        else selected = true;
+        if (selected && !movement) selected = false;
+        else {
+            if(manager.selected == null || !manager.selected.movement) selected = true;
+        }
     }
 
     public void initialize(ArenaTile arTile, Color col) {
