@@ -34,11 +34,15 @@ public class Arena : MonoBehaviour {
     }
 
     public void checkPoints() {
-        //Check rows
-        for(int y = 0; y < maxY; ++y) {
+        checkPointsRow();
+        checkPointsColumn();
+    }
+
+    private void checkPointsRow() {
+        for (int y = 0; y < maxY; ++y) {
             int sameColor = 1;
-            for(int x = 1; x < maxX; ++x) {
-                if(!tile[x, y].empty && !tile[x - 1, y].empty) {
+            for (int x = 1; x < maxX; ++x) {
+                if (!tile[x, y].empty && !tile[x - 1, y].empty) {
                     if (tile[x, y].tile.color == tile[x - 1, y].tile.color) {
                         ++sameColor;
                         if (sameColor == requiredTilesInLine) {
@@ -49,11 +53,12 @@ public class Arena : MonoBehaviour {
                 }
             }
         }
+    }
 
-        //Check columns
-        for(int x = 0; x < maxX; ++x) {
+    private void checkPointsColumn() {
+        for (int x = 0; x < maxX; ++x) {
             int sameColor = 1;
-            for(int y = 1; y < maxY; ++y) {
+            for (int y = 1; y < maxY; ++y) {
                 if (!tile[x, y].empty && !tile[x, y - 1].empty) {
                     if (tile[x, y].tile.color == tile[x, y - 1].tile.color) {
                         ++sameColor;
