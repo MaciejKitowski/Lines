@@ -49,16 +49,10 @@ public class Arena : MonoBehaviour {
                 if (compState == tilesCompareState.SAME) {
                     ++sameColor;
 
-                    if(x == maxX - 1) {
-                        /*if (sameColor >= requiredTilesInLine) {
-                            Debug.Log(string.Format("row: {0} start: {1} end: {2}", y + 1, start + 1, x + 1));
-                        }*/
-                    }
+                    if(x == maxX - 1 && sameColor >= requiredTilesInLine) removeRow(y, start, x);
                 }
                 else {
-                    /*if (sameColor >= requiredTilesInLine) {
-                        Debug.Log(string.Format("row: {0} start: {1} end: {2}", y + 1, start + 1, x));
-                    }*/
+                    if (sameColor >= requiredTilesInLine) removeRow(y, start, x - 1);
 
                     sameColor = 1;
                     start = x;
@@ -77,16 +71,10 @@ public class Arena : MonoBehaviour {
                 if (compState == tilesCompareState.SAME) {
                     ++sameColor;
 
-                    if (y == maxY - 1) {
-                        /*if (sameColor >= requiredTilesInLine) {
-                            Debug.Log(string.Format("column: {0} start: {1} end: {2}", x + 1, start + 1, y + 1));
-                        }*/
-                    }
+                    if (y == maxY - 1 && sameColor >= requiredTilesInLine) removeColumn(x, start, y);
                 }
                 else {
-                    /*if (sameColor >= requiredTilesInLine) {
-                        Debug.Log(string.Format("column: {0} start: {1} end: {2}", x + 1, start + 1, y));
-                    }*/
+                    if (sameColor >= requiredTilesInLine) removeColumn(x, start, y - 1);
 
                     sameColor = 1;
                     start = y;
@@ -101,13 +89,11 @@ public class Arena : MonoBehaviour {
         else return tilesCompareState.DIFFERENT;
     }
 
-    /*private void removeRow(int row, int start, int end) {
-        Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, (end + 1) - (start + 1)));
-    }*/
+    private void removeRow(int row, int start, int end) {
+        Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, end - start + 1));
+    }
 
-
-
-    /*private void removeColumn(int col, int start, int end) {
-        Debug.Log(string.Format("Remove column {0}", col + 1));
-    }*/
+    private void removeColumn(int col, int start, int end) {
+        Debug.Log(string.Format("Remove column: {0}, start: {1}, end: {2}, total tiles: {3}", col + 1, start + 1, end + 1, end - start + 1));
+    }
 }
