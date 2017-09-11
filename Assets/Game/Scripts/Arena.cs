@@ -35,24 +35,74 @@ public class Arena : MonoBehaviour {
 
     public void checkPoints() {
         checkPointsRow();
-        checkPointsColumn();
+        //checkPointsColumn();
     }
+
+    enum tilesCompareState { EMPTY, DIFFERENT, SAME }
+
+    private tilesCompareState compareTiles(ArenaTile A, ArenaTile B) {
+        if (A.empty || B.empty) return tilesCompareState.EMPTY;
+        else if (A.tile.color == B.tile.color) return tilesCompareState.SAME;
+        else return tilesCompareState.DIFFERENT;
+    }
+
+    /*private void removeRow(int row, int start, int end) {
+        Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, (end + 1) - (start + 1)));
+    }*/
 
     private void checkPointsRow() {
         for (int y = 0; y < maxY; ++y) {
-            int sameColor = 1;
+            int sameColor = 1, start = 0;
+
             for (int x = 1; x < maxX; ++x) {
-                if (!tile[x, y].empty && !tile[x - 1, y].empty) {
-                    if (tile[x, y].tile.color == tile[x - 1, y].tile.color) {
-                        ++sameColor;
-                        if (sameColor == requiredTilesInLine) {
-                            Debug.Log(string.Format("Remove row {0}", y + 1));
-                        }
+                tilesCompareState compState = compareTiles(tile[x, y], tile[x - 1, y]);
+
+                if (compState == tilesCompareState.SAME) {
+                    ++sameColor;
+
+                    if(x == maxX - 1) {
+                        /*if (sameColor >= requiredTilesInLine) {
+                            Debug.Log(string.Format("row: {0} start: {1} end: {2}", y + 1, start + 1, x + 1));
+                        }*/
                     }
-                    else sameColor = 1;
+                }
+                else {
+                    /*if (sameColor >= requiredTilesInLine) {
+                        Debug.Log(string.Format("row: {0} start: {1} end: {2}", y + 1, start + 1, x));
+                    }*/
+
+                    sameColor = 1;
+                    start = x;
                 }
             }
         }
+
+
+
+
+
+
+
+
+        //for (int y = 0; y < maxy; ++y) {
+        //    int samecolor = 1, start = 0;
+        //    for (int x = 1; x < maxx; ++x) {
+        //        if (!tile[x, y].empty && !tile[x - 1, y].empty) {
+        //            if (tile[x, y].tile.color == tile[x - 1, y].tile.color) {
+        //                ++samecolor;
+
+        //                if (samecolor == requiredtilesinline) {
+        //                    debug.log(string.format("row: {0} start: {1} end: {2}", y + 1, start + 1, x + 1));
+        //                }
+        //            }
+        //            else {
+        //                samecolor = 1;
+        //                start = x - 1;
+        //            }
+        //        }
+        //        else ++start;
+        //    }
+        //}
     }
 
     private void checkPointsColumn() {
@@ -63,7 +113,7 @@ public class Arena : MonoBehaviour {
                     if (tile[x, y].tile.color == tile[x, y - 1].tile.color) {
                         ++sameColor;
                         if (sameColor == requiredTilesInLine) {
-                            Debug.Log(string.Format("Remove column {0}", y + 1));
+                            
                         }
                     }
                     else sameColor = 1;
@@ -71,4 +121,10 @@ public class Arena : MonoBehaviour {
             }
         }
     }
+
+    
+
+    /*private void removeColumn(int col, int start, int end) {
+        Debug.Log(string.Format("Remove column {0}", col + 1));
+    }*/
 }
