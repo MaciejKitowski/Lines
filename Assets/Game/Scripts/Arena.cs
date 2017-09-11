@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Arena : MonoBehaviour {
     [SerializeField] private int requiredTilesInLine = 3;
+    private enum tilesCompareState { EMPTY, DIFFERENT, SAME }   //Used to prettier comparison in looking for points
     private ArenaTile[,] _tile;
     private List<ArenaTile> tileList;   //Used to found empty tiles
     private int maxX, maxY;
@@ -35,20 +36,8 @@ public class Arena : MonoBehaviour {
 
     public void checkPoints() {
         checkPointsRow();
-        //checkPointsColumn();
+        checkPointsColumn();
     }
-
-    enum tilesCompareState { EMPTY, DIFFERENT, SAME }
-
-    private tilesCompareState compareTiles(ArenaTile A, ArenaTile B) {
-        if (A.empty || B.empty) return tilesCompareState.EMPTY;
-        else if (A.tile.color == B.tile.color) return tilesCompareState.SAME;
-        else return tilesCompareState.DIFFERENT;
-    }
-
-    /*private void removeRow(int row, int start, int end) {
-        Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, (end + 1) - (start + 1)));
-    }*/
 
     private void checkPointsRow() {
         for (int y = 0; y < maxY; ++y) {
@@ -76,53 +65,47 @@ public class Arena : MonoBehaviour {
                 }
             }
         }
-
-
-
-
-
-
-
-
-        //for (int y = 0; y < maxy; ++y) {
-        //    int samecolor = 1, start = 0;
-        //    for (int x = 1; x < maxx; ++x) {
-        //        if (!tile[x, y].empty && !tile[x - 1, y].empty) {
-        //            if (tile[x, y].tile.color == tile[x - 1, y].tile.color) {
-        //                ++samecolor;
-
-        //                if (samecolor == requiredtilesinline) {
-        //                    debug.log(string.format("row: {0} start: {1} end: {2}", y + 1, start + 1, x + 1));
-        //                }
-        //            }
-        //            else {
-        //                samecolor = 1;
-        //                start = x - 1;
-        //            }
-        //        }
-        //        else ++start;
-        //    }
-        //}
     }
 
     private void checkPointsColumn() {
         for (int x = 0; x < maxX; ++x) {
-            int sameColor = 1;
+            int sameColor = 1, start = 0;
+
             for (int y = 1; y < maxY; ++y) {
-                if (!tile[x, y].empty && !tile[x, y - 1].empty) {
-                    if (tile[x, y].tile.color == tile[x, y - 1].tile.color) {
-                        ++sameColor;
-                        if (sameColor == requiredTilesInLine) {
-                            
-                        }
+                tilesCompareState compState = compareTiles(tile[x, y], tile[x, y - 1]);
+
+                if (compState == tilesCompareState.SAME) {
+                    ++sameColor;
+
+                    if (y == maxY - 1) {
+                        /*if (sameColor >= requiredTilesInLine) {
+                            Debug.Log(string.Format("column: {0} start: {1} end: {2}", x + 1, start + 1, y + 1));
+                        }*/
                     }
-                    else sameColor = 1;
+                }
+                else {
+                    /*if (sameColor >= requiredTilesInLine) {
+                        Debug.Log(string.Format("column: {0} start: {1} end: {2}", x + 1, start + 1, y));
+                    }*/
+
+                    sameColor = 1;
+                    start = y;
                 }
             }
         }
     }
 
-    
+    private tilesCompareState compareTiles(ArenaTile A, ArenaTile B) {
+        if (A.empty || B.empty) return tilesCompareState.EMPTY;
+        else if (A.tile.color == B.tile.color) return tilesCompareState.SAME;
+        else return tilesCompareState.DIFFERENT;
+    }
+
+    /*private void removeRow(int row, int start, int end) {
+        Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, (end + 1) - (start + 1)));
+    }*/
+
+
 
     /*private void removeColumn(int col, int start, int end) {
         Debug.Log(string.Format("Remove column {0}", col + 1));
