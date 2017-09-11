@@ -37,6 +37,7 @@ public class TileSpawner : MonoBehaviour {
                 possibleTiles.Remove(pos);
                 Tile obj = Instantiate(tilePrefab, tileParent).GetComponent<Tile>();
                 obj.initialize(pos, ti.color);
+                Debug.Log("Spawned new tile.", pos);
             }
 
             randNewTiles();
