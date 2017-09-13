@@ -7,6 +7,7 @@ public class Arena : MonoBehaviour {
     private ArenaTile[,] _tile;
     private List<ArenaTile> tileList;   //Used to found empty tiles
     private int maxX, maxY;
+    private Game game;
     
     public ArenaTile[,] tile { get { return _tile; } private set { _tile = value; } }
 
@@ -15,6 +16,7 @@ public class Arena : MonoBehaviour {
         maxY = transform.childCount;
         tile = new ArenaTile[maxX, maxY];
         tileList = new List<ArenaTile>();
+        game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
 
         for(int y = 0; y < maxY; ++y) {
             for(int x = 0; x < maxX; ++x) {
@@ -91,9 +93,13 @@ public class Arena : MonoBehaviour {
 
     private void removeRow(int row, int start, int end) {
         Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, end - start + 1));
+        
+        game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
     }
 
     private void removeColumn(int col, int start, int end) {
         Debug.Log(string.Format("Remove column: {0}, start: {1}, end: {2}, total tiles: {3}", col + 1, start + 1, end + 1, end - start + 1));
+
+        game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
     }
 }
