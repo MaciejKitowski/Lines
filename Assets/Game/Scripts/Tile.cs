@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour {
     private NavMeshAgent navMesh;
     private NavMeshObstacle navObstacle;
     private ArenaTile currentTile;
+    private Arena arena;
 
     public bool selected {
         get { return _selected; }
@@ -55,6 +56,7 @@ public class Tile : MonoBehaviour {
         navMesh = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         manager = transform.parent.GetComponent<TileManager>();
+        arena = GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>();
     }
 
     void LateUpdate() {
@@ -62,6 +64,7 @@ public class Tile : MonoBehaviour {
             if (navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while move
             else if(navMesh.remainingDistance == 0) {
                 Debug.Log("Tile on position", gameObject);
+                arena.checkPoints();
                 movement = false;
                 selected = false;
             }
