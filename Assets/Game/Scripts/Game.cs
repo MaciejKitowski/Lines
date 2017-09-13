@@ -3,7 +3,10 @@
 public class Game : MonoBehaviour {
     [SerializeField] private int pointsPerRow = 15;
     [SerializeField] private int extraTilesMultiplier = 2;
+    [SerializeField] private TileSpawner _spawner;
     private int points = 0;
+
+    public TileSpawner spawner { get { return _spawner; } }
 
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Alpha0)) addPoints();

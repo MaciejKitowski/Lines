@@ -25,7 +25,7 @@ public class TileSpawner : MonoBehaviour {
         }
     }
 	
-	private void spawn() {
+	public void spawn() {
         List<ArenaTile> possibleTiles = arena.getEmptyTiles();
 
         if(possibleTiles.Count < 6) {

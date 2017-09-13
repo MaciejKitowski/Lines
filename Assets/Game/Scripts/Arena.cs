@@ -37,33 +37,47 @@ public class Arena : MonoBehaviour {
     }
 
     public void checkPoints() {
-        checkPointsRow();
-        checkPointsColumn();
+        bool pointsRow = checkPointsRow();
+        bool pointsCol = checkPointsColumn();
+
+        if (!pointsRow && !pointsCol) game.spawner.spawn();
     }
 
-    private void checkPointsRow() {
+    private bool checkPointsRow() {
+        bool achievedPoints = false;
+
         for (int y = 0; y < maxY; ++y) {
             int sameColor = 1, start = 0;
-
+            
             for (int x = 1; x < maxX; ++x) {
                 tilesCompareState compState = compareTiles(tile[x, y], tile[x - 1, y]);
 
                 if (compState == tilesCompareState.SAME) {
                     ++sameColor;
 
-                    if(x == maxX - 1 && sameColor >= requiredTilesInLine) removeRow(y, start, x);
+                    if(x == maxX - 1 && sameColor >= requiredTilesInLine) {
+                        achievedPoints = true;
+                        removeRow(y, start, x);
+                    }
                 }
                 else {
-                    if (sameColor >= requiredTilesInLine) removeRow(y, start, x - 1);
+                    if (sameColor >= requiredTilesInLine) {
+                        achievedPoints = true;
+                        removeRow(y, start, x - 1);
+                    }
 
                     sameColor = 1;
                     start = x;
                 }
             }
         }
+
+        return achievedPoints;
     }
 
-    private void checkPointsColumn() {
+    private bool checkPointsColumn() {
+        bool achievedPoints = false;
+
         for (int x = 0; x < maxX; ++x) {
             int sameColor = 1, start = 0;
 
@@ -73,16 +87,24 @@ public class Arena : MonoBehaviour {
                 if (compState == tilesCompareState.SAME) {
                     ++sameColor;
 
-                    if (y == maxY - 1 && sameColor >= requiredTilesInLine) removeColumn(x, start, y);
+                    if (y == maxY - 1 && sameColor >= requiredTilesInLine) {
+                        achievedPoints = true;
+                        removeColumn(x, start, y);
+                    }
                 }
                 else {
-                    if (sameColor >= requiredTilesInLine) removeColumn(x, start, y - 1);
+                    if (sameColor >= requiredTilesInLine) {
+                        achievedPoints = true;
+                        removeColumn(x, start, y - 1);
+                    }
 
                     sameColor = 1;
                     start = y;
                 }
             }
         }
+
+        return achievedPoints;
     }
 
     private tilesCompareState compareTiles(ArenaTile A, ArenaTile B) {
