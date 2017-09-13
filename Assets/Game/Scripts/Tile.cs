@@ -101,6 +101,14 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    public void remove() {
+        Debug.Log("Remove tile", gameObject);
+
+        if (selected) selected = false;
+        currentTile.tile = null;
+        Destroy(gameObject);
+    }
+
     private IEnumerator toggleNavigation() {    //Toggling between Nav Mesh Agent and obstacle must be delayed because of bug (change position of selected tile)
         float waitTime = 0.01f;
 
