@@ -36,11 +36,11 @@ public class Arena : MonoBehaviour {
         return tileList.FindAll(b => b.empty);
     }
 
-    public void checkPoints() {
+    public void checkPoints(bool spawnCheck = false) {  //spawnCheck - avoid spawning new tiles without player move (from tile spawner)
         bool pointsRow = checkPointsRow();
         bool pointsCol = checkPointsColumn();
 
-        if (!pointsRow && !pointsCol) game.spawner.spawn();
+        if (!spawnCheck && !pointsRow && !pointsCol) game.spawner.spawn();
     }
 
     private bool checkPointsRow() {

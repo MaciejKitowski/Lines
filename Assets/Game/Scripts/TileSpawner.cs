@@ -41,6 +41,7 @@ public class TileSpawner : MonoBehaviour {
             }
 
             randNewTiles();
+            arena.checkPoints(true);
         }
     }
 }
