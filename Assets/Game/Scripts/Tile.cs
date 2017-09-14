@@ -8,12 +8,14 @@ public class Tile : MonoBehaviour {
     private MeshRenderer mesh;
     private bool _selected = false;
     private bool _movement = false;
+    private bool toRemove = false;
     private Color _color;
     private TileManager manager;
     private NavMeshAgent navMesh;
     private NavMeshObstacle navObstacle;
     private ArenaTile currentTile;
     private Arena arena;
+    private Animation anim;
 
     public bool selected {
         get { return _selected; }
@@ -29,7 +31,7 @@ public class Tile : MonoBehaviour {
             }
 
             _selected = value;
-            StartCoroutine(toggleNavigation());
+            if(!toRemove) StartCoroutine(toggleNavigation());
             mesh.material.color = color;
         }
     }
@@ -57,6 +59,7 @@ public class Tile : MonoBehaviour {
         navObstacle = GetComponent<NavMeshObstacle>();
         manager = transform.parent.GetComponent<TileManager>();
         arena = GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>();
+        anim = GetComponent<Animation>();
     }
 
     void LateUpdate() {
@@ -83,6 +86,10 @@ public class Tile : MonoBehaviour {
         color = col;
         currentTile = arTile;
         arTile.tile = this;
+
+        anim = GetComponent<Animation>();
+        transform.localScale = new Vector3(0, transform.localScale.y, 0);   //Set scale to 0 before start animation
+        anim.Play("Tile New");
     }
 
     public void moveToPosition(ArenaTile tile) {
@@ -107,10 +114,14 @@ public class Tile : MonoBehaviour {
     public void remove() {
         Debug.Log("Remove tile", gameObject);
 
-        if (selected) selected = false;
+        toRemove = true;
+        selected = false;
         currentTile.tile = null;
-        Destroy(gameObject);
+
+        anim.Play("Tile Remove");
     }
+
+    public void Destroy() { Destroy(gameObject); }  //Used in Tile Remove animation
 
     private IEnumerator toggleNavigation() {    //Toggling between Nav Mesh Agent and obstacle must be delayed because of bug (change position of selected tile)
         float waitTime = 0.01f;
