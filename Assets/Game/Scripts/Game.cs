@@ -4,6 +4,7 @@ public class Game : MonoBehaviour {
     [SerializeField] private int pointsPerRow = 15;
     [SerializeField] private int extraTilesMultiplier = 2;
     [SerializeField] private TileSpawner _spawner;
+    [SerializeField] private GameLost lostPanel;
     private int points = 0;
 
     public TileSpawner spawner { get { return _spawner; } }
@@ -12,6 +13,8 @@ public class Game : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha0)) addPoints();
         else if (Input.GetKeyDown(KeyCode.Alpha1)) addPoints(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) addPoints(2);
+        else if (Input.GetKeyDown(KeyCode.L)) gameLost();
+        else if (Input.GetKeyDown(KeyCode.H)) lostPanel.hide();
     }
 
     public void addPoints(int extraTiles = 0) {
@@ -22,5 +25,9 @@ public class Game : MonoBehaviour {
 
         Debug.Log(string.Format("Add {0} points with {1} extra tiles.", pointsToAdd, extraTiles));
         points += pointsToAdd;
+    }
+
+    public void gameLost() {
+        lostPanel.display(points, false);
     }
 }
