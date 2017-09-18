@@ -7,10 +7,12 @@ public class TileSpawner : MonoBehaviour {
     [SerializeField] private Color[] possibleColors;
     private Tile[] tiles;
     private Arena arena;
+    private Game game;
 
 	void Start () {
         tiles = GetComponentsInChildren<Tile>();
         arena = GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>();
+        game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
 	}
 
     void Update() {
@@ -28,9 +30,7 @@ public class TileSpawner : MonoBehaviour {
 	public void spawn() {
         List<ArenaTile> possibleTiles = arena.getEmptyTiles();
 
-        if(possibleTiles.Count < 6) {
-            Debug.Log("Game Lost");
-        }
+        if(possibleTiles.Count < 6) game.gameLost();
         else {
             foreach (var ti in tiles) {
                 ArenaTile pos = possibleTiles[Random.Range(0, possibleTiles.Count)];

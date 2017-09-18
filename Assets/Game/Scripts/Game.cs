@@ -28,6 +28,8 @@ public class Game : MonoBehaviour {
     }
 
     public void gameLost() {
+        Debug.Log("Game Lost");
+
         lostPanel.display(points, false);
     }
 }
