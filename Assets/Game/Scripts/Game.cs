@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
     [SerializeField] private int pointsPerRow = 15;
     [SerializeField] private int extraTilesMultiplier = 2;
     [SerializeField] private TileSpawner _spawner;
     [SerializeField] private GameLost lostPanel;
+    [SerializeField] private Text pointsText;
     private int points = 0;
 
     public TileSpawner spawner { get { return _spawner; } }
@@ -25,6 +27,8 @@ public class Game : MonoBehaviour {
 
         Debug.Log(string.Format("Add {0} points with {1} extra tiles.", pointsToAdd, extraTiles));
         points += pointsToAdd;
+
+        pointsText.text = points.ToString();
     }
 
     public void gameLost() {
