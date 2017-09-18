@@ -19,6 +19,14 @@ public class Game : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.H)) lostPanel.hide();
     }
 
+    public void newGame() {
+        spawner.randNewTiles();
+        points = 0;
+        pointsText.text = points.ToString();
+        GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
+        lostPanel.hide();
+    }
+
     public void addPoints(int extraTiles = 0) {
         int pointsToAdd = 0;
 

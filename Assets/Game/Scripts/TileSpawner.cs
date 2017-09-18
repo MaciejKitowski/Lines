@@ -20,7 +20,7 @@ public class TileSpawner : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S)) spawn();
     }
 
-    private void randNewTiles() {
+    public void randNewTiles() {
         foreach(var til in tiles) {
             int rand = Random.Range(0, possibleColors.Length);
             til.color = possibleColors[rand];

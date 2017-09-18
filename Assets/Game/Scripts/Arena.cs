@@ -36,6 +36,14 @@ public class Arena : MonoBehaviour {
         return tileList.FindAll(b => b.empty);
     }
 
+    public void removeAllTiles() {
+        Debug.Log("Remove all tiles on arena");
+
+        foreach(var obj in tileList.FindAll(b => !b.empty)) {
+            obj.tile.remove();
+        }
+    }
+
     public void checkPoints(bool spawnCheck = false) {  //spawnCheck - avoid spawning new tiles without player move (from tile spawner)
         bool pointsRow = checkPointsRow();
         bool pointsCol = checkPointsColumn();
