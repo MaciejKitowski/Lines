@@ -9,7 +9,7 @@ public class TileSpawner : MonoBehaviour {
     private Arena arena;
     private Game game;
 
-	void Start () {
+	void Awake () {
         tiles = GetComponentsInChildren<Tile>();
         arena = GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>();
         game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();

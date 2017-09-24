@@ -12,7 +12,12 @@ public class Game : MonoBehaviour {
 
     public TileSpawner spawner { get { return _spawner; } }
 
-	void Update () {
+    void Start() {
+        Debug.Log("Loaded scene Game");
+        newGame();
+    }
+
+    void Update () {
         if (Input.GetButtonDown("Cancel")) exitPanel.display();
 
         if (Input.GetKeyDown(KeyCode.Alpha0)) addPoints();
