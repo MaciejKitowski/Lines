@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour {
         StartCoroutine(loadGameScene());
     }
 
+    public void exitGame() {
+        Application.Quit();
+    }
+
     private IEnumerator loadGameScene() {
         Debug.Log("Load Game scene async");
 

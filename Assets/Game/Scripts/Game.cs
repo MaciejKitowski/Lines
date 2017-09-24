@@ -35,6 +35,7 @@ public class Game : MonoBehaviour {
         pointsText.text = points.ToString();
         GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
         lostPanel.hide();
+        exitPanel.hide();
         spawner.spawn();
     }
 
