@@ -6,17 +6,22 @@ public class Game : MonoBehaviour {
     [SerializeField] private int extraTilesMultiplier = 2;
     [SerializeField] private TileSpawner _spawner;
     [SerializeField] private GameLost lostPanel;
+    [SerializeField] private ExitGame exitPanel;
     [SerializeField] private Text pointsText;
     private int points = 0;
 
     public TileSpawner spawner { get { return _spawner; } }
 
 	void Update () {
+        if (Input.GetButtonDown("Cancel")) exitPanel.display();
+
         if (Input.GetKeyDown(KeyCode.Alpha0)) addPoints();
         else if (Input.GetKeyDown(KeyCode.Alpha1)) addPoints(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) addPoints(2);
         else if (Input.GetKeyDown(KeyCode.L)) gameLost();
         else if (Input.GetKeyDown(KeyCode.H)) lostPanel.hide();
+        else if (Input.GetKeyDown(KeyCode.E)) exitPanel.display();
+        else if (Input.GetKeyDown(KeyCode.R)) exitPanel.hide();
     }
 
     public void newGame() {
