@@ -1,20 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-    public void newGame() {
+    public void NewGame() {
         Debug.Log("Start New Game");
 
-        StartCoroutine(loadGameScene());
+        StartCoroutine(LoadGameScene());
     }
 
-    public void exitGame() {
+    public void ExitGame() {
         Application.Quit();
     }
 
-    private IEnumerator loadGameScene() {
+    private IEnumerator LoadGameScene() {
         Debug.Log("Load Game scene async");
 
         AsyncOperation async = SceneManager.LoadSceneAsync("Game");
