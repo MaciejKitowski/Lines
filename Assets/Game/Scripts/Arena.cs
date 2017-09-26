@@ -40,7 +40,7 @@ public class Arena : MonoBehaviour {
         Debug.Log("Remove all tiles on arena");
 
         foreach(var obj in tileList.FindAll(b => !b.empty)) {
-            obj.tile.remove();
+            obj.tile.Remove();
         }
     }
 
@@ -126,7 +126,7 @@ public class Arena : MonoBehaviour {
         
         game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
 
-        for(int i = start; i <= end; ++i) tile[i, row].tile.remove();
+        for(int i = start; i <= end; ++i) tile[i, row].tile.Remove();
     }
 
     private void removeColumn(int col, int start, int end) {
@@ -134,6 +134,6 @@ public class Arena : MonoBehaviour {
 
         game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
 
-        for (int i = start; i <= end; ++i) tile[col, i].tile.remove();
+        for (int i = start; i <= end; ++i) tile[col, i].tile.Remove();
     }
 }

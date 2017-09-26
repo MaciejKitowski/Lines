@@ -20,6 +20,6 @@ public class ArenaTile : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        if (tileManager.selected != null && empty) tileManager.selected.moveToPosition(this);
+        if (tileManager.selected != null && empty) tileManager.selected.MoveToPosition(this);
     }
 }

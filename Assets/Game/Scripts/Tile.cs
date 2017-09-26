@@ -31,7 +31,7 @@ public class Tile : MonoBehaviour {
             }
 
             _selected = value;
-            if(!toRemove) StartCoroutine(toggleNavigation());
+            if(!toRemove) StartCoroutine(ToggleNavigation());
             mesh.material.color = color;
         }
     }
@@ -81,7 +81,7 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    public void initialize(ArenaTile arTile, Color col) {
+    public void Initialize(ArenaTile arTile, Color col) {
         transform.position = arTile.transform.position;
         color = col;
         currentTile = arTile;
@@ -92,7 +92,7 @@ public class Tile : MonoBehaviour {
         anim.Play("Tile New");
     }
 
-    public void moveToPosition(ArenaTile tile) {
+    public void MoveToPosition(ArenaTile tile) {
         Vector3 pos = tile.transform.position;
         NavMeshPath path = new NavMeshPath();
         navMesh.CalculatePath(pos, path);
@@ -111,7 +111,7 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    public void remove() {
+    public void Remove() {
         Debug.Log("Remove tile", gameObject);
 
         toRemove = true;
@@ -123,7 +123,7 @@ public class Tile : MonoBehaviour {
 
     public void Destroy() { Destroy(gameObject); }  //Used in Tile Remove animation
 
-    private IEnumerator toggleNavigation() {    //Toggling between Nav Mesh Agent and obstacle must be delayed because of bug (change position of selected tile)
+    private IEnumerator ToggleNavigation() {    //Toggling between Nav Mesh Agent and obstacle must be delayed because of bug (change position of selected tile)
         float waitTime = 0.01f;
 
         if (navMesh.enabled) {
