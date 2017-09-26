@@ -14,22 +14,22 @@ public class Game : MonoBehaviour {
 
     void Start() {
         Debug.Log("Loaded scene Game");
-        newGame();
+        NewGame();
     }
 
     void Update () {
         if (Input.GetButtonDown("Cancel")) exitPanel.display();
 
-        if (Input.GetKeyDown(KeyCode.Alpha0)) addPoints();
-        else if (Input.GetKeyDown(KeyCode.Alpha1)) addPoints(1);
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) addPoints(2);
-        else if (Input.GetKeyDown(KeyCode.L)) gameLost();
+        if (Input.GetKeyDown(KeyCode.Alpha0)) AddPoints();
+        else if (Input.GetKeyDown(KeyCode.Alpha1)) AddPoints(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) AddPoints(2);
+        else if (Input.GetKeyDown(KeyCode.L)) GameLost();
         else if (Input.GetKeyDown(KeyCode.H)) lostPanel.Hide();
         else if (Input.GetKeyDown(KeyCode.E)) exitPanel.display();
         else if (Input.GetKeyDown(KeyCode.R)) exitPanel.hide();
     }
 
-    public void newGame() {
+    public void NewGame() {
         spawner.RandNewTiles();
         points = 0;
         pointsText.text = points.ToString();
@@ -39,7 +39,7 @@ public class Game : MonoBehaviour {
         spawner.Spawn();
     }
 
-    public void addPoints(int extraTiles = 0) {
+    public void AddPoints(int extraTiles = 0) {
         int pointsToAdd = 0;
 
         if (extraTiles == 0) pointsToAdd = pointsPerRow;
@@ -51,7 +51,7 @@ public class Game : MonoBehaviour {
         pointsText.text = points.ToString();
     }
 
-    public void gameLost() {
+    public void GameLost() {
         Debug.Log("Game Lost");
 
         lostPanel.Display(points, false);

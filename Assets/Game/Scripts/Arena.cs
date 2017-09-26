@@ -124,7 +124,7 @@ public class Arena : MonoBehaviour {
     private void removeRow(int row, int start, int end) {
         Debug.Log(string.Format("Remove row: {0}, start: {1}, end: {2}, total tiles: {3}", row + 1, start + 1, end + 1, end - start + 1));
         
-        game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
+        game.AddPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
 
         for(int i = start; i <= end; ++i) tile[i, row].tile.Remove();
     }
@@ -132,7 +132,7 @@ public class Arena : MonoBehaviour {
     private void removeColumn(int col, int start, int end) {
         Debug.Log(string.Format("Remove column: {0}, start: {1}, end: {2}, total tiles: {3}", col + 1, start + 1, end + 1, end - start + 1));
 
-        game.addPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
+        game.AddPoints(Mathf.Abs(requiredTilesInLine - (end - start + 1)));
 
         for (int i = start; i <= end; ++i) tile[col, i].tile.Remove();
     }
