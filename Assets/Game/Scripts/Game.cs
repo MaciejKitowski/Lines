@@ -33,7 +33,7 @@ public class Game : MonoBehaviour {
         spawner.RandNewTiles();
         points = 0;
         pointsText.text = points.ToString();
-        GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
+        GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().RemoveAllTiles();
         lostPanel.Hide();
         exitPanel.Hide();
         spawner.Spawn();

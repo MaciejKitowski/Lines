@@ -67,7 +67,7 @@ public class Tile : MonoBehaviour {
             if (navMesh.remainingDistance == Mathf.Infinity) transform.rotation = new Quaternion(); //Freeze rotation while move
             else if(navMesh.remainingDistance == 0) {
                 Debug.Log("Tile on position", gameObject);
-                arena.checkPoints();
+                arena.CheckPoints();
                 movement = false;
                 selected = false;
             }

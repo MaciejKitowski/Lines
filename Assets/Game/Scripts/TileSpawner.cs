@@ -28,7 +28,7 @@ public class TileSpawner : MonoBehaviour {
     }
 	
 	public void Spawn() {
-        List<ArenaTile> possibleTiles = arena.getEmptyTiles();
+        List<ArenaTile> possibleTiles = arena.GetEmptyTiles();
 
         if(possibleTiles.Count < 6) game.GameLost();
         else {
@@ -41,7 +41,7 @@ public class TileSpawner : MonoBehaviour {
             }
 
             RandNewTiles();
-            arena.checkPoints(true);
+            arena.CheckPoints(true);
         }
     }
 }
