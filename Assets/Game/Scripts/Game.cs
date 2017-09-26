@@ -24,7 +24,7 @@ public class Game : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Alpha1)) addPoints(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) addPoints(2);
         else if (Input.GetKeyDown(KeyCode.L)) gameLost();
-        else if (Input.GetKeyDown(KeyCode.H)) lostPanel.hide();
+        else if (Input.GetKeyDown(KeyCode.H)) lostPanel.Hide();
         else if (Input.GetKeyDown(KeyCode.E)) exitPanel.display();
         else if (Input.GetKeyDown(KeyCode.R)) exitPanel.hide();
     }
@@ -34,7 +34,7 @@ public class Game : MonoBehaviour {
         points = 0;
         pointsText.text = points.ToString();
         GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
-        lostPanel.hide();
+        lostPanel.Hide();
         exitPanel.hide();
         spawner.Spawn();
     }
@@ -54,6 +54,6 @@ public class Game : MonoBehaviour {
     public void gameLost() {
         Debug.Log("Game Lost");
 
-        lostPanel.display(points, false);
+        lostPanel.Display(points, false);
     }
 }

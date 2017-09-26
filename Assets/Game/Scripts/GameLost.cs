@@ -8,27 +8,27 @@ public class GameLost : MonoBehaviour {
     [SerializeField] private Text pointsValue;
     [SerializeField] private float highScoreFlickerDelay = 0.5f;
 
-    public void display(int points, bool isHighScore) {
+    public void Display(int points, bool isHighScore) {
         Debug.Log("Display Game Lost panel");
 
         gameObject.SetActive(true);
         pointsValue.text = points.ToString();
-        if (isHighScore) StartCoroutine(newHighScore());
+        if (isHighScore) StartCoroutine(NewHighScore());
     }
 
-    public void hide() {
+    public void Hide() {
         Debug.Log("Hide Game Lost panel");
 
         gameObject.SetActive(false);
     }
 
-    public void backToMenu() {
+    public void BackToMenu() {
         Debug.Log("Back to menu");
 
-        StartCoroutine(loadMainMenuScene());
+        StartCoroutine(LoadMainMenuScene());
     }
 
-    private IEnumerator newHighScore() {
+    private IEnumerator NewHighScore() {
         Debug.Log("Display New High Score text");
 
         while(this.isActiveAndEnabled) {
@@ -37,7 +37,7 @@ public class GameLost : MonoBehaviour {
         }
     }
 
-    private IEnumerator loadMainMenuScene() {
+    private IEnumerator LoadMainMenuScene() {
         Debug.Log("Load Main Menu scene async");
 
         AsyncOperation async = SceneManager.LoadSceneAsync("MainMenu");
