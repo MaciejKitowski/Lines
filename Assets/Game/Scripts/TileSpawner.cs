@@ -16,18 +16,18 @@ public class TileSpawner : MonoBehaviour {
 	}
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.R)) randNewTiles();
-        if (Input.GetKeyDown(KeyCode.S)) spawn();
+        if (Input.GetKeyDown(KeyCode.R)) RandNewTiles();
+        if (Input.GetKeyDown(KeyCode.S)) Spawn();
     }
 
-    public void randNewTiles() {
+    public void RandNewTiles() {
         foreach(var til in tiles) {
             int rand = Random.Range(0, possibleColors.Length);
             til.color = possibleColors[rand];
         }
     }
 	
-	public void spawn() {
+	public void Spawn() {
         List<ArenaTile> possibleTiles = arena.getEmptyTiles();
 
         if(possibleTiles.Count < 6) game.gameLost();
@@ -40,7 +40,7 @@ public class TileSpawner : MonoBehaviour {
                 Debug.Log("Spawned new tile.", pos);
             }
 
-            randNewTiles();
+            RandNewTiles();
             arena.checkPoints(true);
         }
     }

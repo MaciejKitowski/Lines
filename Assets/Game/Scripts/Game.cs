@@ -30,13 +30,13 @@ public class Game : MonoBehaviour {
     }
 
     public void newGame() {
-        spawner.randNewTiles();
+        spawner.RandNewTiles();
         points = 0;
         pointsText.text = points.ToString();
         GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
         lostPanel.hide();
         exitPanel.hide();
-        spawner.spawn();
+        spawner.Spawn();
     }
 
     public void addPoints(int extraTiles = 0) {

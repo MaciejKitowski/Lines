@@ -48,7 +48,7 @@ public class Arena : MonoBehaviour {
         bool pointsRow = checkPointsRow();
         bool pointsCol = checkPointsColumn();
 
-        if (!spawnCheck && !pointsRow && !pointsCol) game.spawner.spawn();
+        if (!spawnCheck && !pointsRow && !pointsCol) game.spawner.Spawn();
     }
 
     private bool checkPointsRow() {
