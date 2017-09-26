@@ -18,15 +18,15 @@ public class Game : MonoBehaviour {
     }
 
     void Update () {
-        if (Input.GetButtonDown("Cancel")) exitPanel.display();
+        if (Input.GetButtonDown("Cancel")) exitPanel.Display();
 
         if (Input.GetKeyDown(KeyCode.Alpha0)) AddPoints();
         else if (Input.GetKeyDown(KeyCode.Alpha1)) AddPoints(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) AddPoints(2);
         else if (Input.GetKeyDown(KeyCode.L)) GameLost();
         else if (Input.GetKeyDown(KeyCode.H)) lostPanel.Hide();
-        else if (Input.GetKeyDown(KeyCode.E)) exitPanel.display();
-        else if (Input.GetKeyDown(KeyCode.R)) exitPanel.hide();
+        else if (Input.GetKeyDown(KeyCode.E)) exitPanel.Display();
+        else if (Input.GetKeyDown(KeyCode.R)) exitPanel.Hide();
     }
 
     public void NewGame() {
@@ -35,7 +35,7 @@ public class Game : MonoBehaviour {
         pointsText.text = points.ToString();
         GameObject.FindGameObjectWithTag("Arena").GetComponent<Arena>().removeAllTiles();
         lostPanel.Hide();
-        exitPanel.hide();
+        exitPanel.Hide();
         spawner.Spawn();
     }
 
